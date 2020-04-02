@@ -12,7 +12,6 @@
         <e p="Properties" t="Include">
           <e p="AssemblyInfo.cs" t="Include" />
         </e>
-        <e p="State.cs" t="Include" />
       </e>
       <e p="GlassesArmies.sln" t="IncludeFlat" />
       <e p="packages" t="ExcludeRecursive" />
