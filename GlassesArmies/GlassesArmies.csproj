@@ -35,9 +35,29 @@
         <Reference Include="System" />
         <Reference Include="System.Core" />
         <Reference Include="System.Data" />
+        <Reference Include="System.Drawing" />
+        <Reference Include="System.Windows.Forms" />
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="MainForm.cs">
+          <SubType>Form</SubType>
+        </Compile>
+        <Compile Include="MainForm.Designer.cs">
+          <DependentUpon>MainForm.cs</DependentUpon>
+        </Compile>
+        <Compile Include="MainMenu.cs">
+          <SubType>UserControl</SubType>
+        </Compile>
+        <Compile Include="MainMenu.Designer.cs">
+          <DependentUpon>MainMenu.cs</DependentUpon>
+        </Compile>
+        <Compile Include="MainMenuControl.cs">
+          <SubType>UserControl</SubType>
+        </Compile>
+        <Compile Include="MainMenuControl.Designer.cs">
+          <DependentUpon>MainMenuControl.cs</DependentUpon>
+        </Compile>
         <Compile Include="Program.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
     </ItemGroup>
