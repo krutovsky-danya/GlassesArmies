@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace GlassesArmies
 {
@@ -34,6 +35,17 @@ namespace GlassesArmies
         {
             components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            var layout = new TableLayoutPanel();
+            
+            var start = new Label();
+            start.Text = "Start";
+            layout.Controls.Add(start, 0, 0);
+            
+            
+            var settings = new Label();
+            settings.Text = "Settings";
+            layout.Controls.Add(settings, 0, 1);
+            Controls.Add(layout);
             
             this.BackColor = Color.Aqua;
         }

@@ -38,7 +38,10 @@ namespace GlassesArmies
             var layout = new TableLayoutPanel();
             
             var mainMenu = new MainMenu();
+            var gameLabel = new Label();
+            gameLabel.Text = "GlassesArmies";
             
+            layout.Controls.Add(gameLabel, 0, 0);
             layout.Controls.Add(mainMenu, 1, 1);
             
             Controls.Add(layout);
