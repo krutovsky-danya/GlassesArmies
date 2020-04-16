@@ -32,17 +32,34 @@ namespace GlassesArmies
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this._mainMenuControl = new GlassesArmies.MainMenuControl();
+            this.SuspendLayout();
+            // 
+            // _mainMenuControl
+            // 
+            this._mainMenuControl.AutoSize = true;
+            this._mainMenuControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this._mainMenuControl.Location = new System.Drawing.Point(0, 0);
+            this._mainMenuControl.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this._mainMenuControl.Name = "_mainMenuControl";
+            this._mainMenuControl.Size = this.Size;
+            this._mainMenuControl.TabIndex = 0;
+            // 
+            // MainForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 562);
+            this.Controls.Add(this._mainMenuControl);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.Name = "MainForm";
             this.Text = "MainForm";
-            
-            _mainMenuControl = new MainMenuControl();
-            Controls.Add(_mainMenuControl);
+            this.ResumeLayout(false);
+            this.PerformLayout();
         }
 
         #endregion
 
-        private MainMenuControl _mainMenuControl;
+        private GlassesArmies.MainMenuControl _mainMenuControl;
     }
 }
