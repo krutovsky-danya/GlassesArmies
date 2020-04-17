@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace GlassesArmies
 {
@@ -33,10 +35,23 @@ namespace GlassesArmies
         {
             components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            
-            this.Controls.Add(_label);
-            this.MouseEnter += ActivateText;
-            this.MouseLeave += DeactivateText;
+            //
+            // lable
+            //
+            this._label.Size = this.Size;
+            this._label.Dock = DockStyle.Fill;
+            this._label.TextAlign = ContentAlignment.MiddleLeft;
+            this._label.Font = new Font(FontFamily.GenericSerif, 16);
+            // this._label.BackColor = Color.Coral;
+            this._label.MouseEnter += ActivateText;
+            this._label.MouseLeave += DeactivateText;
+            //
+            // MainMenuButton
+            //
+            // this.BackColor = Color.Blue;
+            this.Controls.Add(this._label);
+            // this.MouseEnter += ActivateText;
+            // this.MouseLeave += DeactivateText;
         }
 
         #endregion

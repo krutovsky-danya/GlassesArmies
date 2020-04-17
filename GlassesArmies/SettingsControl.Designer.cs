@@ -2,7 +2,7 @@
 
 namespace GlassesArmies
 {
-    partial class StartMenuButton
+    partial class SettingsControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -33,6 +33,12 @@ namespace GlassesArmies
         {
             components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            
+            // music volume
+            // sound voulume
+            //resolution
+            //full screan
+            //controls
         }
 
         #endregion

@@ -34,20 +34,23 @@ namespace GlassesArmies
         private void InitializeComponent()
         {
             this.layout = new System.Windows.Forms.TableLayoutPanel();
+            
             this.gameLabel = new System.Windows.Forms.Label();
+            
+            this.gamePicture = new PictureBox();
             this.mainMenu = new GlassesArmies.MainMenu();
             this.layout.SuspendLayout();
             this.SuspendLayout();
             // 
             // layout
             // 
-            this.layout.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.layout.ColumnCount = 2;
             this.layout.ColumnStyles.Add(
                 new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
             this.layout.ColumnStyles.Add(
                 new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
             this.layout.Controls.Add(this.gameLabel, 0, 0);
+            this.layout.Controls.Add(this.gamePicture, 0, 1);
             this.layout.Controls.Add(this.mainMenu, 1, 1);
             this.layout.Dock = System.Windows.Forms.DockStyle.Fill;
             this.layout.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize;
@@ -64,7 +67,7 @@ namespace GlassesArmies
             // gameLabel
             // 
             this.gameLabel.AutoSize = true;
-            this.gameLabel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.gameLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gameLabel.Name = "gameLabel";
             this.gameLabel.TabIndex = 0;
             this.gameLabel.Text = "GlassesArmies";
@@ -74,14 +77,24 @@ namespace GlassesArmies
             this.gameLabel.BackColor = Color.Yellow;
             
             this.layout.SetColumnSpan(this.gameLabel, 2);
+            //
+            // gamePicture
+            //
+            this.gamePicture.Image = Image.FromFile($"..\\..\\coolDog.jpg");
+            this.gamePicture.AutoSize = true;
+            this.gamePicture.Dock = DockStyle.Fill;
+            this.gamePicture.SizeMode = PictureBoxSizeMode.Zoom;
             // 
             // mainMenu
             // 
+            this.mainMenu.AutoSize = true;
+            this.mainMenu.Dock = DockStyle.Fill;
+            
             this.mainMenu.BackColor = System.Drawing.Color.Aqua;
+            
             this.mainMenu.Location = new System.Drawing.Point(3, 4);
             this.mainMenu.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.mainMenu.Name = "mainMenu";
-            this.mainMenu.Size = new System.Drawing.Size(1, 1);
             this.mainMenu.TabIndex = 1;
             // 
             // MainMenuControl
@@ -100,8 +113,9 @@ namespace GlassesArmies
 
         #endregion
 
-        private GlassesArmies.MainMenu mainMenu;
-        private System.Windows.Forms.Label gameLabel;
         private System.Windows.Forms.TableLayoutPanel layout;
+        private System.Windows.Forms.Label gameLabel;
+        private PictureBox gamePicture;
+        private GlassesArmies.MainMenu mainMenu;
     }
 }

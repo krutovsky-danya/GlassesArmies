@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace GlassesArmies
@@ -34,20 +35,22 @@ namespace GlassesArmies
         {
             this._mainMenuControl = new GlassesArmies.MainMenuControl();
             this.SuspendLayout();
-            // 
+            //
             // _mainMenuControl
-            // 
+            //
             this._mainMenuControl.AutoSize = true;
             this._mainMenuControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this._mainMenuControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this._mainMenuControl.Location = new System.Drawing.Point(0, 0);
             this._mainMenuControl.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this._mainMenuControl.Name = "_mainMenuControl";
-            this._mainMenuControl.Size = this.Size;
+            this._mainMenuControl.Size = new System.Drawing.Size(800, 562);
             this._mainMenuControl.TabIndex = 0;
-            // 
+            //
             // MainForm
-            // 
+            //
+            // this.FormBorderStyle = FormBorderStyle.None;
+            this.MinimumSize = new Size(600, 480);
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 562);
