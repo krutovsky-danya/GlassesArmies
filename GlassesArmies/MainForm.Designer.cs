@@ -38,6 +38,7 @@ namespace GlassesArmies
             // _mainMenuControl
             // 
             this._mainMenuControl.AutoSize = true;
+            this._mainMenuControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this._mainMenuControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this._mainMenuControl.Location = new System.Drawing.Point(0, 0);
             this._mainMenuControl.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);

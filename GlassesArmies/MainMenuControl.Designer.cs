@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace GlassesArmies
@@ -40,46 +41,58 @@ namespace GlassesArmies
             // 
             // layout
             // 
+            this.layout.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.layout.ColumnCount = 2;
             this.layout.ColumnStyles.Add(
-                new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+                new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
             this.layout.ColumnStyles.Add(
-                new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 180F));
+                new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
             this.layout.Controls.Add(this.gameLabel, 0, 0);
             this.layout.Controls.Add(this.mainMenu, 1, 1);
+            this.layout.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.layout.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize;
             this.layout.Location = new System.Drawing.Point(0, 0);
             this.layout.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.layout.Name = "layout";
-            this.layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.layout.Size = new System.Drawing.Size(303, 184);
+            this.layout.RowCount = 3;
+            this.layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 70F));
+            this.layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.layout.Size = new System.Drawing.Size(0, 0);
             this.layout.TabIndex = 0;
             // 
             // gameLabel
             // 
             this.gameLabel.AutoSize = true;
-            this.gameLabel.Location = new System.Drawing.Point(3, 0);
+            this.gameLabel.Dock = System.Windows.Forms.DockStyle.Top;
             this.gameLabel.Name = "gameLabel";
-            this.gameLabel.Size = new System.Drawing.Size(14, 20);
             this.gameLabel.TabIndex = 0;
             this.gameLabel.Text = "GlassesArmies";
+            this.gameLabel.Font = new Font(FontFamily.GenericMonospace, 24);
+            this.gameLabel.TextAlign = ContentAlignment.MiddleCenter;
+            
+            this.gameLabel.BackColor = Color.Yellow;
+            
+            this.layout.SetColumnSpan(this.gameLabel, 2);
             // 
             // mainMenu
             // 
             this.mainMenu.BackColor = System.Drawing.Color.Aqua;
-            this.mainMenu.Location = new System.Drawing.Point(23, 24);
+            this.mainMenu.Location = new System.Drawing.Point(3, 4);
             this.mainMenu.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.mainMenu.Name = "mainMenu";
-            this.mainMenu.Size = new System.Drawing.Size(254, 98);
+            this.mainMenu.Size = new System.Drawing.Size(1, 1);
             this.mainMenu.TabIndex = 1;
             // 
             // MainMenuControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.Controls.Add(this.layout);
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "MainMenuControl";
-            this.Size = new System.Drawing.Size(183, 188);
             this.layout.ResumeLayout(false);
             this.layout.PerformLayout();
             this.ResumeLayout(false);
