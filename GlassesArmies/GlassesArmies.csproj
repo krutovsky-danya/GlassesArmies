@@ -32,10 +32,12 @@
         <WarningLevel>4</WarningLevel>
     </PropertyGroup>
     <ItemGroup>
+        <Reference Include="PresentationFramework" />
         <Reference Include="System" />
         <Reference Include="System.Core" />
         <Reference Include="System.Data" />
         <Reference Include="System.Drawing" />
+        <Reference Include="System.Windows.Controls.Ribbon" />
         <Reference Include="System.Windows.Forms" />
         <Reference Include="System.Xml" />
     </ItemGroup>
@@ -78,6 +80,9 @@
       </EmbeddedResource>
       <EmbeddedResource Include="MainMenuControl.resx">
         <DependentUpon>MainMenuControl.cs</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Include="SettingsControl.resx">
+        <DependentUpon>SettingsControl.cs</DependentUpon>
       </EmbeddedResource>
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

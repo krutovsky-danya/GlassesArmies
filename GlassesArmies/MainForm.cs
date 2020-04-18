@@ -8,7 +8,7 @@ namespace GlassesArmies
         {
             InitializeComponent();
             
-            ShowMainMenu();
+            ShowSettings();
         }
 
         private void ShowMainMenu()
@@ -17,9 +17,16 @@ namespace GlassesArmies
             _mainMenuControl.Show();
         }
 
+        private void ShowSettings()
+        {
+            HideAll();
+            _settingsControl.Show();
+        }
+
         private void HideAll()
         {
             _mainMenuControl.Hide();
+            _settingsControl.Hide();
         }
     }
 }

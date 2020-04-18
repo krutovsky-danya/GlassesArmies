@@ -25,6 +25,7 @@
         </e>
         <e p="SettingsControl.cs" t="Include" />
         <e p="SettingsControl.Designer.cs" t="Include" />
+        <e p="SettingsControl.resx" t="Include" />
       </e>
       <e p="GlassesArmies.sln" t="IncludeFlat" />
       <e p="packages" t="ExcludeRecursive" />

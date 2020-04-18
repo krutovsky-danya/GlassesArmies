@@ -34,27 +34,32 @@ namespace GlassesArmies
         private void InitializeComponent()
         {
             this._mainMenuControl = new GlassesArmies.MainMenuControl();
+            this._settingsControl = new GlassesArmies.SettingsControl();
             this.SuspendLayout();
-            //
+            // 
             // _mainMenuControl
-            //
+            // 
             this._mainMenuControl.AutoSize = true;
             this._mainMenuControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this._mainMenuControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this._mainMenuControl.Location = new System.Drawing.Point(0, 0);
             this._mainMenuControl.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this._mainMenuControl.Name = "_mainMenuControl";
-            this._mainMenuControl.Size = new System.Drawing.Size(800, 562);
             this._mainMenuControl.TabIndex = 0;
+            // 
+            // _settingsControl
+            // 
+            this._settingsControl.AutoSize = true;
+            this._settingsControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            // 
+            // mainForm
             //
-            // MainForm
-            //
-            // this.FormBorderStyle = FormBorderStyle.None;
-            this.MinimumSize = new Size(600, 480);
+            this.MinimumSize = new System.Drawing.Size(600, 480);
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 562);
             this.Controls.Add(this._mainMenuControl);
+            this.Controls.Add(this._settingsControl);
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "MainForm";
             this.Text = "MainForm";
@@ -65,5 +70,6 @@ namespace GlassesArmies
         #endregion
 
         private GlassesArmies.MainMenuControl _mainMenuControl;
+        private GlassesArmies.SettingsControl _settingsControl;
     }
 }
