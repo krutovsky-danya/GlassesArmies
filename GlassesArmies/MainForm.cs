@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 
 namespace GlassesArmies
 {
@@ -18,26 +19,34 @@ namespace GlassesArmies
         public void ShowMainMenu()
         {
             HideAll();
+            _mainMenuControl.Enabled = true;
             _mainMenuControl.Show();
         }
 
         public void ShowGamePlay()
         {
             HideAll();
+            _gamePlayControl.Enabled = true;
+            _gamePlayControl.ResumeGame();
             _gamePlayControl.Show();
         }
 
         public void ShowSettings()
         {
             HideAll();
+            _settingsControl.Enabled = true;
             _settingsControl.Show();
         }
 
         private void HideAll()
         {
-            _mainMenuControl.Hide();
-            _gamePlayControl.Hide();
-            _settingsControl.Hide();
+            foreach (Control control in Controls)
+            {
+                //Console.WriteLine(control.Name);
+                control.Enabled = false;
+                control.Hide();
+            }
+            _gamePlayControl.StopGame();
         }
     }
 }

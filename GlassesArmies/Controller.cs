@@ -7,8 +7,8 @@ namespace GlassesArmies
     public class Controller
     {
         public MainForm MainForm { get; set; }
-        private Stack<State> priviousState = new Stack<State>();
-        private State currentState = State.MainMenu;
+        private readonly Stack<State> _previousState = new Stack<State>();
+        private State _currentState = State.MainMenu;
 
         public Controller()
         {
@@ -18,8 +18,8 @@ namespace GlassesArmies
         public void ChangeState(State state)
         {
             if (state == State.Settings)
-                priviousState.Push(currentState);
-            currentState = state;
+                _previousState.Push(_currentState);
+            _currentState = state;
             switch (state)
             {
                 case State.MainMenu:
@@ -32,7 +32,7 @@ namespace GlassesArmies
                     MainForm.ShowSettings();
                     break;
                 case State.Back:
-                    ChangeState(priviousState.Pop());
+                    ChangeState(_previousState.Pop());
                     break;
                 case State.Exit:
                     MainForm.Close();

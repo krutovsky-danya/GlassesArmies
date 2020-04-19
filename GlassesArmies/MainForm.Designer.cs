@@ -57,6 +57,7 @@ namespace GlassesArmies
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 562);
             this.Controls.Add(this._mainMenuControl);
+            this.Controls.Add(this._gamePlayControl);
             this.Controls.Add(this._settingsControl);
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "MainForm";

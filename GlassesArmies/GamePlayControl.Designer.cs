@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace GlassesArmies
@@ -32,6 +33,15 @@ namespace GlassesArmies
         /// </summary>
         private void InitializeComponent()
         {
+            this._timer = new Timer();
+            this._timer.Interval = 15;
+            
+
+            this.KeyPress += OnKeyPress;
+            this.Click += (sender, args) => Console.WriteLine("Oi");
+            this._timer.Tick += OnTimerTick;
+            
+
             this.SuspendLayout();
             // 
             // GamePlayControl
@@ -45,5 +55,19 @@ namespace GlassesArmies
         }
 
         #endregion
+
+        private Timer _timer;
+
+        public void StopGame() => this._timer.Stop();
+
+        public void ResumeGame() => this._timer.Start();
+
+        private void OnTimerTick(object sender, EventArgs eventArgs)
+        {
+            ticks %= 60;
+            Console.WriteLine(ticks++);
+        }
+
+        private int ticks = 0;
     }
 }
