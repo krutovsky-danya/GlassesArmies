@@ -4,8 +4,10 @@ namespace GlassesArmies
 {
     public partial class SettingsControl : UserControl
     {
-        public SettingsControl()
+        private Controller _controller;
+        public SettingsControl(Controller controller)
         {
+            _controller = controller;
             InitializeComponent();
         }
     }

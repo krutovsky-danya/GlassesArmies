@@ -42,6 +42,13 @@
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="Controller.cs" />
+        <Compile Include="GamePlayControl.cs">
+          <SubType>UserControl</SubType>
+        </Compile>
+        <Compile Include="GamePlayControl.Designer.cs">
+          <DependentUpon>GamePlayControl.cs</DependentUpon>
+        </Compile>
         <Compile Include="MainForm.cs">
           <SubType>Form</SubType>
         </Compile>
@@ -72,6 +79,9 @@
         </Compile>
     </ItemGroup>
     <ItemGroup>
+      <EmbeddedResource Include="GamePlayControl.resx">
+        <DependentUpon>GamePlayControl.cs</DependentUpon>
+      </EmbeddedResource>
       <EmbeddedResource Include="MainForm.resx">
         <DependentUpon>MainForm.cs</DependentUpon>
       </EmbeddedResource>

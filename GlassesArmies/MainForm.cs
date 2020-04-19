@@ -4,20 +4,30 @@ namespace GlassesArmies
 {
     public partial class MainForm : Form
     {
-        public MainForm()
+        private readonly Controller _controller;
+        
+        public MainForm(Controller controller)
         {
+            _controller = controller;
+            _controller.MainForm = this;
             InitializeComponent();
             
-            ShowSettings();
+            ShowMainMenu();
         }
 
-        private void ShowMainMenu()
+        public void ShowMainMenu()
         {
             HideAll();
             _mainMenuControl.Show();
         }
 
-        private void ShowSettings()
+        public void ShowGamePlay()
+        {
+            HideAll();
+            _gamePlayControl.Show();
+        }
+
+        public void ShowSettings()
         {
             HideAll();
             _settingsControl.Show();
@@ -26,6 +36,7 @@ namespace GlassesArmies
         private void HideAll()
         {
             _mainMenuControl.Hide();
+            _gamePlayControl.Hide();
             _settingsControl.Hide();
         }
     }

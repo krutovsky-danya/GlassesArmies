@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 
 namespace GlassesArmies
 {
@@ -34,13 +35,22 @@ namespace GlassesArmies
         /// </summary>
         private void InitializeComponent()
         {
+            this.startButton = new MainMenuButton("Start");
+            this.startButton.Click += (sender, args) => _controller.ChangeState(Controller.State.GamePlay);
+            
+            this.settingsButton = new MainMenuButton("Settings");
+            this.settingsButton.Click += (sender, args) => _controller.ChangeState(Controller.State.Settings);
+            
+            this.exitButton = new MainMenuButton("Exit");
+            this.exitButton.Click += (sender, args) => _controller.ChangeState(Controller.State.Exit);
+
             this.layout = new System.Windows.Forms.TableLayoutPanel();
             var buttons = new List<MainMenuButton>
             {
-                new MainMenuButton("Start"),
+                this.startButton,
                 new MainMenuButton("Select Level"),
-                new MainMenuButton("Options"),
-                new MainMenuButton("Exit")
+                this.settingsButton,
+                this.exitButton
             };
             
             this.SuspendLayout();
@@ -66,7 +76,7 @@ namespace GlassesArmies
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Aqua;
+            //this.BackColor = System.Drawing.Color.Aqua;
             this.Controls.Add(this.layout);
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "MainMenu";
@@ -77,5 +87,10 @@ namespace GlassesArmies
         #endregion
         
         private System.Windows.Forms.TableLayoutPanel layout;
+        
+        private GlassesArmies.MainMenuButton startButton;
+        
+        private GlassesArmies.MainMenuButton settingsButton;
+        private GlassesArmies.MainMenuButton exitButton;
     }
 }

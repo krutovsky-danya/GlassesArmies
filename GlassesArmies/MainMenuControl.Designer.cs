@@ -38,7 +38,7 @@ namespace GlassesArmies
             this.gameLabel = new System.Windows.Forms.Label();
             
             this.gamePicture = new PictureBox();
-            this.mainMenu = new GlassesArmies.MainMenu();
+            this.mainMenu = new GlassesArmies.MainMenu(this._controller);
             this.layout.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -74,7 +74,7 @@ namespace GlassesArmies
             this.gameLabel.Font = new Font(FontFamily.GenericMonospace, 24);
             this.gameLabel.TextAlign = ContentAlignment.MiddleCenter;
             
-            this.gameLabel.BackColor = Color.Yellow;
+            //this.gameLabel.BackColor = Color.Yellow;
             
             this.layout.SetColumnSpan(this.gameLabel, 2);
             //
@@ -90,7 +90,7 @@ namespace GlassesArmies
             this.mainMenu.AutoSize = true;
             this.mainMenu.Dock = DockStyle.Fill;
             
-            this.mainMenu.BackColor = System.Drawing.Color.Aqua;
+            //this.mainMenu.BackColor = System.Drawing.Color.Aqua;
             
             this.mainMenu.Location = new System.Drawing.Point(3, 4);
             this.mainMenu.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);

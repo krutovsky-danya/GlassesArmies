@@ -33,12 +33,10 @@ namespace GlassesArmies
         /// </summary>
         private void InitializeComponent()
         {
-            this._mainMenuControl = new GlassesArmies.MainMenuControl();
-            this._settingsControl = new GlassesArmies.SettingsControl();
+            this._mainMenuControl = new GlassesArmies.MainMenuControl(this._controller);
+            this._gamePlayControl = new GlassesArmies.GamePlayControl(this._controller);
+            this._settingsControl = new GlassesArmies.SettingsControl(this._controller);
             this.SuspendLayout();
-            // 
-            // _mainMenuControl
-            // 
             this._mainMenuControl.AutoSize = true;
             this._mainMenuControl.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this._mainMenuControl.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -46,14 +44,8 @@ namespace GlassesArmies
             this._mainMenuControl.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this._mainMenuControl.Name = "_mainMenuControl";
             this._mainMenuControl.TabIndex = 0;
-            // 
-            // _settingsControl
-            // 
             this._settingsControl.AutoSize = true;
             this._settingsControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            // 
-            // mainForm
-            //
             this.MinimumSize = new System.Drawing.Size(600, 480);
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -71,5 +63,6 @@ namespace GlassesArmies
 
         private GlassesArmies.MainMenuControl _mainMenuControl;
         private GlassesArmies.SettingsControl _settingsControl;
+        private GlassesArmies.GamePlayControl _gamePlayControl;
     }
 }

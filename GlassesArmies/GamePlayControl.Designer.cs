@@ -1,10 +1,9 @@
 ﻿using System.ComponentModel;
-using System.Drawing;
 using System.Windows.Forms;
 
 namespace GlassesArmies
 {
-    partial class MainMenuButton
+    partial class GamePlayControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -27,19 +26,22 @@ namespace GlassesArmies
 
         #region Component Designer generated code
 
-        /// <summary> 
-        /// Required method for Designer support - do not modify 
+        /// <summary>
+        /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
-            this.Dock = DockStyle.Fill;
-            this.TextAlign = ContentAlignment.MiddleLeft;
-            this.Font = new Font(FontFamily.GenericSerif, 16);
-            // this.BackColor = Color.Coral;
-            this.MouseEnter += ActivateText;
-            this.MouseLeave += DeactivateText;
+            this.SuspendLayout();
+            // 
+            // GamePlayControl
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.Name = "GamePlayControl";
+            this.Size = new System.Drawing.Size(150, 188);
+            this.ResumeLayout(false);
         }
 
         #endregion

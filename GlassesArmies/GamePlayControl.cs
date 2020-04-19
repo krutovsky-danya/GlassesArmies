@@ -2,10 +2,11 @@
 
 namespace GlassesArmies
 {
-    public partial class MainMenuControl : UserControl
+    public partial class GamePlayControl : UserControl
     {
         private Controller _controller;
-        public MainMenuControl(Controller controller)
+        
+        public GamePlayControl(Controller controller)
         {
             _controller = controller;
             InitializeComponent();

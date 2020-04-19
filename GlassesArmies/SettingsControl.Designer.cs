@@ -38,19 +38,23 @@ namespace GlassesArmies
         /// </summary>
         private void InitializeComponent()
         {
+            this.Font = new Font(FontFamily.GenericSerif, 10);
             this._layoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.settings = new System.Windows.Forms.TableLayoutPanel();
+            this.back = new MainMenuButton("Back");
+            this.back.TextAlign = ContentAlignment.MiddleCenter;
+            this.back.Click += (sender, args) => this._controller.ChangeState(Controller.State.Back);
             this.SuspendLayout();
             // 
             // _layoutPanel
             // 
             this._layoutPanel.ColumnCount = 3;
             this._layoutPanel.ColumnStyles.Add(
-                new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17.21854F));
+                new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this._layoutPanel.ColumnStyles.Add(
-                new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 67.36111F));
+                new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this._layoutPanel.ColumnStyles.Add(
-                new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.55556F));
+                new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this._layoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this._layoutPanel.Location = new System.Drawing.Point(0, 0);
             this._layoutPanel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -64,6 +68,7 @@ namespace GlassesArmies
                 new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 22.07031F));
             
             this._layoutPanel.Controls.Add(this.settings, 1, 1);
+            this._layoutPanel.Controls.Add(this.back, 2, 2);
             this._layoutPanel.Size = new System.Drawing.Size(720, 480);
             this._layoutPanel.TabIndex = 0;
             // 
@@ -71,11 +76,10 @@ namespace GlassesArmies
             // 
             this.settings.AutoSize = true;
             this.settings.Dock = DockStyle.Fill;
-            this.settings.ColumnCount = 2;
             this.settings.ColumnStyles.Add(
-                new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+                new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.settings.ColumnStyles.Add(
-                new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+                new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
             ConfigureSettings();
             this.settings.Location = new System.Drawing.Point(0, 0);
             this.settings.Name = "settings";
@@ -98,35 +102,39 @@ namespace GlassesArmies
 
         private System.Windows.Forms.TableLayoutPanel _layoutPanel;
         private System.Windows.Forms.TableLayoutPanel settings;
+        private GlassesArmies.MainMenuButton back;
 
         private void ConfigureSettings()
         {
-            this.settings.RowCount = 5;
             this.musicVolumeLabel = new SettingsLabel("Music Volume");
-            this.settings.Controls.Add(musicVolumeLabel, 0, 0);
-            
             this.musicVolumeTrackBar = new SettingsSlider();
-            this.settings.Controls.Add(musicVolumeTrackBar, 1, 0);
             
             this.soundsVolumeLabel = new SettingsLabel("Sounds Volume");
-            this.settings.Controls.Add(soundsVolumeLabel, 0, 1);
-            
             this.soundsVolumeTrackBar = new SettingsSlider();
-            this.settings.Controls.Add(soundsVolumeTrackBar, 1, 1);
             
             this.resolutionLabel = new SettingsLabel("Resolution");
-            this.settings.Controls.Add(resolutionLabel, 0, 2);
-            
             this.resolutionSwitcher = new SettingsSwitcher<Resolution>(new Resolution(3, 4),
                 new Resolution(720, 480),
                 new Resolution(1080, 920));
-            this.settings.Controls.Add(resolutionSwitcher, 1, 2);
             
             this.fullScreanLabel = new SettingsLabel("Full Screan");
-            this.settings.Controls.Add(this.fullScreanLabel, 0, 3);
-            
             this.fullScreanSwitcher = new SettingsSwitcher<string>("OFF", "ON");
-            this.settings.Controls.Add(this.fullScreanSwitcher, 1, 3);
+            
+            var rowContent = new List<Tuple<SettingsLabel, Control>>
+            {
+                Tuple.Create<SettingsLabel, Control>(this.musicVolumeLabel, this.musicVolumeTrackBar),
+                Tuple.Create<SettingsLabel, Control>(this.soundsVolumeLabel, this.soundsVolumeTrackBar),
+                Tuple.Create<SettingsLabel, Control>(this.resolutionLabel, this.resolutionSwitcher),
+                Tuple.Create<SettingsLabel, Control>(this.fullScreanLabel, this.fullScreanSwitcher),
+            };
+
+            for (int i = 0; i < rowContent.Count; i++)
+            {
+                this.settings.RowStyles.Add(new RowStyle(SizeType.Percent, 1));
+                this.settings.Controls.Add(rowContent[i].Item1, 0, i);
+                this.settings.Controls.Add(rowContent[i].Item2, 1, i);
+            }
+            this.settings.RowStyles.Add(new RowStyle(SizeType.Percent, 1));
             
             this.ChangeControls = new Label();
             this.ChangeControls.Text = "Change Controls";
@@ -137,7 +145,7 @@ namespace GlassesArmies
             this.settings.SetColumnSpan(this.ChangeControls, 2);
             
             //this.soundsVolumeLabel.BackColor = Color.Navy;
-            // this.musicVolumeLabel.BackColor = Color.Peru;
+            //this.musicVolumeLabel.BackColor = Color.Peru;
         }
 
         private GlassesArmies.SettingsLabel musicVolumeLabel;
@@ -222,7 +230,7 @@ namespace GlassesArmies
             var layout = new TableLayoutPanel();
             layout.ColumnCount = 3;
             for (var i = 0; i < 3; i++)
-                layout.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
+                layout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 1));
             layout.RowCount = 1;
             layout.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
             layout.Controls.Add(left, 0, 0);
@@ -233,6 +241,7 @@ namespace GlassesArmies
             this.Controls.Add(layout);
             this.Dock = DockStyle.Fill;
             this.AutoSize = true;
+            //this.BackColor = Color.Olive;
         }
 
         private void SwitchLeft(object sender, EventArgs eventArgs)
