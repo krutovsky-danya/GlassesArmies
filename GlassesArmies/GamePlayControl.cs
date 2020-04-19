@@ -1,11 +1,10 @@
-﻿using System;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace GlassesArmies
 {
     public partial class GamePlayControl : UserControl
     {
-        private Controller _controller;
+        private readonly Controller _controller;
         
         public GamePlayControl(Controller controller)
         {
@@ -17,7 +16,10 @@ namespace GlassesArmies
         {
             // Esc is 27
             if (e.KeyChar == 27)
+            {
                 _controller.ChangeState(Controller.State.Settings);
+                StopGame();
+            }
         }
     }
 }

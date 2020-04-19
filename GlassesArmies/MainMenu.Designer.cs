@@ -64,13 +64,18 @@ namespace GlassesArmies
             this.layout.Name = "layout";
             this.layout.TabIndex = 0;
             this.layout.ColumnCount = 1;
-            this.layout.ColumnStyles.Add(new ColumnStyle(System.Windows.Forms.SizeType.Percent, 1));
+            this.layout.ColumnStyles.Add(new ColumnStyle(System.Windows.Forms.SizeType.Percent, 100));
             this.layout.RowCount = buttons.Count;
+            
+            this.layout.RowStyles.Add(new RowStyle(System.Windows.Forms.SizeType.Percent, 25));
+            this.layout.Controls.Add(new Label(), 0, 0);
             for (int i = 0; i < buttons.Count; i++)
             {
-                this.layout.RowStyles.Add(new RowStyle(System.Windows.Forms.SizeType.Percent, 1));
-                this.layout.Controls.Add(buttons[i], 0, i);
+                this.layout.RowStyles.Add(new RowStyle(System.Windows.Forms.SizeType.Percent, 10));
+                this.layout.Controls.Add(buttons[i], 0, i + 1);
             }
+            this.layout.RowStyles.Add(new RowStyle(System.Windows.Forms.SizeType.Percent, 15));
+            this.layout.Controls.Add(new Label(), 0, 9);
             // 
             // MainMenu
             // 
@@ -80,7 +85,6 @@ namespace GlassesArmies
             this.Controls.Add(this.layout);
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "MainMenu";
-            this.Size = new System.Drawing.Size(227, 192);
             this.ResumeLayout(false);
         }
 

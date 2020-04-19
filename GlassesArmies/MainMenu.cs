@@ -5,7 +5,7 @@ namespace GlassesArmies
 {
     public partial class MainMenu : UserControl
     {
-        private Controller _controller;
+        private readonly Controller _controller;
 
         public MainMenu(Controller controller)
         {

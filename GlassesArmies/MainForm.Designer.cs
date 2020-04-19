@@ -1,5 +1,7 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Drawing;
+using System.Windows;
 using System.Windows.Forms;
 
 namespace GlassesArmies
@@ -51,17 +53,17 @@ namespace GlassesArmies
             
             this._settingsControl.AutoSize = true;
             this._settingsControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            
+
             this.MinimumSize = new System.Drawing.Size(1080, 920);
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 562);
             this.Controls.Add(this._mainMenuControl);
             this.Controls.Add(this._gamePlayControl);
             this.Controls.Add(this._settingsControl);
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "MainForm";
             this.Text = "MainForm";
+
             this.ResumeLayout(false);
             this.PerformLayout();
         }

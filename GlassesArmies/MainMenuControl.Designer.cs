@@ -80,6 +80,7 @@ namespace GlassesArmies
             //
             // gamePicture
             //
+            // cool glasses
             this.gamePicture.Image = Image.FromFile($"..\\..\\coolDog.jpg");
             this.gamePicture.AutoSize = true;
             this.gamePicture.Dock = DockStyle.Fill;
