@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Runtime.CompilerServices;
+using System.Runtime.ExceptionServices;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace GlassesArmies
@@ -37,6 +41,9 @@ namespace GlassesArmies
         {
             this._timer = new Timer();
             this._timer.Interval = 15;
+
+            this.isPused = false;
+            
             
             this.KeyPress += OnKeyPress;
             this.Click += (sender, args) => Console.WriteLine("Oi");
@@ -47,24 +54,85 @@ namespace GlassesArmies
             // GamePlayControl
             // 
             
-            this.placeHolder = new PictureBox();
-            //grey filter
-            placeHolder.Image = Image.FromFile($"..\\..\\coolDog.jpg");
-            placeHolder.SizeMode = PictureBoxSizeMode.Zoom;
-            placeHolder.Dock = DockStyle.Fill;
-            placeHolder.BackColor = Color.Transparent;
             
-            var layuot = new TableLayoutPanel();
-            layuot.Dock = DockStyle.Fill;
-            layuot.BackColor = Color.Transparent;
+            // 
+            // puseMenu
+            //
+            var coolDog = Image.FromFile($"..\\..\\coolDog.jpg");
             
-            this.Controls.Add(placeHolder);
-            this.Controls.Add(layuot);
+            //this.greyFilter = new PictureBox();
+            //this.greyFilter.Image = coolDog;
+            // this.greyFilter.SizeMode = PictureBoxSizeMode.Zoom;
+            // this.greyFilter.Dock = DockStyle.Fill;
+            //this.greyFilter.BackColor = Color.Transparent;
+            
+            
+            this.pauseMenu = new TableLayoutPanel();
+            this.pauseMenu.Dock = DockStyle.Fill;
+            this.pauseMenu.BackColor = Color.Transparent;
+            
+            
+            //this.pauseMenu.BackgroundImage = coolDog;
+            this.pauseMenu.BackColor = Color.FromArgb(50, Color.Gray);
+
+            this.pauseMenu.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            
+            //resume
+            //restart -> confirm
+            //settings
+            //exit
+            
+            var resume = new PauseMenuButton("Resume");
+            resume.Click += (sender, args) => HidePauseMenu();
+            
+            var restart = new PauseMenuButton("Restart");
+            
+            var settings = new PauseMenuButton("Settings");
+            settings.Click += (sender, args) => this._controller.ChangeState(Controller.State.Settings);
+            
+            var exit = new PauseMenuButton("Exit");
+            exit.Click += (sender, args) => this._controller.ChangeState(Controller.State.MainMenu);
+            
+            var pauseMenuButtons = new List<PauseMenuButton>
+            {
+                resume,
+                restart,
+                settings,
+                exit
+            };
+            
+            pauseMenuButtons.For((button, index) =>
+            {
+                button.Anchor = AnchorStyles.None;
+                button.AutoSize = true;
+                button.BackColor = Color.Transparent;
+                
+                //button.BackColor = Color.Aqua;
+                //button.BackgroundImage = coolDog;
+                
+                this.pauseMenu.Controls.Add(button, 0, index);
+                this.pauseMenu.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
+            });
+            
+            this.pauseMenuComponents = new List<Control>
+            {
+                //this.greyFilter,
+                this.pauseMenu
+            };
+            
+            pauseMenuComponents.ForEach(component => this.Controls.Add(component));
 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "GamePlayControl";
+            
+            foreach (Control control in this.Controls)
+            {
+                Console.WriteLine(control);
+            }
+            
+            HidePauseMenu();
             Invalidate();
             this.ResumeLayout(false);
         }
@@ -73,7 +141,10 @@ namespace GlassesArmies
 
         private Timer _timer;
 
-        private PictureBox placeHolder;
+        //private PictureBox greyFilter;
+        private TableLayoutPanel pauseMenu;
+
+        private List<Control> pauseMenuComponents;
 
         public void StopGame() => this._timer.Stop();
 
@@ -81,16 +152,79 @@ namespace GlassesArmies
 
         private void OnTimerTick(object sender, EventArgs eventArgs)
         {
-            Console.Write(' ');
+            Invalidate();
         }
 
         protected override void OnPaint(PaintEventArgs e)
         {
             e.Graphics
-                .DrawEllipse(
-                    Pens.Crimson,
-                    new RectangleF(new PointF(30, 30), new Size(100, 100)));
-            
+                .FillEllipse(
+                    Brushes.Crimson,
+                    new RectangleF(
+                        new PointF(
+                            rng.Next(30), 
+                            rng.Next(30)), 
+                        new Size(
+                            rng.Next(100),
+                            rng.Next(100))));
         }
+        
+        private Random rng = new Random(1729);
+        
+        private const int Esc = 27;
+        
+        private void OnKeyPress(object sender, KeyPressEventArgs e)
+        {
+            //Console.WriteLine(e.KeyChar);
+            if (e.KeyChar == Esc)
+            {
+                MangaePauseMenu();
+            }
+        }
+
+        private bool isPused;
+        
+        private void MangaePauseMenu()
+        {
+            if (isPused)
+            {
+                HidePauseMenu();
+                ResumeGame();
+            }
+            else
+            {
+                StopGame();
+                ShowPauseMenu();
+            }
+            isPused = !isPused;
+        }
+        
+        private void ShowPauseMenu()
+        {
+            foreach (var control in this.pauseMenuComponents)
+            {
+                control.Show();
+                control.Enabled = true;
+            }
+        }
+        
+        private void HidePauseMenu()
+        {
+            foreach (var control in this.pauseMenuComponents)
+            {
+                control.Enabled = false;
+                control.Hide();
+            }
+        }
+    }
+
+    public class PauseMenuButton : MainMenuButton
+    {
+        public PauseMenuButton(string text) : base(text)
+        {
+            MouseInText = $"> {text} <";
+            this.TextAlign = ContentAlignment.MiddleCenter;
+        }
+        
     }
 }

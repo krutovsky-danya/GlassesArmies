@@ -31,10 +31,15 @@ namespace GlassesArmies
         /// Required method for Designer support - do not modify 
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
+        private void InitializeComponent(string text)
         {
             components = new System.ComponentModel.Container();
-            this.Dock = DockStyle.Fill;
+            
+            this._mouseOutText = text;
+            this.MouseInText = "> " + text;
+            this.Text = text;
+            this.Anchor = AnchorStyles.Left;
+            this.AutoSize = true;
             this.TextAlign = ContentAlignment.MiddleLeft;
             this.Font = new Font(FontFamily.GenericSerif, 16);
             // this.BackColor = Color.Coral;

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace GlassesArmies
 {
@@ -27,7 +26,6 @@ namespace GlassesArmies
         {
             HideAll();
             _gamePlayControl.Enabled = true;
-            _gamePlayControl.ResumeGame();
             _gamePlayControl.Show();
         }
 
@@ -46,7 +44,6 @@ namespace GlassesArmies
                 control.Enabled = false;
                 control.Hide();
             }
-            _gamePlayControl.StopGame();
         }
     }
 }

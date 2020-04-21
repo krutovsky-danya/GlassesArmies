@@ -42,7 +42,6 @@ namespace GlassesArmies
             
             this._mainMenuControl.AutoSize = true;
             this._mainMenuControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            
             this._mainMenuControl.Location = new System.Drawing.Point(0, 0);
             this._mainMenuControl.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this._mainMenuControl.Name = "_mainMenuControl";
@@ -50,20 +49,20 @@ namespace GlassesArmies
             
             this._gamePlayControl.AutoSize = true;
             this._gamePlayControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            
             this._settingsControl.AutoSize = true;
             this._settingsControl.Dock = System.Windows.Forms.DockStyle.Fill;
-
+            
             this.MinimumSize = new System.Drawing.Size(1080, 920);
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this._mainMenuControl);
             this.Controls.Add(this._gamePlayControl);
             this.Controls.Add(this._settingsControl);
+            
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "MainForm";
             this.Text = "MainForm";
-
             this.ResumeLayout(false);
             this.PerformLayout();
         }

@@ -224,9 +224,12 @@ namespace GlassesArmies
             left.Click += SwitchLeft;
             text.Click += SwitchRight;
             right.Click += SwitchRight;
-            left.Dock = DockStyle.Right;
-            text.Dock = DockStyle.Fill;
-            right.Dock = DockStyle.Left;
+            left.Anchor = AnchorStyles.Right;
+            text.Anchor = AnchorStyles.None;
+            right.Anchor = AnchorStyles.Left;
+            right.AutoSize = true;
+            text.AutoSize = true;
+            left.AutoSize = true;
             var layout = new TableLayoutPanel();
             layout.ColumnCount = 3;
             for (var i = 0; i < 3; i++)

@@ -11,15 +11,5 @@ namespace GlassesArmies
             _controller = controller;
             InitializeComponent();
         }
-
-        private void OnKeyPress(object sender, KeyPressEventArgs e)
-        {
-            // Esc is 27
-            if (e.KeyChar == 27)
-            {
-                _controller.ChangeState(Controller.State.Settings);
-                StopGame();
-            }
-        }
     }
 }

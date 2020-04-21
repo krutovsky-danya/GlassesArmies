@@ -69,11 +69,11 @@ namespace GlassesArmies
             
             this.layout.RowStyles.Add(new RowStyle(System.Windows.Forms.SizeType.Percent, 25));
             this.layout.Controls.Add(new Label(), 0, 0);
-            for (int i = 0; i < buttons.Count; i++)
+            buttons.For((button, index) =>
             {
                 this.layout.RowStyles.Add(new RowStyle(System.Windows.Forms.SizeType.Percent, 10));
-                this.layout.Controls.Add(buttons[i], 0, i + 1);
-            }
+                this.layout.Controls.Add(buttons[index], 0, index + 1);
+            });
             this.layout.RowStyles.Add(new RowStyle(System.Windows.Forms.SizeType.Percent, 15));
             this.layout.Controls.Add(new Label(), 0, 9);
             // 

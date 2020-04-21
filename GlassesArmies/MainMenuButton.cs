@@ -5,15 +5,12 @@ namespace GlassesArmies
 {
     public partial class MainMenuButton : Label
     {
-        private readonly string _mouseOutText;
-        private readonly string _mouseInText;
+        private string _mouseOutText;
+        protected string MouseInText;
 
         public MainMenuButton(string text)
         {
-            _mouseOutText = text;
-            _mouseInText = "> " + text;
-            Text = text;
-            InitializeComponent();
+            InitializeComponent(text);
         }
 
         public sealed override string Text
@@ -24,7 +21,7 @@ namespace GlassesArmies
 
         private void ActivateText(object sender, EventArgs e)
         {
-            Text = _mouseInText;
+            Text = MouseInText;
         }
 
         private void DeactivateText(object sender, EventArgs e)
