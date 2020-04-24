@@ -5,20 +5,20 @@ namespace GlassesArmies
 {
     public class Vector
     {
-        public int X { get; set; }
-        public int Y { get; set; }
+        public double X { get; set; }
+        public double Y { get; set; }
         
-        public Vector(int x, int y)
+        public Vector(double x, double y)
         {
             X = x;
             Y = y;
         }
         
-        public double GetLength => Math.Sqrt(X * X + Y * Y);
+        public double Length => Math.Sqrt(X * X + Y * Y);
         
         public Vector Copy => new Vector(X, Y);
 
-        public Point ToPoint() => new Point(X, Y);
+        public Point ToPoint() => new Point((int)X, (int)Y);
 
         public static Vector Zero => new Vector(0, 0);
 
@@ -29,7 +29,12 @@ namespace GlassesArmies
 
         public static Vector operator *(double c, Vector a)
         {
-            return new Vector((int)c * a.X, (int)c * a.Y);
+            return new Vector(c * a.X, c * a.Y);
+        }
+        
+        public static Vector operator *(Vector a, double c)
+        {
+            return c * a;
         }
 
         public static Vector operator -(Vector a)
@@ -39,7 +44,7 @@ namespace GlassesArmies
 
         public static Vector operator -(Vector a, Vector b)
         {
-            return new Vector(a.X - b.X, a.Y - a.Y);
+            return new Vector(a.X - b.X, a.Y - b.Y);
         }
     }
 }

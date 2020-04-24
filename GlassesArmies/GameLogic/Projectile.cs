@@ -1,4 +1,6 @@
-﻿namespace GlassesArmies
+﻿using System;
+
+namespace GlassesArmies
 {
     public class Projectile //red circle
     {

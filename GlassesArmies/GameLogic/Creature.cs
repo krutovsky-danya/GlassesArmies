@@ -33,7 +33,7 @@ namespace GlassesArmies
             _turns = new LinkedList<Turn>();
         }
 
-        public void Move(Vector movement)
+        public virtual void Move(Vector movement)
         {
             //check for collisions
             //maybe some acceleration
@@ -53,18 +53,22 @@ namespace GlassesArmies
             MemorizeTurn(Turn.TurnType.MoveRight);
         }
 
-        public void Jump()
+        public virtual void Jump()
         {
             //if not in flight
             Velocity += jumpAcceleration;
             Move(Vector.Zero);
         }
 
-        public void Shoot(int x, int y)
+        public virtual void Shoot(int x, int y)
         {
-            throw new NotImplementedException();
-            _turns.AddLast(new Turn(Turn.TurnType.Shoot, creature => creature.Shoot(x, y)));
+            //_turns.AddLast(new Turn(Turn.TurnType.Shoot, creature => creature.Shoot(x, y)));
             //accelerate back
+        }
+
+        public virtual void Shoot(Vector target)
+        {
+            
         }
 
         public virtual void MakeAutoTurn()

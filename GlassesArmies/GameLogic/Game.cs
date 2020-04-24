@@ -16,7 +16,7 @@ namespace GlassesArmies
         //ordered walls by starts
         private HashSet<Projectile> _projectiles;
         public IEnumerable<Projectile> Projectiles => _projectiles;
-        private Creature player;
+        public Creature Player;
         public Turn PlayersTurn { get; set; }
 
         //camera location
@@ -33,18 +33,16 @@ namespace GlassesArmies
             _projectiles = new HashSet<Projectile>();
             foreach (var enemy in level.Enemies)
             {
-                var copy = enemy.Copy();
-                copy.Projectiles = _projectiles;
-                enemies.Add(copy);
-                aliveCretures.Add(copy);
+                enemy.Projectiles = _projectiles;
+                enemies.Add(enemy);
+                aliveCretures.Add(enemy);
             }
             walls = new List<Wall>(level.Walls);
             
             //player = level.StartCharacter.Copy();
             PlayersTurn = Turn.None;
-            player = level.StartCharacter;
-            player.Projectiles = _projectiles;
-            aliveCretures.Add(player);
+            Player = level.StartCharacter;
+            Player.Projectiles = _projectiles;
         }
 
         public void MakeTurn()
@@ -62,7 +60,7 @@ namespace GlassesArmies
 
             _projectiles.RemoveWhere(p => p.Live == 0);
 
-            PlayersTurn.Action(player);
+            PlayersTurn.Action(Player);
             PlayersTurn = Turn.None;
             //Console.WriteLine("Wow");
         }
