@@ -54,7 +54,6 @@ namespace GlassesArmies
                 creature.MakeAutoTurn();
             }
             
-            var removed = new HashSet<Projectile>();
             foreach (var projectile in _projectiles)
             {
                 //check for hit

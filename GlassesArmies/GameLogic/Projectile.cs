@@ -2,9 +2,9 @@
 {
     public class Projectile //red circle
     {
-        public Vector Velocity  { get; private set; }
+        private Vector Velocity  { get; }
         public Vector Location { get; private set; }
-        public int Live { get; protected set; } = 132;
+        public int Live { get; private set; } = 100;
 
         public Projectile(Vector location, Vector velocity)
         {

@@ -51,14 +51,13 @@ namespace GlassesArmies
         {
             foreach (var projectile in _game.Projectiles)
             {
-                var locaton = bias + new Vector(projectile.Location.X - 2, projectile.Location.Y - 2);
-                eventArgs.Graphics.FillEllipse(Brushes.Crimson, locaton.X, locaton.Y, 5, 5);
+                var location = bias + new Vector(projectile.Location.X - 2, projectile.Location.Y - 2);
+                eventArgs.Graphics.FillEllipse(Brushes.Crimson, location.X, location.Y, 5, 5);
             }
             foreach (var creature in _game.Alive)
             {
                 var location = bias + new Vector(creature.Location.X, -creature.Location.Y);
                 eventArgs.Graphics.DrawImage(creature._texture, location.ToPoint());
-                //Console.WriteLine("Yay");
             }
 
             foreach (var gameWall in _game.Walls)
