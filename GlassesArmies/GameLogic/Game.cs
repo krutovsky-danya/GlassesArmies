@@ -43,6 +43,7 @@ namespace GlassesArmies
             //player = level.StartCharacter.Copy();
             PlayersTurn = Turn.None;
             player = level.StartCharacter;
+            player.Projectiles = _projectiles;
             aliveCretures.Add(player);
         }
 
@@ -52,17 +53,15 @@ namespace GlassesArmies
             {
                 creature.MakeAutoTurn();
             }
-
+            
+            var removed = new HashSet<Projectile>();
             foreach (var projectile in _projectiles)
             {
                 //check for hit
-                if (projectile.Live == 0)
-                    _projectiles.Remove(projectile);
-                else
-                {
-                    projectile.Move();
-                }
+                projectile.Move();
             }
+
+            _projectiles.RemoveWhere(p => p.Live == 0);
 
             PlayersTurn.Action(player);
             PlayersTurn = Turn.None;

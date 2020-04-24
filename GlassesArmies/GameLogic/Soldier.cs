@@ -4,7 +4,7 @@ namespace GlassesArmies
 {
     public class Soldier : Creature
     {
-        protected int reloadTime;
+        protected int ReloadTime = 10;
         public Soldier(Bitmap texture, Vector location) : base(texture, location)
         {
             
@@ -12,16 +12,16 @@ namespace GlassesArmies
 
         public override void MakeAutoTurn()
         {
-            // if (reloadTime < 0)
-            // {
-            //     var projectile = new Projectile(Location + new Vector(-16, -16), new Vector(-5, 0));
-            //     Projectiles.Add(projectile);
-            //     reloadTime = 10;
-            // }
-            // else
-            // {
-            //     reloadTime--;
-            // }
+            if (ReloadTime <= 0)
+            {
+                var projectile = new Projectile(Location + new Vector(32, 16), new Vector(5, 0));
+                Projectiles.Add(projectile);
+                ReloadTime = 10;
+            }
+            else
+            {
+                ReloadTime--;
+            }
         }
     }
 }
