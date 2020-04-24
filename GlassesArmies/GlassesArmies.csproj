@@ -37,61 +37,74 @@
         <Reference Include="System.Core" />
         <Reference Include="System.Data" />
         <Reference Include="System.Drawing" />
+        <Reference Include="System.Numerics" />
+        <Reference Include="System.Windows" />
         <Reference Include="System.Windows.Controls.Ribbon" />
         <Reference Include="System.Windows.Forms" />
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Controller.cs" />
-        <Compile Include="GamePlayControl.cs">
-          <SubType>UserControl</SubType>
-        </Compile>
-        <Compile Include="GamePlayControl.Designer.cs">
-          <DependentUpon>GamePlayControl.cs</DependentUpon>
-        </Compile>
-        <Compile Include="MainForm.cs">
-          <SubType>Form</SubType>
-        </Compile>
-        <Compile Include="MainForm.Designer.cs">
-          <DependentUpon>MainForm.cs</DependentUpon>
-        </Compile>
-        <Compile Include="MainMenu.cs">
-          <SubType>UserControl</SubType>
-        </Compile>
-        <Compile Include="MainMenu.Designer.cs">
-          <DependentUpon>MainMenu.cs</DependentUpon>
-        </Compile>
-        <Compile Include="MainMenuButton.cs" />
-        <Compile Include="MainMenuButton.Designer.cs" />
-        <Compile Include="MainMenuControl.cs">
-          <SubType>UserControl</SubType>
-        </Compile>
-        <Compile Include="MainMenuControl.Designer.cs">
-          <DependentUpon>MainMenuControl.cs</DependentUpon>
-        </Compile>
+        <Compile Include="EnumerableExtension.cs" />
+        <Compile Include="GameLogic\Creature.cs" />
+        <Compile Include="GameLogic\Game.cs" />
+        <Compile Include="GameLogic\Level.cs" />
+        <Compile Include="GameLogic\Projectile.cs" />
+        <Compile Include="GameLogic\Soldier.cs" />
+        <Compile Include="GameLogic\Tests.cs" />
+        <Compile Include="GameLogic\Turn.cs" />
+        <Compile Include="GameLogic\Vector.cs" />
+        <Compile Include="GameLogic\Wall.cs" />
         <Compile Include="Program.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
-        <Compile Include="SettingsControl.cs">
+        <Compile Include="View\GamePlayControl.cs">
           <SubType>UserControl</SubType>
         </Compile>
-        <Compile Include="SettingsControl.Designer.cs">
+        <Compile Include="View\GamePlayControl.Designer.cs">
+          <DependentUpon>GamePlayControl.cs</DependentUpon>
+        </Compile>
+        <Compile Include="View\MainForm.cs">
+          <SubType>Form</SubType>
+        </Compile>
+        <Compile Include="View\MainForm.Designer.cs">
+          <DependentUpon>MainForm.cs</DependentUpon>
+        </Compile>
+        <Compile Include="View\MainMenu.cs">
+          <SubType>UserControl</SubType>
+        </Compile>
+        <Compile Include="View\MainMenu.Designer.cs">
+          <DependentUpon>MainMenu.cs</DependentUpon>
+        </Compile>
+        <Compile Include="View\MainMenuButton.cs" />
+        <Compile Include="View\MainMenuButton.Designer.cs" />
+        <Compile Include="View\MainMenuControl.cs">
+          <SubType>UserControl</SubType>
+        </Compile>
+        <Compile Include="View\MainMenuControl.Designer.cs">
+          <DependentUpon>MainMenuControl.cs</DependentUpon>
+        </Compile>
+        <Compile Include="View\SettingsControl.cs">
+          <SubType>UserControl</SubType>
+        </Compile>
+        <Compile Include="View\SettingsControl.Designer.cs">
           <DependentUpon>SettingsControl.cs</DependentUpon>
         </Compile>
+        <Compile Include="View\SettingsSwitcher.cs" />
     </ItemGroup>
     <ItemGroup>
-      <EmbeddedResource Include="GamePlayControl.resx">
+      <EmbeddedResource Include="View\GamePlayControl.resx">
         <DependentUpon>GamePlayControl.cs</DependentUpon>
       </EmbeddedResource>
-      <EmbeddedResource Include="MainForm.resx">
+      <EmbeddedResource Include="View\MainForm.resx">
         <DependentUpon>MainForm.cs</DependentUpon>
       </EmbeddedResource>
-      <EmbeddedResource Include="MainMenu.resx">
+      <EmbeddedResource Include="View\MainMenu.resx">
         <DependentUpon>MainMenu.cs</DependentUpon>
       </EmbeddedResource>
-      <EmbeddedResource Include="MainMenuControl.resx">
+      <EmbeddedResource Include="View\MainMenuControl.resx">
         <DependentUpon>MainMenuControl.cs</DependentUpon>
       </EmbeddedResource>
-      <EmbeddedResource Include="SettingsControl.resx">
+      <EmbeddedResource Include="View\SettingsControl.resx">
         <DependentUpon>SettingsControl.cs</DependentUpon>
       </EmbeddedResource>
     </ItemGroup>

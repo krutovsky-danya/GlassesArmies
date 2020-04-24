@@ -46,7 +46,7 @@ namespace GlassesArmies
             
             
             this.KeyPress += OnKeyPress;
-            this.Click += (sender, args) => Console.WriteLine("Oi");
+            this.Click += (sender, args) => Console.WriteLine(((MouseEventArgs)args).Location);
             this._timer.Tick += OnTimerTick;
 
             this.SuspendLayout();
@@ -83,7 +83,7 @@ namespace GlassesArmies
             //exit
             
             var resume = new PauseMenuButton("Resume");
-            resume.Click += (sender, args) => HidePauseMenu();
+            resume.Click += (sender, args) => ManagePauseMenu();
             
             var restart = new PauseMenuButton("Restart");
             
@@ -132,6 +132,8 @@ namespace GlassesArmies
                 Console.WriteLine(control);
             }
             
+            
+            
             HidePauseMenu();
             Invalidate();
             this.ResumeLayout(false);
@@ -152,21 +154,14 @@ namespace GlassesArmies
 
         private void OnTimerTick(object sender, EventArgs eventArgs)
         {
+            //Console.WriteLine("Tick");
+            _controller.TurnGame();
             Invalidate();
         }
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            e.Graphics
-                .FillEllipse(
-                    Brushes.Crimson,
-                    new RectangleF(
-                        new PointF(
-                            rng.Next(30), 
-                            rng.Next(30)), 
-                        new Size(
-                            rng.Next(100),
-                            rng.Next(100))));
+            _controller.DrawGame(e);
         }
         
         private Random rng = new Random(1729);
@@ -175,21 +170,34 @@ namespace GlassesArmies
         
         private void OnKeyPress(object sender, KeyPressEventArgs e)
         {
-            //Console.WriteLine(e.KeyChar);
+            // Console.WriteLine(e.KeyChar);
+            // Console.WriteLine((int)e.KeyChar);
+            //Enter is 13
             if (e.KeyChar == Esc)
             {
-                MangaePauseMenu();
+                ManagePauseMenu();
+            }
+
+            if (e.KeyChar == 'd')
+            {
+                _controller.SetTurn(Turn.MoveRight);
+            }
+
+            if (e.KeyChar == 'a')
+            {
+                _controller.SetTurn(Turn.MoveLeft);
             }
         }
 
         private bool isPused;
         
-        private void MangaePauseMenu()
+        private void ManagePauseMenu()
         {
             if (isPused)
             {
                 HidePauseMenu();
                 ResumeGame();
+                Console.WriteLine("Resumed");
             }
             else
             {

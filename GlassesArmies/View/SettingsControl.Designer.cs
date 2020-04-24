@@ -5,7 +5,6 @@ using System.Drawing;
 using System.Windows.Forms;
 using Control = System.Windows.Forms.Control;
 using Orientation = System.Windows.Forms.Orientation;
-using UserControl = System.Windows.Forms.UserControl;
 
 namespace GlassesArmies
 {
@@ -192,71 +191,6 @@ namespace GlassesArmies
             this.SmallChange = 1;
             this.TickFrequency = 5;
             this.Value = 70;
-        }
-    }
-
-    public class SettingsSwitcher<T> : UserControl
-    {
-        private List<T> options;
-        private int index = 0;
-        private Label left;
-        private Label text;
-        private Label right;
-
-        public T Valur => options[index];
-        
-        public SettingsSwitcher(params T[] list)
-        {
-            options = new List<T>(list);
-            if (options.Count == 0)
-                throw new InvalidEnumArgumentException();
-            InitializeComponent();
-        }
-
-        public void InitializeComponent()
-        {
-            left = new Label {Text = "< "};
-            text = new Label {Text = options[index].ToString()};
-            right = new Label {Text = " >"};
-            left.TextAlign = ContentAlignment.MiddleRight;
-            text.TextAlign = ContentAlignment.MiddleCenter;
-            right.TextAlign = ContentAlignment.MiddleLeft;
-            left.Click += SwitchLeft;
-            text.Click += SwitchRight;
-            right.Click += SwitchRight;
-            left.Anchor = AnchorStyles.Right;
-            text.Anchor = AnchorStyles.None;
-            right.Anchor = AnchorStyles.Left;
-            right.AutoSize = true;
-            text.AutoSize = true;
-            left.AutoSize = true;
-            var layout = new TableLayoutPanel();
-            layout.ColumnCount = 3;
-            for (var i = 0; i < 3; i++)
-                layout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 1));
-            layout.RowCount = 1;
-            layout.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
-            layout.Controls.Add(left, 0, 0);
-            layout.Controls.Add(text, 1, 0);
-            layout.Controls.Add(right, 2, 0);
-            layout.AutoSize = true;
-            layout.Dock = DockStyle.Fill;
-            this.Controls.Add(layout);
-            this.Dock = DockStyle.Fill;
-            this.AutoSize = true;
-            //this.BackColor = Color.Olive;
-        }
-
-        private void SwitchLeft(object sender, EventArgs eventArgs)
-        {
-            index = (options.Count + index - 1) % options.Count;
-            text.Text = options[index].ToString();
-        }
-
-        private void SwitchRight(object sender, EventArgs eventArgs)
-        {
-            index = (index + 1) % options.Count;
-            text.Text = options[index].ToString();
         }
     }
 
