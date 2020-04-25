@@ -13,7 +13,7 @@ namespace GlassesArmies
         
         public Soldier(Bitmap texture, Vector location) : base(texture, location)
         {
-            JumpAcceleration = new Vector(0, 5);
+            JumpAcceleration = new Vector(0, 2);
             BulletsInClip = ClipSize;
         }
 
@@ -55,11 +55,16 @@ namespace GlassesArmies
             Velocity.Y -= dt;
             Location += movement + Velocity;
             Location.Y = Math.Max(-5, Location.Y);
+            if (Math.Abs(Location.Y + 5) < 1e-5)
+            {
+                Velocity.Y = Math.Max(Velocity.Y, 0);
+            }
         }
 
         public override void Jump()
         {
-            Velocity += JumpAcceleration;
+            if (Math.Abs(Velocity.Y) < 1e-5)
+                Velocity += JumpAcceleration;
             Move(Vector.Zero);
         }
     }
