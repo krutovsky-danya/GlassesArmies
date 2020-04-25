@@ -51,7 +51,7 @@ namespace GlassesArmies
         {
             foreach (var projectile in _game.Projectiles)
             {
-                var location = bias + new Vector(projectile.Location.X - 2, projectile.Location.Y - 2);
+                var location = bias + new Vector(projectile.Location.X - 2, -projectile.Location.Y - 2);
                 eventArgs.Graphics.FillEllipse(Brushes.Crimson, (int)location.X, (int)location.Y, 5, 5);
             }
             foreach (var creature in _game.Alive)
@@ -68,8 +68,8 @@ namespace GlassesArmies
                     gameWall.Width, gameWall.Height);
             }
             
-            var playerlocation = bias + new Vector(_game.Player.Location.X, -_game.Player.Location.Y);
-            eventArgs.Graphics.DrawImage(_game.Player._texture, playerlocation.ToPoint());
+            var playerLocation = bias + new Vector(_game.Player.Location.X, -_game.Player.Location.Y);
+            eventArgs.Graphics.DrawImage(_game.Player._texture, playerLocation.ToPoint());
         }
 
         public void TurnGame()
@@ -86,6 +86,7 @@ namespace GlassesArmies
         public void ShootInGame(Point target)
         {
             var inGameTarget = target.ToVector() - bias;
+            inGameTarget.Y *= -1;
             _game.Player.Shoot(inGameTarget);
         }
         

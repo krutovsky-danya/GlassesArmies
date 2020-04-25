@@ -13,12 +13,12 @@ namespace GlassesArmies
         //walls to not collide
         //ai
         private LinkedList<Turn> _turns;
-        public Vector Location { get; private set; }
+        public Vector Location { get; protected set; }
 
         private Vector step;
         public Creature Copy() => new Creature(_texture, Location.Copy);
         public Vector Velocity;
-        private Vector jumpAcceleration;
+        protected Vector JumpAcceleration;
         
         //hit(horizontal/vertical) => Velocity.z = 0
 
@@ -31,6 +31,8 @@ namespace GlassesArmies
             Location = location;
             step = new Vector(5, 0);
             _turns = new LinkedList<Turn>();
+            Velocity = Vector.Zero;
+            
         }
 
         public virtual void Move(Vector movement)
@@ -56,7 +58,7 @@ namespace GlassesArmies
         public virtual void Jump()
         {
             //if not in flight
-            Velocity += jumpAcceleration;
+            Velocity += JumpAcceleration;
             Move(Vector.Zero);
         }
 

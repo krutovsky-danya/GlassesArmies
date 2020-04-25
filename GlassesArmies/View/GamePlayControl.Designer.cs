@@ -160,21 +160,26 @@ namespace GlassesArmies
                 ManagePauseMenu();
             }
 
-            if (e.KeyChar == 'd')
+            if (e.KeyChar == 'd' || e.KeyChar == 'в')
             {
                 _controller.SetTurn(Turn.MoveRight);
             }
 
-            if (e.KeyChar == 'a')
+            if (e.KeyChar == 'a'|| e.KeyChar == 'ф')
             {
                 _controller.SetTurn(Turn.MoveLeft);
+            }
+
+            if (e.KeyChar == ' ')
+            {
+                _controller.SetTurn(Turn.Jump);
             }
         }
 
         private void OnCLick(object sender, EventArgs eventArgs)
         {
             var mouseEventArgs = (MouseEventArgs) eventArgs;
-            Console.WriteLine(mouseEventArgs.Location);
+            //Console.WriteLine(mouseEventArgs.Location);
             _controller.ShootInGame(mouseEventArgs.Location);
         }
 
