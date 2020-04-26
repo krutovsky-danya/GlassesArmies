@@ -13,7 +13,7 @@ namespace GlassesArmies
             _controller.MainForm = this;
             InitializeComponent();
             
-            ShowGamePlay();
+            ShowMainMenu();
         }
 
         protected override void OnLoad(EventArgs e)
