@@ -13,12 +13,12 @@ namespace GlassesArmies
         //walls to not collide
         //ai
         private LinkedList<Turn> _turns;
-        public Vector Location { get; private set; }
+        public Vector Location { get; protected set; }
 
         private Vector step;
         public Creature Copy() => new Creature(_texture, Location.Copy);
         public Vector Velocity;
-        private Vector jumpAcceleration;
+        protected Vector JumpAcceleration;
         
         //hit(horizontal/vertical) => Velocity.z = 0
 
@@ -31,9 +31,11 @@ namespace GlassesArmies
             Location = location;
             step = new Vector(5, 0);
             _turns = new LinkedList<Turn>();
+            Velocity = Vector.Zero;
+            
         }
 
-        public void Move(Vector movement)
+        public virtual void Move(Vector movement)
         {
             //check for collisions
             //maybe some acceleration
@@ -53,18 +55,22 @@ namespace GlassesArmies
             MemorizeTurn(Turn.TurnType.MoveRight);
         }
 
-        public void Jump()
+        public virtual void Jump()
         {
             //if not in flight
-            Velocity += jumpAcceleration;
+            Velocity += JumpAcceleration;
             Move(Vector.Zero);
         }
 
-        public void Shoot(int x, int y)
+        public virtual void Shoot(int x, int y)
         {
-            throw new NotImplementedException();
-            _turns.AddLast(new Turn(Turn.TurnType.Shoot, creature => creature.Shoot(x, y)));
+            //_turns.AddLast(new Turn(Turn.TurnType.Shoot, creature => creature.Shoot(x, y)));
             //accelerate back
+        }
+
+        public virtual void Shoot(Vector target)
+        {
+            
         }
 
         public virtual void MakeAutoTurn()

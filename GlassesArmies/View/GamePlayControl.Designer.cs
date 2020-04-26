@@ -43,11 +43,6 @@ namespace GlassesArmies
             this._timer.Interval = 20;
 
             this.isPused = false;
-            
-            
-            this.KeyPress += OnKeyPress;
-            this.Click += (sender, args) => Console.WriteLine(((MouseEventArgs)args).Location);
-            this._timer.Tick += OnTimerTick;
 
             this.SuspendLayout();
             // 
@@ -113,26 +108,16 @@ namespace GlassesArmies
                 this.pauseMenu.Controls.Add(button, 0, index);
                 this.pauseMenu.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
             });
-            
-            this.pauseMenuComponents = new List<Control>
-            {
-                //this.greyFilter,
-                this.pauseMenu
-            };
-            
-            pauseMenuComponents.ForEach(component => this.Controls.Add(component));
 
+            this.Controls.Add(pauseMenu);
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "GamePlayControl";
-            
-            foreach (Control control in this.Controls)
-            {
-                Console.WriteLine(control);
-            }
-            
-            
+
+            this.KeyPress += OnKeyPress;
+            this.Click += OnCLick;
+            this._timer.Tick += OnTimerTick;
             
             HidePauseMenu();
             Invalidate();
@@ -143,10 +128,7 @@ namespace GlassesArmies
 
         private Timer _timer;
 
-        //private PictureBox greyFilter;
         private TableLayoutPanel pauseMenu;
-
-        private List<Control> pauseMenuComponents;
 
         public void StopGame() => this._timer.Stop();
 
@@ -178,15 +160,27 @@ namespace GlassesArmies
                 ManagePauseMenu();
             }
 
-            if (e.KeyChar == 'd')
+            if (e.KeyChar == 'd' || e.KeyChar == 'в')
             {
                 _controller.SetTurn(Turn.MoveRight);
             }
 
-            if (e.KeyChar == 'a')
+            if (e.KeyChar == 'a'|| e.KeyChar == 'ф')
             {
                 _controller.SetTurn(Turn.MoveLeft);
             }
+
+            if (e.KeyChar == ' ')
+            {
+                _controller.SetTurn(Turn.Jump);
+            }
+        }
+
+        private void OnCLick(object sender, EventArgs eventArgs)
+        {
+            var mouseEventArgs = (MouseEventArgs) eventArgs;
+            //Console.WriteLine(mouseEventArgs.Location);
+            _controller.ShootInGame(mouseEventArgs.Location);
         }
 
         private bool isPused;
@@ -209,20 +203,14 @@ namespace GlassesArmies
         
         private void ShowPauseMenu()
         {
-            foreach (var control in this.pauseMenuComponents)
-            {
-                control.Show();
-                control.Enabled = true;
-            }
+            this.pauseMenu.Show();
+            this.pauseMenu.Enabled = true;
         }
         
         private void HidePauseMenu()
         {
-            foreach (var control in this.pauseMenuComponents)
-            {
-                control.Enabled = false;
-                control.Hide();
-            }
+            this.pauseMenu.Enabled = false;
+            this.pauseMenu.Hide();
         }
     }
 

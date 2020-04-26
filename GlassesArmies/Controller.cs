@@ -51,21 +51,25 @@ namespace GlassesArmies
         {
             foreach (var projectile in _game.Projectiles)
             {
-                var locaton = bias + new Vector(projectile.Location.X - 2, projectile.Location.Y - 2);
-                eventArgs.Graphics.FillEllipse(Brushes.Crimson, locaton.X, locaton.Y, 5, 5);
+                var location = bias + new Vector(projectile.Location.X - 2, -projectile.Location.Y - 2);
+                eventArgs.Graphics.FillEllipse(Brushes.Crimson, (int)location.X, (int)location.Y, 5, 5);
             }
             foreach (var creature in _game.Alive)
             {
                 var location = bias + new Vector(creature.Location.X, -creature.Location.Y);
                 eventArgs.Graphics.DrawImage(creature._texture, location.ToPoint());
-                //Console.WriteLine("Yay");
             }
 
             foreach (var gameWall in _game.Walls)
             {
                 var location = bias + new Vector(gameWall.Location.X, -gameWall.Location.Y);
-                eventArgs.Graphics.FillRectangle(Brushes.Silver, location.X, location.Y, gameWall.Width, gameWall.Height);
+                eventArgs.Graphics.FillRectangle(Brushes.Silver, 
+                    (int)location.X, (int)location.Y, 
+                    gameWall.Width, gameWall.Height);
             }
+            
+            var playerLocation = bias + new Vector(_game.Player.Location.X, -_game.Player.Location.Y);
+            eventArgs.Graphics.DrawImage(_game.Player._texture, playerLocation.ToPoint());
         }
 
         public void TurnGame()
@@ -78,6 +82,13 @@ namespace GlassesArmies
         {
             _game.PlayersTurn = turn;
         }
+
+        public void ShootInGame(Point target)
+        {
+            var inGameTarget = target.ToVector() - bias;
+            inGameTarget.Y *= -1;
+            _game.Player.Shoot(inGameTarget);
+        }
         
         public enum State
         {
@@ -87,5 +98,10 @@ namespace GlassesArmies
             Back,
             Exit
         }
+    }
+
+    public static class PointExtension
+    {
+        public static Vector ToVector(this Point point) => new Vector(point.X, point.Y);
     }
 }
