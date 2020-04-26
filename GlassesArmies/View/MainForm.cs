@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 
 namespace GlassesArmies
 {
@@ -12,9 +13,27 @@ namespace GlassesArmies
             _controller.MainForm = this;
             InitializeComponent();
             
-            ShowMainMenu();
+            ShowGamePlay();
         }
 
+        protected override void OnLoad(EventArgs e)
+        {
+            SetStyle(
+                ControlStyles.AllPaintingInWmPaint |
+                ControlStyles.OptimizedDoubleBuffer,
+                true);
+        }
+
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams cp = base.CreateParams;
+                cp.ExStyle |= 0x02000000;
+                return cp;
+            }
+        } 
+     
         public void ShowMainMenu()
         {
             HideAll();

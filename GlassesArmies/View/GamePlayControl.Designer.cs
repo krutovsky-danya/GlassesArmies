@@ -40,7 +40,7 @@ namespace GlassesArmies
         private void InitializeComponent()
         {
             this._timer = new Timer();
-            this._timer.Interval = 15;
+            this._timer.Interval = 20;
 
             this.isPused = false;
             
