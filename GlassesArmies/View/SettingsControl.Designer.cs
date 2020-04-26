@@ -116,15 +116,15 @@ namespace GlassesArmies
                 new Resolution(720, 480),
                 new Resolution(1080, 920));
             
-            this.fullScreanLabel = new SettingsLabel("Full Screan");
-            this.fullScreanSwitcher = new SettingsSwitcher<string>("OFF", "ON");
+            this.fullScreenLabel = new SettingsLabel("Full Screen");
+            this.fullScreenSwitcher = new SettingsSwitcher<string>("OFF", "ON");
             
             var rowContent = new List<Tuple<SettingsLabel, Control>>
             {
                 Tuple.Create<SettingsLabel, Control>(this.musicVolumeLabel, this.musicVolumeTrackBar),
                 Tuple.Create<SettingsLabel, Control>(this.soundsVolumeLabel, this.soundsVolumeTrackBar),
                 Tuple.Create<SettingsLabel, Control>(this.resolutionLabel, this.resolutionSwitcher),
-                Tuple.Create<SettingsLabel, Control>(this.fullScreanLabel, this.fullScreanSwitcher),
+                Tuple.Create<SettingsLabel, Control>(this.fullScreenLabel, this.fullScreenSwitcher),
             };
 
             for (int i = 0; i < rowContent.Count; i++)
@@ -153,8 +153,8 @@ namespace GlassesArmies
         private GlassesArmies.SettingsSlider soundsVolumeTrackBar;
         private GlassesArmies.SettingsLabel resolutionLabel;
         private GlassesArmies.SettingsSwitcher<Resolution> resolutionSwitcher;
-        private GlassesArmies.SettingsLabel fullScreanLabel;
-        private GlassesArmies.SettingsSwitcher<string> fullScreanSwitcher;
+        private GlassesArmies.SettingsLabel fullScreenLabel;
+        private GlassesArmies.SettingsSwitcher<string> fullScreenSwitcher;
         private System.Windows.Forms.Label ChangeControls;
     }
     
