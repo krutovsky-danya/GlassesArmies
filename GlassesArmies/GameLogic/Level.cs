@@ -15,7 +15,7 @@ namespace GlassesArmies
             StartCharacter = new Soldier(PlayerSoldierTexture, Vector.Zero);
         }
 
-        public static Bitmap PlayerSoldierTexture = new Bitmap(@"..\..\solder.png");
-        public static Bitmap EnemySoldierTexture = new Bitmap(@"..\..\EnemySolder.png");
+        public static Bitmap PlayerSoldierTexture = new Bitmap(@"..\..\Resources\Textures\soldier.png");
+        public static Bitmap EnemySoldierTexture = new Bitmap(@"..\..\Resources\Textures\enemySoldier.png");
     }
 }

@@ -53,7 +53,7 @@ namespace GlassesArmies
             // 
             // puseMenu
             //
-            var coolDog = Image.FromFile($"..\\..\\coolDog.jpg");
+            var coolDog = Image.FromFile($"..\\..\\Resources\\Textures\\coolDog.jpg");
             
             //this.greyFilter = new PictureBox();
             //this.greyFilter.Image = coolDog;
