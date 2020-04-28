@@ -9,7 +9,7 @@ namespace GlassesArmies
         protected readonly int ClipSize = 12;
         protected int BulletsInClip;
 
-        private double dt = 1d / 60;
+        private double _dt = 1d / 60;
         
         public Soldier(Bitmap texture, Vector location) : base(texture, location)
         {
@@ -43,8 +43,8 @@ namespace GlassesArmies
             //Console.WriteLine($"{target.X} {target.Y}");
             var location = Location.Copy;
             if (target.X > Location.X)
-                location.X += _texture.Width;
-            location.Y -= _texture.Height / 2d;
+                location.X += texture.Width;
+            location.Y -= texture.Height / 2d;
             var bulletVelocity = target - location;
             bulletVelocity *= 1 / bulletVelocity.Length;
             Projectiles.Add(new Projectile(location, 7 * bulletVelocity));
@@ -52,7 +52,7 @@ namespace GlassesArmies
 
         public override void Move(Vector movement)
         {
-            Velocity.Y -= dt;
+            Velocity.Y -= _dt;
             Location += movement + Velocity;
             Location.Y = Math.Max(-5, Location.Y);
             if (Math.Abs(Location.Y + 5) < 1e-5)

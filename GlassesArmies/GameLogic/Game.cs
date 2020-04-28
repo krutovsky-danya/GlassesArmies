@@ -8,13 +8,13 @@ namespace GlassesArmies
 {
     public class Game
     {
-        private List<Creature> enemies;
-        public IEnumerable<Creature> Alive => aliveCretures; // tuples with location and texture
-        private HashSet<Creature> players;
+        private List<Creature> _enemies;
+        public IEnumerable<Creature> Alive => _aliveCretures; // tuples with location and texture
+        private HashSet<Creature> _players;
         //players locations to allow enemies aim
-        private HashSet<Creature> aliveCretures; // probably not set
-        public IReadOnlyList<Wall> Walls => walls;
-        private List<Wall> walls;
+        private HashSet<Creature> _aliveCretures; // probably not set
+        public IReadOnlyList<Wall> Walls => _walls;
+        private List<Wall> _walls;
         //ordered walls by starts
         
         private HashSet<Projectile> _projectiles;
@@ -31,19 +31,19 @@ namespace GlassesArmies
 
         public Game(Level level)
         {
-            enemies = new List<Creature>(level.Enemies.Length);
-            players = new HashSet<Creature>();
-            aliveCretures = new HashSet<Creature>();
+            _enemies = new List<Creature>(level.Enemies.Length);
+            _players = new HashSet<Creature>();
+            _aliveCretures = new HashSet<Creature>();
             _projectiles = new HashSet<Projectile>();
             foreach (var enemy in level.Enemies)
             {
                 //copy enemy
                 enemy.Projectiles = _projectiles;
-                enemies.Add(enemy);
-                aliveCretures.Add(enemy);
+                _enemies.Add(enemy);
+                _aliveCretures.Add(enemy);
             }
-            walls = new List<Wall>(level.Walls);
-            var a = walls.OrderBy(w => w.Location.X);
+            _walls = new List<Wall>(level.Walls);
+            var a = _walls.OrderBy(w => w.Location.X);
             
             //player = level.StartCharacter.Copy();
             PlayersTurn = Turn.None;
@@ -53,7 +53,7 @@ namespace GlassesArmies
 
         public void MakeTurn()
         {
-            foreach (var creature in aliveCretures)
+            foreach (var creature in _aliveCretures)
             {
                 creature.MakeAutoTurn();
             }

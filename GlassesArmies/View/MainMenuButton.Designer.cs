@@ -9,7 +9,7 @@ namespace GlassesArmies
         /// <summary> 
         /// Required designer variable.
         /// </summary>
-        private IContainer components = null;
+        private IContainer _components = null;
 
         /// <summary> 
         /// Clean up any resources being used.
@@ -17,9 +17,9 @@ namespace GlassesArmies
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            if (disposing && (_components != null))
             {
-                components.Dispose();
+                _components.Dispose();
             }
 
             base.Dispose(disposing);
@@ -33,7 +33,7 @@ namespace GlassesArmies
         /// </summary>
         private void InitializeComponent(string text)
         {
-            components = new System.ComponentModel.Container();
+            _components = new System.ComponentModel.Container();
             
             this._mouseOutText = text;
             this.MouseInText = "> " + text;

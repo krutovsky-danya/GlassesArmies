@@ -6,7 +6,7 @@ namespace GlassesArmies
 {
     public class Creature
     {
-        private int healsPoints;
+        private int _healthPoints;
 
         public HashSet<Projectile> Projectiles { get; set; }
         //projectiles set to place bullets
@@ -15,21 +15,21 @@ namespace GlassesArmies
         private LinkedList<Turn> _turns;
         public Vector Location { get; protected set; }
 
-        private Vector step;
-        public Creature Copy() => new Creature(_texture, Location.Copy);
+        private Vector _step;
+        public Creature Copy() => new Creature(texture, Location.Copy);
         public Vector Velocity;
         protected Vector JumpAcceleration;
         
         //hit(horizontal/vertical) => Velocity.z = 0
 
 
-        public Bitmap _texture;
+        public Bitmap texture;
 
         public Creature(Bitmap texture, Vector location)
         {
-            _texture = texture;
+            this.texture = texture;
             Location = location;
-            step = new Vector(5, 0);
+            _step = new Vector(5, 0);
             _turns = new LinkedList<Turn>();
             Velocity = Vector.Zero;
             
@@ -45,13 +45,13 @@ namespace GlassesArmies
         
         public void MoveLeft()
         {
-            Move(-step);
+            Move(-_step);
             MemorizeTurn(Turn.TurnType.MoveLeft);
         }
 
         public void MoveRight()
         {
-            Move(step);
+            Move(_step);
             MemorizeTurn(Turn.TurnType.MoveRight);
         }
 

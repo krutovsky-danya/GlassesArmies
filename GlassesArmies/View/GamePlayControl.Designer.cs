@@ -15,7 +15,7 @@ namespace GlassesArmies
         /// <summary> 
         /// Required designer variable.
         /// </summary>
-        private IContainer components = null;
+        private IContainer _components = null;
 
         /// <summary> 
         /// Clean up any resources being used.
@@ -23,9 +23,9 @@ namespace GlassesArmies
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            if (disposing && (_components != null))
             {
-                components.Dispose();
+                _components.Dispose();
             }
 
             base.Dispose(disposing);
@@ -42,7 +42,7 @@ namespace GlassesArmies
             this._timer = new Timer();
             this._timer.Interval = 20;
 
-            this.isPused = false;
+            this._isPaused = false;
 
             this.SuspendLayout();
             // 
@@ -51,7 +51,7 @@ namespace GlassesArmies
             
             
             // 
-            // puseMenu
+            // pauseMenu
             //
             var coolDog = Image.FromFile($"..\\..\\Resources\\Textures\\coolDog.jpg");
             
@@ -62,15 +62,15 @@ namespace GlassesArmies
             //this.greyFilter.BackColor = Color.Transparent;
             
             
-            this.pauseMenu = new TableLayoutPanel();
-            this.pauseMenu.Dock = DockStyle.Fill;
-            this.pauseMenu.BackColor = Color.Transparent;
+            this._pauseMenu = new TableLayoutPanel();
+            this._pauseMenu.Dock = DockStyle.Fill;
+            this._pauseMenu.BackColor = Color.Transparent;
             
             
             //this.pauseMenu.BackgroundImage = coolDog;
-            this.pauseMenu.BackColor = Color.FromArgb(50, Color.Gray);
+            this._pauseMenu.BackColor = Color.FromArgb(50, Color.Gray);
 
-            this.pauseMenu.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            this._pauseMenu.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             
             //resume
             //restart -> confirm
@@ -105,18 +105,18 @@ namespace GlassesArmies
                 //button.BackColor = Color.Aqua;
                 //button.BackgroundImage = coolDog;
                 
-                this.pauseMenu.Controls.Add(button, 0, index);
-                this.pauseMenu.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
+                this._pauseMenu.Controls.Add(button, 0, index);
+                this._pauseMenu.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
             });
 
-            this.Controls.Add(pauseMenu);
+            this.Controls.Add(_pauseMenu);
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "GamePlayControl";
 
-            this.KeyPress += OnKeyPress;
-            this.Click += OnCLick;
+            this.KeyDown += OnKeyDown;
+            this.Click += OnClick;
             this._timer.Tick += OnTimerTick;
             
             HidePauseMenu();
@@ -128,7 +128,7 @@ namespace GlassesArmies
 
         private Timer _timer;
 
-        private TableLayoutPanel pauseMenu;
+        private TableLayoutPanel _pauseMenu;
 
         public void StopGame() => this._timer.Stop();
 
@@ -146,48 +146,43 @@ namespace GlassesArmies
             _controller.DrawGame(e);
         }
         
-        private Random rng = new Random(1729);
+        private Random _rng = new Random(1729);
         
-        private const int Esc = 27;
         
-        private void OnKeyPress(object sender, KeyPressEventArgs e)
+        private void OnKeyDown(object sender, KeyEventArgs e)
         {
             // Console.WriteLine(e.KeyChar);
             // Console.WriteLine((int)e.KeyChar);
             //Enter is 13
-            if (e.KeyChar == Esc)
+            switch (e.KeyCode)
             {
-                ManagePauseMenu();
-            }
-
-            if (e.KeyChar == 'd' || e.KeyChar == 'в')
-            {
-                _controller.SetTurn(Turn.MoveRight);
-            }
-
-            if (e.KeyChar == 'a'|| e.KeyChar == 'ф')
-            {
-                _controller.SetTurn(Turn.MoveLeft);
-            }
-
-            if (e.KeyChar == ' ')
-            {
-                _controller.SetTurn(Turn.Jump);
+                case Keys.Escape:
+                    ManagePauseMenu();
+                    break;
+                case Keys.D:
+                    _controller.SetTurn(Turn.MoveRight);
+                    break;
+                case Keys.A:
+                    _controller.SetTurn(Turn.MoveRight);
+                    break;
+                case Keys.Space:
+                    _controller.SetTurn(Turn.Jump);
+                    break;
             }
         }
 
-        private void OnCLick(object sender, EventArgs eventArgs)
+        private void OnClick(object sender, EventArgs eventArgs)
         {
             var mouseEventArgs = (MouseEventArgs) eventArgs;
             //Console.WriteLine(mouseEventArgs.Location);
             _controller.ShootInGame(mouseEventArgs.Location);
         }
 
-        private bool isPused;
+        private bool _isPaused;
         
         private void ManagePauseMenu()
         {
-            if (isPused)
+            if (_isPaused)
             {
                 HidePauseMenu();
                 ResumeGame();
@@ -198,19 +193,19 @@ namespace GlassesArmies
                 StopGame();
                 ShowPauseMenu();
             }
-            isPused = !isPused;
+            _isPaused = !_isPaused;
         }
         
         private void ShowPauseMenu()
         {
-            this.pauseMenu.Show();
-            this.pauseMenu.Enabled = true;
+            this._pauseMenu.Show();
+            this._pauseMenu.Enabled = true;
         }
         
         private void HidePauseMenu()
         {
-            this.pauseMenu.Enabled = false;
-            this.pauseMenu.Hide();
+            this._pauseMenu.Enabled = false;
+            this._pauseMenu.Hide();
         }
     }
 
