@@ -64,7 +64,7 @@ namespace GlassesArmies
             Location.Y = Math.Max(0, Location.Y);
             if (Location.Y < 2)
             {
-                Velocity.Y = Math.Max(Velocity.Y, 0);8
+                Velocity.Y = Math.Max(Velocity.Y, 0);
             }
         }
 
