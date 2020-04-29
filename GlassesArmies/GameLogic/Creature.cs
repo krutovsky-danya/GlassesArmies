@@ -4,11 +4,13 @@ using System.Drawing;
 
 namespace GlassesArmies
 {
-    public class Creature
+    public abstract class Creature
     {
-        private int _healthPoints;
+        protected readonly double _dt = 1d / 60;
+        
+        //private int _healthPoints;
 
-        public HashSet<Projectile> Projectiles { get; set; }
+        public Game _Game;
         //projectiles set to place bullets
         //walls to not collide
         //ai
@@ -16,7 +18,7 @@ namespace GlassesArmies
         public Vector Location { get; protected set; }
 
         private Vector _step;
-        public Creature Copy() => new Creature(texture, Location.Copy);
+        //public Creature Copy() => new Creature(texture, Location.Copy);
         public Vector Velocity;
         protected Vector JumpAcceleration;
         
@@ -32,7 +34,6 @@ namespace GlassesArmies
             _step = new Vector(5, 0);
             _turns = new LinkedList<Turn>();
             Velocity = Vector.Zero;
-            
         }
 
         public virtual void Move(Vector movement)
@@ -43,45 +44,43 @@ namespace GlassesArmies
             //_turns.AddLast(Turn.Move(movement));
         }
         
-        public void MoveLeft()
+        public virtual void MoveLeft()
         {
             Move(-_step);
-            MemorizeTurn(Turn.TurnType.MoveLeft);
+            //MemorizeTurn(Turn.MoveLeft);
         }
 
-        public void MoveRight()
+        public virtual void MoveRight()
         {
             Move(_step);
-            MemorizeTurn(Turn.TurnType.MoveRight);
+            //MemorizeTurn(Turn.MoveRight);
         }
 
         public virtual void Jump()
         {
             //if not in flight
             Velocity += JumpAcceleration;
-            Move(Vector.Zero);
         }
 
-        public virtual void Shoot(int x, int y)
+        public abstract void Shoot(Vector target);
+
+        public abstract void MakeAutoTurn();
+
+        private void MemorizeTurn(Turn turn)
         {
-            //_turns.AddLast(new Turn(Turn.TurnType.Shoot, creature => creature.Shoot(x, y)));
-            //accelerate back
+            var currentTurn = _turns.Last.Value;
+            if (turn.Type != Turn.Types.None && turn.Type != Turn.Types.MoveLeft && turn.Type != Turn.Types.MoveRight
+                || currentTurn.Type != turn.Type)
+            {
+                _turns.AddLast(turn); // copy to not increase counter outside
+            }
+            else
+            {
+                currentTurn.Repetitions++;
+            }
         }
 
-        public virtual void Shoot(Vector target)
-        {
-            
-        }
-
-        public virtual void MakeAutoTurn()
-        {
-            
-        }
-
-        private void MemorizeTurn(Turn.TurnType type)
-        {
-            
-        }
+        public abstract void MakeTurn(Turn turn);
 
         private void ValidateMove()
         {

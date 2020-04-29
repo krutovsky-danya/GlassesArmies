@@ -5,7 +5,7 @@ namespace GlassesArmies
 {
     public class Turn
     {
-        public readonly TurnType Type;
+        public readonly Types Type;
         public readonly Action<Creature> Action;
         private int _repetition = 1;
 
@@ -18,13 +18,13 @@ namespace GlassesArmies
             }
         }
 
-        public Turn(TurnType type, Action<Creature> action)
+        public Turn(Types type, Action<Creature> action)
         {
             Type = type;
             Action = action;
         }
 
-        public enum TurnType
+        public enum Types
         {
             None,
             MoveLeft,
@@ -35,19 +35,21 @@ namespace GlassesArmies
             //special
         }
         
-        public static Turn None => new Turn(TurnType.None, creature => creature.Move(Vector.Zero));
-        public static Turn MoveLeft => new Turn(TurnType.MoveLeft, creature => creature.MoveLeft());
-        public static Turn MoveRight => new Turn(TurnType.MoveRight, creature => creature.MoveRight());
-        public static Turn Jump => new Turn(TurnType.Jump, creature => creature.Jump());
+        public static Turn None => new Turn(Types.None, creature => creature.Move(Vector.Zero));
+        public static Turn MoveLeft => new Turn(Types.MoveLeft, creature => creature.MoveLeft());
+        public static Turn MoveRight => new Turn(Types.MoveRight, creature => creature.MoveRight());
+        public static Turn Jump => new Turn(Types.Jump, creature => creature.Jump());
 
         public static Turn Shoot(Point target)
         {
-            return new Turn(TurnType.Shoot, creature => creature.Shoot(target.X, target.Y));
+            return new Turn(Types.Shoot, creature => creature.Shoot(target.ToVector()));
         }
 
         public static Turn Move(Vector movement)
         {
-            return new Turn(TurnType.Move, creature => Move(movement));
+            return new Turn(Types.Move, creature => Move(movement));
         }
+        
+        //copy
     }
 }

@@ -15,7 +15,10 @@ namespace GlassesArmies
 
         public Controller()
         {
-            _game = new Game(new Level());
+            _game = new Game(new Level(
+                new Creature[] {new Soldier(Level.EnemySoldierTexture, new Vector(320, 0))},
+                new[] {new Wall(new Vector(0, -32), 1000, 25)},
+                new Soldier(Level.PlayerSoldierTexture, Vector.Zero)));
         }
 
         public void ChangeState(State state)
@@ -87,7 +90,7 @@ namespace GlassesArmies
         {
             var inGameTarget = target.ToVector() - _bias;
             inGameTarget.Y *= -1;
-            _game.Player.Shoot(inGameTarget);
+            SetTurn(Turn.Shoot(target));
         }
         
         public enum State

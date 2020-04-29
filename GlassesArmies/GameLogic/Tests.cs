@@ -44,8 +44,12 @@ namespace GlassesArmies
     }
 
     [TestFixture]
-    public class CreatureTests
+    public class SoldierTests
     {
-        
+        [Test]
+        public void SoldierShootTest()
+        {
+            
+        }
     }
 }

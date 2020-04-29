@@ -15,7 +15,7 @@ namespace GlassesArmies
         private HashSet<Creature> _aliveCretures; // probably not set
         public IReadOnlyList<Wall> Walls => _walls;
         private List<Wall> _walls;
-        //ordered walls by starts
+        //ordered walls by borders
         
         private HashSet<Projectile> _projectiles;
         public IEnumerable<Projectile> Projectiles => _projectiles;
@@ -38,7 +38,7 @@ namespace GlassesArmies
             foreach (var enemy in level.Enemies)
             {
                 //copy enemy
-                enemy.Projectiles = _projectiles;
+                enemy._Game = this;
                 _enemies.Add(enemy);
                 _aliveCretures.Add(enemy);
             }
@@ -48,7 +48,7 @@ namespace GlassesArmies
             //player = level.StartCharacter.Copy();
             PlayersTurn = Turn.None;
             Player = level.StartCharacter;
-            Player.Projectiles = _projectiles;
+            Player._Game = this;
         }
 
         public void MakeTurn()
@@ -71,7 +71,10 @@ namespace GlassesArmies
             //Console.WriteLine("Wow");
         }
 
-
+        public void AddProjectile(Projectile projectile)
+        {
+            _projectiles.Add(projectile);
+        }
         // public void MakePlayersCreatureTurn(action)
         // {
         //     

@@ -4,15 +4,15 @@ namespace GlassesArmies
 {
     public class Level
     {
-        public readonly Creature[] Enemies;
-        public readonly Wall[] Walls;
-        public readonly Creature StartCharacter;
+        public Creature[] Enemies;
+        public Wall[] Walls;
+        public Creature StartCharacter;
 
-        public Level()
+        public Level(Creature[] enemies, Wall[] walls, Creature startCharacter)
         {
-            Enemies = new Creature[] {new Soldier(EnemySoldierTexture, new Vector(320, 0))};
-            Walls = new[] { new Wall(new Vector(0, -32), 1000, 25)};
-            StartCharacter = new Soldier(PlayerSoldierTexture, Vector.Zero);
+            Enemies = enemies;
+            Walls = walls;
+            StartCharacter = startCharacter;
         }
 
         public static Bitmap PlayerSoldierTexture = new Bitmap(@"..\..\Resources\Textures\soldier.png");

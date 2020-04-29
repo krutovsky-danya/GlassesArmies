@@ -132,7 +132,11 @@ namespace GlassesArmies
 
         public void StopGame() => this._timer.Stop();
 
-        public void ResumeGame() => this._timer.Start();
+        public void ResumeGame()
+        {
+            if (!this._isPaused)
+                this._timer.Start();
+        }
 
         private void OnTimerTick(object sender, EventArgs eventArgs)
         {
@@ -147,8 +151,7 @@ namespace GlassesArmies
         }
         
         private Random _rng = new Random(1729);
-        
-        
+
         private void OnKeyDown(object sender, KeyEventArgs e)
         {
             // Console.WriteLine(e.KeyChar);
@@ -163,7 +166,7 @@ namespace GlassesArmies
                     _controller.SetTurn(Turn.MoveRight);
                     break;
                 case Keys.A:
-                    _controller.SetTurn(Turn.MoveRight);
+                    _controller.SetTurn(Turn.MoveLeft);
                     break;
                 case Keys.Space:
                     _controller.SetTurn(Turn.Jump);
@@ -182,18 +185,18 @@ namespace GlassesArmies
         
         private void ManagePauseMenu()
         {
-            if (_isPaused)
+            _isPaused = !_isPaused;
+            if (!_isPaused)
             {
                 HidePauseMenu();
                 ResumeGame();
-                Console.WriteLine("Resumed");
+                //Console.WriteLine("Resumed");
             }
             else
             {
                 StopGame();
                 ShowPauseMenu();
             }
-            _isPaused = !_isPaused;
         }
         
         private void ShowPauseMenu()

@@ -9,11 +9,9 @@ namespace GlassesArmies
         protected readonly int ClipSize = 12;
         protected int BulletsInClip;
 
-        private double _dt = 1d / 60;
-        
         public Soldier(Bitmap texture, Vector location) : base(texture, location)
         {
-            JumpAcceleration = new Vector(0, 2);
+            JumpAcceleration = new Vector(0, 7);
             BulletsInClip = ClipSize;
         }
 
@@ -22,7 +20,7 @@ namespace GlassesArmies
             if (ReloadTime <= 0)
             {
                 var projectile = new Projectile(Location + new Vector(0, -16), new Vector(-7, 0));
-                Projectiles.Add(projectile);
+                _Game.AddProjectile(projectile);
                 ReloadTime = 10;
                 BulletsInClip--;
             }
@@ -38,6 +36,12 @@ namespace GlassesArmies
             }
         }
 
+        public override void MakeTurn(Turn turn)
+        {
+            throw new NotImplementedException();
+            //Move(Vector.Zero);
+        }
+
         public override void Shoot(Vector target)
         {
             //Console.WriteLine($"{target.X} {target.Y}");
@@ -47,17 +51,20 @@ namespace GlassesArmies
             location.Y -= texture.Height / 2d;
             var bulletVelocity = target - location;
             bulletVelocity *= 1 / bulletVelocity.Length;
-            Projectiles.Add(new Projectile(location, 7 * bulletVelocity));
+            _Game.AddProjectile(new Projectile(location, 7 * bulletVelocity));
+            
+            //_turns.AddLast(new Turn(Turn.TurnType.Shoot, creature => creature.Shoot(x, y)));
+            //accelerate back
         }
 
         public override void Move(Vector movement)
         {
-            Velocity.Y -= _dt;
+            Velocity.Y -= 10 * _dt;
             Location += movement + Velocity;
-            Location.Y = Math.Max(-5, Location.Y);
-            if (Math.Abs(Location.Y + 5) < 1e-5)
+            Location.Y = Math.Max(0, Location.Y);
+            if (Location.Y < 2)
             {
-                Velocity.Y = Math.Max(Velocity.Y, 0);
+                Velocity.Y = Math.Max(Velocity.Y, 0);8
             }
         }
 
@@ -65,7 +72,6 @@ namespace GlassesArmies
         {
             if (Math.Abs(Velocity.Y) < 1e-5)
                 Velocity += JumpAcceleration;
-            Move(Vector.Zero);
         }
     }
 }

@@ -46,6 +46,8 @@ namespace GlassesArmies
             HideAll();
             _gamePlayControl.Enabled = true;
             _gamePlayControl.Show();
+            _gamePlayControl.Focus();
+            _gamePlayControl.ResumeGame();
         }
 
         public void ShowSettings()
