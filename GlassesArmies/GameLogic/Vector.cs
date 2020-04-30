@@ -46,5 +46,36 @@ namespace GlassesArmies
         {
             return new Vector(a.X - b.X, a.Y - b.Y);
         }
+
+        public static bool operator ==(Vector a, Vector b)
+        {
+            return Math.Abs(a.X - b.X) < 1e-9 && Math.Abs(a.Y - b.Y) < 1e-9
+                                              && a.GetHashCode() == b.GetHashCode();
+        }
+
+        public static bool operator !=(Vector a, Vector b)
+        {
+            return Math.Abs(a.X - b.X) >= 1e-9 || Math.Abs(a.Y - b.Y) > 1e-9;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is Vector other)
+            {
+                return this == other;
+            }
+
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return Tuple.Create(X, Y).GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return $"X: {X} Y: {Y}";
+        }
     }
 }
