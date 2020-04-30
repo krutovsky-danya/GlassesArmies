@@ -16,9 +16,9 @@ namespace GlassesArmies
         public Controller()
         {
             _game = new Game(new Level(
-                new Creature[] {new Soldier(Level.EnemySoldierTexture, new Vector(320, 0))},
+                new Creature[] {new Soldier(Textures.EnemySoldier, new Vector(320, 0))},
                 new[] {new Wall(new Vector(0, -32), 1000, 25)},
-                new Soldier(Level.PlayerSoldierTexture, Vector.Zero)));
+                new Soldier(Textures.PlayerSoldier, Vector.Zero)));
         }
 
         public void ChangeState(State state)

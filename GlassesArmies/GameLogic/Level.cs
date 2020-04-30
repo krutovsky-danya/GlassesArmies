@@ -14,8 +14,5 @@ namespace GlassesArmies
             Walls = walls;
             StartCharacter = startCharacter;
         }
-
-        public static Bitmap PlayerSoldierTexture = new Bitmap(@"..\..\Resources\Textures\soldier.png");
-        public static Bitmap EnemySoldierTexture = new Bitmap(@"..\..\Resources\Textures\enemySoldier.png");
     }
 }

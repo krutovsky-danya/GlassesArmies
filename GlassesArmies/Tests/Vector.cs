@@ -1,15 +1,10 @@
-﻿
-
-using System;
+﻿using GlassesArmies;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
 
-namespace GlassesArmies
+namespace GlassesArmies.Tests
 {
-    public class Tests
-    {
-        
-    }
-
     [TestFixture]
     public class VectorTests
     {
@@ -32,7 +27,8 @@ namespace GlassesArmies
             var vector = new Vector(x, y);
             Assert.AreEqual(expected, vector.Length, 1e-5);
         }
-
+        
+        [Test]
         public void VectorCopyTest()
         {
             var x = _random.NextDouble();
@@ -41,15 +37,16 @@ namespace GlassesArmies
             var copy = vector.Copy;
             Assert.IsFalse(ReferenceEquals(vector, copy));
         }
-    }
-
-    [TestFixture]
-    public class SoldierTests
-    {
+        
         [Test]
-        public void SoldierShootTest()
+        public void VectorEqualityTest()
         {
-            
+            var x = _random.NextDouble();
+            var y = _random.NextDouble();
+            var a = new Vector(x, y);
+            var b = new Vector(x, y);
+            Assert.AreEqual(a, b);
         }
+
     }
 }
