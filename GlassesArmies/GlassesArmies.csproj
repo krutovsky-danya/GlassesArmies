@@ -54,6 +54,7 @@
         <Compile Include="EnumerableExtension.cs" />
         <Compile Include="GameLogic\Creature.cs" />
         <Compile Include="GameLogic\Game.cs" />
+        <Compile Include="GameLogic\Geometry.cs" />
         <Compile Include="GameLogic\Level.cs" />
         <Compile Include="GameLogic\Projectile.cs" />
         <Compile Include="GameLogic\Soldier.cs" />
