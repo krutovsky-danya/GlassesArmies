@@ -91,5 +91,10 @@ namespace GlassesArmies
         {
             Velocity += impulse;
         }
+
+        public override int GetHashCode()
+        {
+            return Tuple.Create(Location, _step).GetHashCode();
+        }
     }
 }

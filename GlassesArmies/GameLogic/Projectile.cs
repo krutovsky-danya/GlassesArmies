@@ -19,5 +19,10 @@ namespace GlassesArmies
             Location += Velocity;
             Live--;
         }
+
+        public override int GetHashCode()
+        {
+            return Tuple.Create(Velocity, Location, Live).GetHashCode();
+        }
     }
 }
