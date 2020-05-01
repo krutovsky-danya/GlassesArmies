@@ -1,6 +1,4 @@
-﻿
-
-using System;
+﻿using System;
 using NUnit.Framework;
 
 namespace GlassesArmies
@@ -50,6 +48,20 @@ namespace GlassesArmies
         public void SoldierShootTest()
         {
             
+        }
+    }
+
+    [TestFixture]
+    public class ProjectilesTests
+    {
+        [Test]
+        public void ProjectileMoveTest()
+        {
+            var velocity = new Vector(5, 0);
+            var projectile = new Projectile(Vector.Zero, velocity);
+            Assert.Equals(Vector.Zero, projectile.Location);
+            projectile.Move();
+            Assert.Equals(velocity, projectile.Location);
         }
     }
 }

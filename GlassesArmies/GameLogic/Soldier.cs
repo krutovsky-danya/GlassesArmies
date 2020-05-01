@@ -49,9 +49,9 @@ namespace GlassesArmies
             if (target.X > Location.X)
                 location.X += texture.Width;
             location.Y -= texture.Height / 2d;
-            var bulletVelocity = target - location;
-            bulletVelocity *= 1 / bulletVelocity.Length;
-            _Game.AddProjectile(new Projectile(location, 7 * bulletVelocity));
+            var bulletDirection = target - location;
+            bulletDirection *= 1 / bulletDirection.Length;
+            _Game.AddProjectile(new Projectile(location, 7 * bulletDirection));
             
             //_turns.AddLast(new Turn(Turn.TurnType.Shoot, creature => creature.Shoot(x, y)));
             //accelerate back

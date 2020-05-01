@@ -2,21 +2,26 @@
 
 namespace GlassesArmies
 {
-    public class Projectile //red circle
+    public class Projectile //crimson circle
     {
-        public Vector Velocity  { get; }
-        public Vector Location { get; private set; }
+        private readonly Vector _velocity;
+        private Vector _location;
+
+        public Vector Velocity => _velocity.Copy;
+
+        public Vector Location => _location.Copy;
+
         public int Live { get; private set; } = 100;
 
         public Projectile(Vector location, Vector velocity)
         {
-            Velocity = velocity.Copy;
-            Location = location.Copy;
+            _velocity = velocity.Copy;
+            _location = location.Copy;
         }
         
         public void Move()
         {
-            Location += Velocity;
+            _location += Velocity;
             Live--;
         }
     }

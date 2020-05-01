@@ -46,5 +46,17 @@ namespace GlassesArmies
         {
             return new Vector(a.X - b.X, a.Y - b.Y);
         }
+
+        public override bool Equals(object obj)
+        {
+            if (obj != null && obj.GetType() == GetType())
+                return Equals((Vector)obj);
+            return false;
+        }
+
+        private bool Equals(Vector vector)
+        {
+            return Math.Abs(X - vector.X) < 1e-5 && Math.Abs(Y - vector.Y) < 1e-5;
+        }
     }
 }
