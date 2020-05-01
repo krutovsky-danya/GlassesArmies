@@ -49,13 +49,12 @@ namespace GlassesArmies
 
         public static bool operator ==(Vector a, Vector b)
         {
-            return Math.Abs(a.X - b.X) < 1e-9 && Math.Abs(a.Y - b.Y) < 1e-9
-                                              && a.GetHashCode() == b.GetHashCode();
+            return Math.Abs(a.X - b.X) < 1e-9 && Math.Abs(a.Y - b.Y) < 1e-9;
         }
 
         public static bool operator !=(Vector a, Vector b)
         {
-            return Math.Abs(a.X - b.X) >= 1e-9 || Math.Abs(a.Y - b.Y) > 1e-9;
+            return !(a == b);
         }
 
         public override bool Equals(object obj)
@@ -75,7 +74,7 @@ namespace GlassesArmies
 
         public override string ToString()
         {
-            return $"X: {X} Y: {Y}";
+            return $"X = {X} Y = {Y}";
         }
     }
 }

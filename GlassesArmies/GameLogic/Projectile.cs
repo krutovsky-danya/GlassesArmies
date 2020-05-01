@@ -20,9 +20,34 @@ namespace GlassesArmies
             Live--;
         }
 
+        public static bool operator ==(Projectile a, Projectile b)
+        {
+            return a.Location == b.Location && a.Velocity == b.Velocity
+                                            && a.Live == b.Live;
+        }
+
+        public static bool operator !=(Projectile a, Projectile b)
+        {
+            return !(a == b);
+        }
+        
+        public override bool Equals(object obj)
+        {
+            if (obj is Projectile other)
+            {
+                return this == other;
+            }
+            return false;
+        }
+
         public override int GetHashCode()
         {
             return Tuple.Create(Velocity, Location, Live).GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return $"Velocity: {Velocity}, Location: {Location}, Live = {Live}";
         }
     }
 }
