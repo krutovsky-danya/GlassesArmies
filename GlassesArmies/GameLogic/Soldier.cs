@@ -8,6 +8,7 @@ namespace GlassesArmies
         protected int ReloadTime = 10;
         protected readonly int ClipSize = 12;
         protected int BulletsInClip;
+        protected bool jumpAbility;
 
         public Soldier(Bitmap texture, Vector location) : base(texture, location)
         {
@@ -44,7 +45,7 @@ namespace GlassesArmies
 
         public override void Shoot(Vector target)
         {
-            //Console.WriteLine($"{target.X} {target.Y}");
+            Console.WriteLine($"{target.X} {target.Y}");
             var location = Location.Copy;
             if (target.X > Location.X)
                 location.X += texture.Width;
@@ -87,6 +88,7 @@ namespace GlassesArmies
                 {
                     Velocity.Y = 0;
                     destination.Y = wallRect.Top + texture.Height;
+                    jumpAbility = true;
                 }
                 if (Velocity.Y > 0 && wallRect.Bottom < hitBox.Top)
                 {
@@ -101,10 +103,9 @@ namespace GlassesArmies
 
         public override void Jump()
         {
-            if (Math.Abs(Velocity.Y) < 1)
-            {
-                Velocity += JumpAcceleration;
-            }
+            if (!jumpAbility) return;
+            Velocity += JumpAcceleration;
+            jumpAbility = false;
         }
     }
 }

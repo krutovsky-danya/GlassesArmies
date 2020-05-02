@@ -40,9 +40,9 @@ namespace GlassesArmies
         public static Turn MoveRight => new Turn(Types.MoveRight, creature => creature.MoveRight());
         public static Turn Jump => new Turn(Types.Jump, creature => creature.Jump());
 
-        public static Turn Shoot(Point target)
+        public static Turn Shoot(Vector target)
         {
-            return new Turn(Types.Shoot, creature => creature.Shoot(target.ToVector()));
+            return new Turn(Types.Shoot, creature => creature.Shoot(target));
         }
 
         public static Turn Move(Vector movement)

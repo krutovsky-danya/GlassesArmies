@@ -90,7 +90,7 @@ namespace GlassesArmies
         {
             var inGameTarget = target.ToVector() - _bias;
             inGameTarget.Y *= -1;
-            SetTurn(Turn.Shoot(target));
+            SetTurn(Turn.Shoot(inGameTarget));
         }
         
         public enum State
