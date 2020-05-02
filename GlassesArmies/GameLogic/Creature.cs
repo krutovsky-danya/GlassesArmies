@@ -66,13 +66,13 @@ namespace GlassesArmies
 
         public abstract void MakeAutoTurn();
 
-        private void MemorizeTurn(Turn turn)
+        protected void MemorizeTurn(Turn turn)
         {
             var currentTurn = _turns.Last.Value;
             if (turn.Type != Turn.Types.None && turn.Type != Turn.Types.MoveLeft && turn.Type != Turn.Types.MoveRight
                 || currentTurn.Type != turn.Type)
             {
-                _turns.AddLast(turn); // copy to not increase counter outside
+                _turns.AddLast(turn.Copy()); // copy to not increase counter outside
             }
             else
             {

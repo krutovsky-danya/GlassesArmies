@@ -39,7 +39,8 @@ namespace GlassesArmies
 
         public override void MakeTurn(Turn turn)
         {
-            throw new NotImplementedException();
+            turn.Action(this);
+            MemorizeTurn(turn);
             //Move(Vector.Zero);
         }
 
