@@ -11,10 +11,11 @@
         <e p="GameLogic" t="Include">
           <e p="Creature.cs" t="Include" />
           <e p="Game.cs" t="Include" />
+          <e p="Geometry.cs" t="Include" />
           <e p="Level.cs" t="Include" />
           <e p="Projectile.cs" t="Include" />
           <e p="Soldier.cs" t="Include" />
-          <e p="Tests.cs" t="Include" />
+          <e p="Textures.cs" t="Include" />
           <e p="Turn.cs" t="Include" />
           <e p="Vector.cs" t="Include" />
           <e p="Wall.cs" t="Include" />
@@ -32,6 +33,11 @@
             <e p="enemySoldier.png" t="Include" />
             <e p="soldier.png" t="Include" />
           </e>
+        </e>
+        <e p="Tests" t="Include">
+          <e p="Projectile.cs" t="Include" />
+          <e p="Soldier.cs" t="Include" />
+          <e p="Vector.cs" t="Include" />
         </e>
         <e p="View" t="Include">
           <e p="GamePlayControl.cs" t="Include" />

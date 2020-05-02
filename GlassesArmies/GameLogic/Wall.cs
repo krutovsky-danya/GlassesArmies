@@ -1,4 +1,6 @@
-﻿namespace GlassesArmies
+﻿using System.Drawing;
+
+namespace GlassesArmies
 {
     public class Wall
     {
@@ -13,6 +15,10 @@
             Width = width;
             Height = height;
         }
-        
+
+        public Rectangle ToRectangle()
+        {
+            return new Rectangle(_location.ToPoint(), new Size(Width, Height));
+        }
     }
 }

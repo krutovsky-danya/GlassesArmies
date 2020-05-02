@@ -59,6 +59,7 @@ namespace GlassesArmies.Tests
             Assert.AreEqual(a, b);
         }
 
+        [Test]
         public void VectorArithmeticTest()
         {
             var a = GenerateVector();
