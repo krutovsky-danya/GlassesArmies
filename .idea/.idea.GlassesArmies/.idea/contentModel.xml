@@ -35,6 +35,7 @@
           </e>
         </e>
         <e p="Tests" t="Include">
+          <e p="GeometryTests.cs" t="Include" />
           <e p="Projectile.cs" t="Include" />
           <e p="Soldier.cs" t="Include" />
           <e p="Vector.cs" t="Include" />

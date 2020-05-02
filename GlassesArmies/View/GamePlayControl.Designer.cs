@@ -41,6 +41,7 @@ namespace GlassesArmies
         {
             this._timer = new Timer();
             this._timer.Interval = 20;
+            // this._timer.Interval = 1000;
 
             this._isPaused = false;
 

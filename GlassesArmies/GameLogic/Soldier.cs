@@ -60,18 +60,51 @@ namespace GlassesArmies
         public override void Move(Vector movement)
         {
             Velocity.Y -= 10 * _dt;
-            Location += movement + Velocity;
-            Location.Y = Math.Max(0, Location.Y);
-            if (Location.Y < 2)
+            var destination = movement + Velocity + Location;
+            var hitBox = new Rectangle(destination.ToPoint(), new Size(texture.Width, -texture.Height));
+            foreach (var wall in _Game.Walls)
             {
-                Velocity.Y = Math.Max(Velocity.Y, 0);
+                var wallRect = wall.ToRectangle();
+                if (!Geometry.CheckRectangleIntersection(hitBox, wallRect)) continue;
+                // Console.WriteLine("Intersection");
+                // Console.WriteLine(Velocity.ToString());
+                // Console.Write("Wall: ");
+                // Console.WriteLine(wallRect.ToString());
+                // Console.Write("HitBox: ");
+                // Console.WriteLine(hitBox.ToString());
+                if (Velocity.X < 0 && hitBox.Left < wallRect.Right)
+                {
+                    Velocity.X = 0;
+                    destination.X = wallRect.Right;
+                }
+                if (Velocity.X > 0 && wallRect.Left < hitBox.Right)
+                {
+                    Velocity.X = 0;
+                    destination.X = wallRect.Left - texture.Width;
+                }
+
+                if (Velocity.Y < 0 && hitBox.Bottom < wallRect.Top)
+                {
+                    Velocity.Y = 0;
+                    destination.Y = wallRect.Top + texture.Height;
+                }
+                if (Velocity.Y > 0 && wallRect.Bottom < hitBox.Top)
+                {
+                    Velocity.Y = 0;
+                    destination.Y = wallRect.Bottom;
+                }
+                hitBox = new Rectangle(destination.ToPoint(), texture.Size);
             }
+            
+            Location = destination;
         }
 
         public override void Jump()
         {
-            if (Math.Abs(Velocity.Y) < 1e-5)
+            if (Math.Abs(Velocity.Y) < 1)
+            {
                 Velocity += JumpAcceleration;
+            }
         }
     }
 }

@@ -18,7 +18,7 @@ namespace GlassesArmies
 
         public Rectangle ToRectangle()
         {
-            return new Rectangle(_location.ToPoint(), new Size(Width, Height));
+            return new Rectangle(_location.ToPoint(), new Size(Width, -Height));
         }
     }
 }
