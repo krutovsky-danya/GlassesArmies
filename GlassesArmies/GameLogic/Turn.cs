@@ -50,6 +50,6 @@ namespace GlassesArmies
             return new Turn(Types.Move, creature => Move(movement));
         }
         
-        //copy
+        public Turn Copy() => new Turn(Type, Action);
     }
 }
