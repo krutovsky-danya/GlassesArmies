@@ -10,22 +10,22 @@ namespace GlassesArmies
         
         //private int _healthPoints;
 
-        public Game _Game;
+        public Game Game;
         //projectiles set to place bullets
         //walls to not collide
         //ai
         private LinkedList<Turn> _turns;
         public Vector Location { get; protected set; }
 
-        private Vector _step;
+        protected Vector _step;
         //public Creature Copy() => new Creature(texture, Location.Copy);
         public Vector Velocity;
         protected Vector JumpAcceleration;
-        
-        //hit(horizontal/vertical) => Velocity.z = 0
+
+        protected int HealthPoints;
 
 
-        public Bitmap texture;
+        public Bitmap texture { get; protected set; }
 
         public Creature(Bitmap texture, Vector location)
         {
@@ -89,5 +89,12 @@ namespace GlassesArmies
         {
             return Tuple.Create(Location, _step).GetHashCode();
         }
+        
+        public Rectangle ToRectangle()
+        {
+            return new Rectangle(Location.ToPoint(), new Size(texture.Width, -texture.Height));
+        }
+
+        public abstract void TakeDamage(int damage);
     }
 }

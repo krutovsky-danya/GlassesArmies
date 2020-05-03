@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 
 namespace GlassesArmies
 {
@@ -6,7 +7,7 @@ namespace GlassesArmies
     {
         public Vector Velocity  { get; }
         public Vector Location { get; protected set; }
-        public int Live { get; protected set; } = 100;
+        public int Live { get; protected set; } = 50;
 
         public int Damage { get; set; } = 10;
 
@@ -42,14 +43,19 @@ namespace GlassesArmies
             return false;
         }
 
-        public override int GetHashCode()
-        {
-            return Tuple.Create(Velocity, Location, Live).GetHashCode();
-        }
-
         public override string ToString()
         {
             return $"Velocity: {Velocity}, Location: {Location}, Live = {Live}";
+        }
+        
+        public Rectangle ToRectangle()
+        {
+            return new Rectangle(Location.ToPoint(), new Size(5, -5));
+        }
+
+        public void Collide()
+        {
+            Live = 0;
         }
     }
 }

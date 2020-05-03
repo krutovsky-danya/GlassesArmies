@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 
 namespace GlassesArmies
 {
@@ -7,7 +8,7 @@ namespace GlassesArmies
         protected int ReloadTime = 10;
         protected readonly int ClipSize = 12;
         protected int BulletsInClip;
-        protected bool jumpAbility;
+        protected bool JumpAbility;
 
         public Soldier(Bitmap texture, Vector location) : base(texture, location)
         {
@@ -19,7 +20,7 @@ namespace GlassesArmies
         {
             if (ReloadTime <= 0)
             {
-                Shoot(_Game.Player.Location);
+                //Shoot(Game.Player.Location + new Vector(16, -16));
                 ReloadTime = 10;
                 BulletsInClip--;
             }
@@ -42,6 +43,12 @@ namespace GlassesArmies
             //Move(Vector.Zero);
         }
 
+        public override void TakeDamage(int damage)
+        {
+            HealthPoints -= damage;
+            Console.WriteLine("Damage taken");
+        }
+
         public override void Shoot(Vector target)
         {
             var location = Location.Copy;
@@ -50,7 +57,7 @@ namespace GlassesArmies
             location.Y -= texture.Height / 2d;
             var bulletVelocity = target - location;
             bulletVelocity *= 1 / bulletVelocity.Length;
-            _Game.AddProjectile(new Projectile(location, 7 * bulletVelocity));
+            Game.AddProjectile(new Projectile(location, 7 * bulletVelocity));
             
             //_turns.AddLast(new Turn(Turn.TurnType.Shoot, creature => creature.Shoot(x, y)));
             //accelerate back
@@ -61,7 +68,7 @@ namespace GlassesArmies
             Velocity.Y -= 10 * _dt;
             var destination = movement + Velocity + Location;
             var hitBox = new Rectangle(destination.ToPoint(), new Size(texture.Width, -texture.Height));
-            foreach (var wall in _Game.Walls)
+            foreach (var wall in Game.Walls)
             {
                 var wallRect = wall.ToRectangle();
                 if (!Geometry.CheckRectangleIntersection(hitBox, wallRect)) continue;
@@ -80,7 +87,7 @@ namespace GlassesArmies
                 {
                     Velocity.Y = 0;
                     destination.Y = wallRect.Top + texture.Height;
-                    jumpAbility = true;
+                    JumpAbility = true;
                 }
                 if (Velocity.Y > 0 && wallRect.Bottom < hitBox.Top)
                 {
@@ -95,9 +102,9 @@ namespace GlassesArmies
 
         public override void Jump()
         {
-            if (!jumpAbility) return;
+            if (!JumpAbility) return;
             Velocity += JumpAcceleration;
-            jumpAbility = false;
+            JumpAbility = false;
         }
     }
 }

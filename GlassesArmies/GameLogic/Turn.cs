@@ -45,11 +45,6 @@ namespace GlassesArmies
             return new Turn(Types.Shoot, creature => creature.Shoot(target));
         }
 
-        public static Turn Move(Vector movement)
-        {
-            return new Turn(Types.Move, creature => Move(movement));
-        }
-        
         public Turn Copy() => new Turn(Type, Action);
     }
 }

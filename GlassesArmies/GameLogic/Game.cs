@@ -38,17 +38,16 @@ namespace GlassesArmies
             foreach (var enemy in level.Enemies)
             {
                 //copy enemy
-                enemy._Game = this;
+                enemy.Game = this;
                 _enemies.Add(enemy);
                 _aliveCretures.Add(enemy);
             }
             _walls = new List<Wall>(level.Walls);
-            var a = _walls.OrderBy(w => w.Location.X);
             
             //player = level.StartCharacter.Copy();
             PlayersTurn = Turn.None;
             Player = level.StartCharacter;
-            Player._Game = this;
+            Player.Game = this;
         }
 
         public void MakeTurn()
@@ -62,9 +61,20 @@ namespace GlassesArmies
             {
                 //check for hit
                 projectile.Move();
+                var projectileRect = projectile.ToRectangle();
+                foreach (var creature in _aliveCretures.Where(creature => Geometry.CheckRectangleIntersection(projectileRect, creature.ToRectangle())))
+                {
+                    creature.TakeDamage(projectile.Damage);
+                    projectile.Collide();
+                }
+
+                foreach (var dummy in _walls.Where(wall => Geometry.CheckRectangleIntersection(wall.ToRectangle(), projectileRect)))
+                {
+                    projectile.Collide();
+                }
             }
 
-            _projectiles.RemoveWhere(p => p.Live == 0);
+            _projectiles.RemoveWhere(p => p.Live <= 0);
 
             PlayersTurn.Action(Player);
             PlayersTurn = Turn.None;
