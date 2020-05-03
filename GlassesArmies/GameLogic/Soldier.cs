@@ -9,9 +9,11 @@ namespace GlassesArmies
         protected readonly int ClipSize = 12;
         protected int BulletsInClip;
         protected bool JumpAbility;
+        public const int MaxHealthPoints = 50;
 
         public Soldier(Bitmap texture, Vector location) : base(texture, location)
         {
+            HealthPoints = MaxHealthPoints;
             JumpAcceleration = new Vector(0, 7);
             BulletsInClip = ClipSize;
         }
@@ -53,8 +55,8 @@ namespace GlassesArmies
         {
             var location = Location.Copy;
             if (target.X > Location.X)
-                location.X += texture.Width;
-            location.Y -= texture.Height / 2d;
+                location.X += Texture.Width;
+            location.Y -= Texture.Height / 2d;
             var bulletVelocity = target - location;
             bulletVelocity *= 1 / bulletVelocity.Length;
             Game.AddProjectile(new Projectile(location, 7 * bulletVelocity));
@@ -67,7 +69,7 @@ namespace GlassesArmies
         {
             Velocity.Y -= 10 * _dt;
             var destination = movement + Velocity + Location;
-            var hitBox = new Rectangle(destination.ToPoint(), new Size(texture.Width, -texture.Height));
+            var hitBox = new Rectangle(destination.ToPoint(), new Size(Texture.Width, -Texture.Height));
             foreach (var wall in Game.Walls)
             {
                 var wallRect = wall.ToRectangle();
@@ -80,13 +82,13 @@ namespace GlassesArmies
                 if (Velocity.X > 0 && wallRect.Left < hitBox.Right)
                 {
                     Velocity.X = 0;
-                    destination.X = wallRect.Left - texture.Width;
+                    destination.X = wallRect.Left - Texture.Width;
                 }
 
                 if (Velocity.Y < 0 && hitBox.Bottom < wallRect.Top)
                 {
                     Velocity.Y = 0;
-                    destination.Y = wallRect.Top + texture.Height;
+                    destination.Y = wallRect.Top + Texture.Height;
                     JumpAbility = true;
                 }
                 if (Velocity.Y > 0 && wallRect.Bottom < hitBox.Top)
@@ -94,7 +96,7 @@ namespace GlassesArmies
                     Velocity.Y = 0;
                     destination.Y = wallRect.Bottom;
                 }
-                hitBox = new Rectangle(destination.ToPoint(), texture.Size);
+                hitBox = new Rectangle(destination.ToPoint(), Texture.Size);
             }
             
             Location = destination;

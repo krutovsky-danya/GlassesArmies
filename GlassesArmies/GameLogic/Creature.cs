@@ -22,14 +22,14 @@ namespace GlassesArmies
         public Vector Velocity;
         protected Vector JumpAcceleration;
 
-        protected int HealthPoints;
+        public int HealthPoints { get; protected set; }
 
 
-        public Bitmap texture { get; protected set; }
+        public Bitmap Texture { get; protected set; }
 
         public Creature(Bitmap texture, Vector location)
         {
-            this.texture = texture;
+            this.Texture = texture;
             Location = location;
             _step = new Vector(5, 0);
             _turns = new LinkedList<Turn>();
@@ -92,7 +92,7 @@ namespace GlassesArmies
         
         public Rectangle ToRectangle()
         {
-            return new Rectangle(Location.ToPoint(), new Size(texture.Width, -texture.Height));
+            return new Rectangle(Location.ToPoint(), new Size(Texture.Width, -Texture.Height));
         }
 
         public abstract void TakeDamage(int damage);

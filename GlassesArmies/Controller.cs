@@ -58,7 +58,7 @@ namespace GlassesArmies
 
         public IEnumerable<Tuple<Bitmap, Point>> GetAliveCreature() => from creature in _game.Alive
             let location = _bias + new Vector(creature.Location.X, -creature.Location.Y)
-            select Tuple.Create(creature.texture, location.ToPoint());
+            select Tuple.Create(creature.Texture, location.ToPoint());
 
         public IEnumerable<Rectangle> GetWalls() => from gameWall in _game.Walls
             let location = _bias + new Vector(gameWall.Location.X, -gameWall.Location.Y) 
@@ -67,7 +67,7 @@ namespace GlassesArmies
         public Tuple<Bitmap, Point> GetPlayerData()
         {
             var playerLocation = _bias + new Vector(_game.Player.Location.X, -_game.Player.Location.Y);
-            return Tuple.Create(_game.Player.texture, playerLocation.ToPoint());
+            return Tuple.Create(_game.Player.Texture, playerLocation.ToPoint());
         }
 
         public void TurnGame()
