@@ -145,9 +145,24 @@ namespace GlassesArmies
             Invalidate();
         }
 
-        protected override void OnPaint(PaintEventArgs e)
+        protected override void OnPaint(PaintEventArgs eventArgs)
         {
-            _controller.DrawGame(e);
+            foreach (var projectile in _controller.GetProjectiles())
+            {
+                eventArgs.Graphics.FillEllipse(Brushes.Crimson, projectile);
+            }
+            foreach (var textureLocation in _controller.GetAliveCreature())
+            {
+                eventArgs.Graphics.DrawImage(textureLocation.Item1, textureLocation.Item2);
+            }
+
+            foreach (var gameWall in _controller.GetWalls())
+            {
+                eventArgs.Graphics.FillRectangle(Brushes.Silver, gameWall);
+            }
+
+            var playerData = _controller.GetPlayerData();
+            eventArgs.Graphics.DrawImage(playerData.Item1, playerData.Item2);
         }
         
         private Random _rng = new Random(1729);

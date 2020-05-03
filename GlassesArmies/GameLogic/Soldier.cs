@@ -1,5 +1,4 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
 
 namespace GlassesArmies
 {
@@ -20,8 +19,7 @@ namespace GlassesArmies
         {
             if (ReloadTime <= 0)
             {
-                var projectile = new Projectile(Location + new Vector(0, -16), new Vector(-7, 0));
-                _Game.AddProjectile(projectile);
+                Shoot(_Game.Player.Location);
                 ReloadTime = 10;
                 BulletsInClip--;
             }
@@ -46,7 +44,6 @@ namespace GlassesArmies
 
         public override void Shoot(Vector target)
         {
-            Console.WriteLine($"{target.X} {target.Y}");
             var location = Location.Copy;
             if (target.X > Location.X)
                 location.X += texture.Width;
@@ -68,12 +65,6 @@ namespace GlassesArmies
             {
                 var wallRect = wall.ToRectangle();
                 if (!Geometry.CheckRectangleIntersection(hitBox, wallRect)) continue;
-                // Console.WriteLine("Intersection");
-                // Console.WriteLine(Velocity.ToString());
-                // Console.Write("Wall: ");
-                // Console.WriteLine(wallRect.ToString());
-                // Console.Write("HitBox: ");
-                // Console.WriteLine(hitBox.ToString());
                 if (Velocity.X < 0 && hitBox.Left < wallRect.Right)
                 {
                     Velocity.X = 0;

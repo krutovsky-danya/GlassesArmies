@@ -5,8 +5,10 @@ namespace GlassesArmies
     public class Projectile //red circle
     {
         public Vector Velocity  { get; }
-        public Vector Location { get; private set; }
-        public int Live { get; private set; } = 100;
+        public Vector Location { get; protected set; }
+        public int Live { get; protected set; } = 100;
+
+        public int Damage { get; set; } = 10;
 
         public Projectile(Vector location, Vector velocity)
         {

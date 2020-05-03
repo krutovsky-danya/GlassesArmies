@@ -13,7 +13,7 @@ namespace GlassesArmies
         private HashSet<Creature> _players;
         //players locations to allow enemies aim
         private HashSet<Creature> _aliveCretures; // probably not set
-        public IReadOnlyList<Wall> Walls => _walls;
+        public IEnumerable<Wall> Walls => _walls;
         private List<Wall> _walls;
         //ordered walls by borders
         

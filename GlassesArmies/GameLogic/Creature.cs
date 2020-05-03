@@ -47,13 +47,11 @@ namespace GlassesArmies
         public virtual void MoveLeft()
         {
             Move(-_step);
-            //MemorizeTurn(Turn.MoveLeft);
         }
 
         public virtual void MoveRight()
         {
             Move(_step);
-            //MemorizeTurn(Turn.MoveRight);
         }
 
         public virtual void Jump()
@@ -81,11 +79,6 @@ namespace GlassesArmies
         }
 
         public abstract void MakeTurn(Turn turn);
-
-        private void ValidateMove()
-        {
-            
-        }
 
         public void Accelerate(Vector impulse)
         {
