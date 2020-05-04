@@ -40,11 +40,11 @@ namespace GlassesArmies
         {
             Enemies = new Creature[]
             {
-                new Soldier(Textures.EnemySoldier, new Vector(320, 0), 20),
-                new Soldier(Textures.EnemySoldier, new Vector(500, 0), 20)
+                new Soldier(Game.CreatureSide.Enemy, new Vector(320, 0), 20),
+                new Soldier(Game.CreatureSide.Enemy, new Vector(500, 0), 20)
             };
             Walls = new[] {new Wall(new Vector(0, -32), 1000, 25)};
-            StartCharacter = new Soldier(Textures.PlayerSoldier, Vector.Zero, 100);
+            StartCharacter = new Soldier(Game.CreatureSide.Player, Vector.Zero, 100);
         }
 
         public enum Name

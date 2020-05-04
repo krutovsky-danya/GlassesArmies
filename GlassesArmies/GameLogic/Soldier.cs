@@ -13,13 +13,15 @@ namespace GlassesArmies
         protected bool JumpAbility;
         public const int MaxHealthPoints = 50;
 
-        public Soldier(Bitmap texture, Vector location, int health) : base(texture, location)
+        public Soldier(Game.CreatureSide soldierSide, Vector location, int health) : 
+            base(soldierSide == Game.CreatureSide.Enemy ? Textures.EnemySoldier : Textures.PlayerSoldier, location)
         {
             HealthPoints = MaxHealthPoints;
             JumpAcceleration = new Vector(0, 7);
             BulletsInClip = ClipSize;
             StartHealth = health;
             HealthPoints = health;
+            Side = soldierSide;
         }
 
         public override void MakeAutoTurn()
@@ -64,7 +66,7 @@ namespace GlassesArmies
 
         public override Creature Copy()
         {
-            return new Soldier(StartTexture, StartLocation, StartHealth);
+            return new Soldier(Side, StartLocation, StartHealth);
         }
 
         public override void Shoot(Vector target)
@@ -75,7 +77,7 @@ namespace GlassesArmies
             location.Y -= Texture.Height / 2d;
             var bulletVelocity = target - location;
             bulletVelocity *= 1 / bulletVelocity.Length;
-            Game.AddProjectile(new Projectile(location, 7 * bulletVelocity));
+            Game.AddProjectile(new Projectile(location, 7 * bulletVelocity, Side));
             
             //_turns.AddLast(new Turn(Turn.TurnType.Shoot, creature => creature.Shoot(x, y)));
             //accelerate back

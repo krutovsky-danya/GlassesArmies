@@ -21,6 +21,8 @@ namespace GlassesArmies
 
         protected int HealthPoints;
         public bool IsAlive { get; protected set; } = true;
+        
+        public Game.CreatureSide Side { get; protected set; }
 
 
         public Bitmap Texture { get; protected set; }

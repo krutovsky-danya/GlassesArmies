@@ -11,11 +11,13 @@ namespace GlassesArmies
         public int Live { get; protected set; } = MaxLive;
 
         public int Damage { get; set; } = 10;
+        public Game.CreatureSide Side { get; private set; }
 
-        public Projectile(Vector location, Vector velocity)
+        public Projectile(Vector location, Vector velocity, Game.CreatureSide side)
         {
             Velocity = velocity.Copy;
             Location = location.Copy;
+            Side = side;
         }
         
         public void Move()
@@ -27,7 +29,8 @@ namespace GlassesArmies
         public static bool operator ==(Projectile a, Projectile b)
         {
             return a.Location == b.Location && a.Velocity == b.Velocity
-                                            && a.Live == b.Live;
+                                            && a.Live == b.Live
+                && a.Side == b.Side;
         }
 
         public static bool operator !=(Projectile a, Projectile b)

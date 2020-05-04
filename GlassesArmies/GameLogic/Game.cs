@@ -56,7 +56,7 @@ namespace GlassesArmies
 
         public void MakeTurn()
         {
-            foreach (var creature in Alive)
+            foreach (var creature in Alive.Where(c => c != Player))
             {
                 creature.MakeAutoTurn();
             }
@@ -65,7 +65,8 @@ namespace GlassesArmies
             {
                 projectile.Move();
                 var projectileRect = projectile.ToRectangle();
-                foreach (var creature in Alive.Where(creature => Geometry.CheckRectangleIntersection(projectileRect, creature.ToRectangle())))
+                foreach (var creature in Alive.Where(creature => projectile.Side != creature.Side && 
+                    Geometry.CheckRectangleIntersection(projectileRect, creature.ToRectangle())))
                 {
                     creature.TakeDamage(projectile.Damage);
                     projectile.Collide();
@@ -122,7 +123,7 @@ namespace GlassesArmies
                 creature.Reborn();
                 _aliveCretures.Add(creature);
             }
-            Player = _level.StartCharacter.Copy();
+            Player = _level.StartCharacter.Copy(); //chosen by human
             Player.Game = this;
             _aliveCretures.Add(Player);
         }
@@ -130,5 +131,11 @@ namespace GlassesArmies
         // {
         //     
         // }
+        public enum CreatureSide
+        {
+            Enemy,
+            Player,
+            //Neutral
+        }
     }
 }
