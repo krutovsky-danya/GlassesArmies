@@ -9,7 +9,6 @@ namespace GlassesArmies
 {
     public class Game
     {
-        private List<Creature> _enemies;
         public IEnumerable<Creature> Alive => _aliveCretures;
         // TODO: fix THETA(N) deletion
         
@@ -37,7 +36,6 @@ namespace GlassesArmies
         public Game(Level level)
         {
             _level = level;
-            _enemies = new List<Creature>(level.Enemies.Length);
             _players = new HashSet<Creature>();
             _aliveCretures = new HashSet<Creature>();
             _projectiles = new HashSet<Projectile>();
@@ -45,15 +43,15 @@ namespace GlassesArmies
             {
                 var enemy = levelEnemy.Copy();
                 enemy.Game = this;
-                _enemies.Add(enemy);
                 _aliveCretures.Add(enemy);
             }
+            Player = level.StartCharacter.Copy();
+            Player.Game = this;
+            _aliveCretures.Add(Player);
             
             _walls = new List<Wall>(level.Walls);
             
             PlayersTurn = Turn.None;
-            Player = level.StartCharacter.Copy();
-            Player.Game = this;
         }
 
         public void MakeTurn()
@@ -91,7 +89,7 @@ namespace GlassesArmies
             _projectiles.Add(projectile);
         }
 
-        public void IAmDead(Creature deadOne)
+        public void AcceptDeath(Creature deadOne)
         {
             if (deadOne == Player)
             {
@@ -106,7 +104,27 @@ namespace GlassesArmies
         private void PlayerDead()
         {
             _players.Add(Player);
+            RestartLevel();
+        }
+
+        private void RestartLevel()
+        {
+            _aliveCretures = _level.Enemies
+                .Select(e =>
+                {
+                    var enemy = e.Copy(); 
+                    enemy.Game = this; 
+                    return enemy;
+                })
+                .ToHashSet();
+            foreach (var creature in _players)
+            {
+                creature.Reborn();
+                _aliveCretures.Add(creature);
+            }
             Player = _level.StartCharacter.Copy();
+            Player.Game = this;
+            _aliveCretures.Add(Player);
         }
         // public void MakePlayersCreatureTurn(action)
         // {

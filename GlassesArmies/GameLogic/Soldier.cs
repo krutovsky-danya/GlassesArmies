@@ -26,7 +26,7 @@ namespace GlassesArmies
         {
             if (ReloadTime <= 0)
             {
-                //Shoot(Game.Player.Location + new Vector(16, -16));
+                Shoot(Game.Player.Location + new Vector(16, -16));
                 ReloadTime = 10;
                 BulletsInClip--;
             }
@@ -55,12 +55,7 @@ namespace GlassesArmies
             Console.WriteLine(HealthPoints);
             if (HealthPoints > 0) return;
             IsAlive = false;
-            Game.IAmDead(this);
-            CurrentTurn = Turns.First;
-            CurrentRepetition = 0;
-            Location = StartLocation.Copy;
-            Texture = StartTexture;
-            HealthPoints = StartHealth;
+            Game.AcceptDeath(this);
         }
 
         protected int CurrentRepetition { get; set; }
@@ -130,10 +125,14 @@ namespace GlassesArmies
             JumpAbility = false;
         }
 
-        public virtual void Reincornate()
+        public override void Reborn()
         {
-            IsAlive = true;
+            base.Reborn();
+            CurrentTurn = Turns.First;
+            CurrentRepetition = 0;
+            Location = StartLocation.Copy;
+            Texture = StartTexture;
+            HealthPoints = StartHealth;
         }
-        
     }
 }

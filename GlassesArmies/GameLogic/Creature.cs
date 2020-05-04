@@ -74,7 +74,7 @@ namespace GlassesArmies
             if (turn.Type != Turn.Types.None && turn.Type != Turn.Types.MoveLeft && turn.Type != Turn.Types.MoveRight
                 || currentTurn.Type != turn.Type)
             {
-                Turns.AddLast(turn.Copy()); // copy to not increase counter outside
+                Turns.AddLast(turn.Copy()); // copy to not increase counter from outside
             }
             else
             {
@@ -102,5 +102,10 @@ namespace GlassesArmies
         public abstract void TakeDamage(int damage);
 
         public abstract Creature Copy();
+        
+        public virtual void Reborn()
+        {
+            IsAlive = true;
+        }
     }
 }
