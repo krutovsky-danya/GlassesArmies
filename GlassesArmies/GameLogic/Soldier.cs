@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace GlassesArmies
@@ -53,6 +54,7 @@ namespace GlassesArmies
             HealthPoints -= damage;
             Console.WriteLine(HealthPoints);
             if (HealthPoints > 0) return;
+            IsAlive = false;
             Game.IAmDead(this);
             CurrentTurn = Turns.First;
             CurrentRepetition = 0;
@@ -60,6 +62,10 @@ namespace GlassesArmies
             Texture = StartTexture;
             HealthPoints = StartHealth;
         }
+
+        protected int CurrentRepetition { get; set; }
+
+        private LinkedListNode<Turn> CurrentTurn { get; set; }
 
         public override Creature Copy()
         {
@@ -123,5 +129,11 @@ namespace GlassesArmies
             Velocity += JumpAcceleration;
             JumpAbility = false;
         }
+
+        public virtual void Reincornate()
+        {
+            IsAlive = true;
+        }
+        
     }
 }

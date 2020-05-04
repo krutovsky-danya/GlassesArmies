@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.SqlTypes;
 using System.Diagnostics;
 using System.Linq;
@@ -9,7 +10,9 @@ namespace GlassesArmies
     public class Game
     {
         private List<Creature> _enemies;
-        public IEnumerable<Creature> Alive => _aliveCretures; // tuples with location and texture
+        public IEnumerable<Creature> Alive => _aliveCretures;
+        // TODO: fix THETA(N) deletion
+        
         private HashSet<Creature> _players;
         //players locations to allow enemies aim
         private HashSet<Creature> _aliveCretures; // probably not set
@@ -55,30 +58,29 @@ namespace GlassesArmies
 
         public void MakeTurn()
         {
-            foreach (var creature in _aliveCretures)
+            foreach (var creature in Alive)
             {
                 creature.MakeAutoTurn();
             }
             
             foreach (var projectile in _projectiles)
             {
-                //check for hit
                 projectile.Move();
                 var projectileRect = projectile.ToRectangle();
-                foreach (var creature in _aliveCretures.Where(creature => Geometry.CheckRectangleIntersection(projectileRect, creature.ToRectangle())))
+                foreach (var creature in Alive.Where(creature => Geometry.CheckRectangleIntersection(projectileRect, creature.ToRectangle())))
                 {
                     creature.TakeDamage(projectile.Damage);
                     projectile.Collide();
                 }
 
-                foreach (var dummy in _walls.Where(wall => Geometry.CheckRectangleIntersection(wall.ToRectangle(), projectileRect)))
+                foreach (var dummy in Walls.Where(wall => Geometry.CheckRectangleIntersection(wall.ToRectangle(), projectileRect)))
                 {
                     projectile.Collide();
                 }
             }
 
             _projectiles.RemoveWhere(p => p.Live <= 0);
-            _aliveCretures.RemoveWhere(c => c.HealthPoints <= 0);
+            _aliveCretures.RemoveWhere(c => !c.IsAlive);
             PlayersTurn.Action(Player);
             PlayersTurn = Turn.None;
             //Console.WriteLine("Wow");
@@ -97,7 +99,7 @@ namespace GlassesArmies
             }
             else
             {
-                _aliveCretures.Remove(deadOne);
+                //_aliveCretures.Remove(deadOne);
             }
         }
 

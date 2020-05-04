@@ -38,7 +38,11 @@ namespace GlassesArmies
 
         private void SetEmptyLevel()
         {
-            Enemies = new Creature[] {new Soldier(Textures.EnemySoldier, new Vector(320, 0), 100)};
+            Enemies = new Creature[]
+            {
+                new Soldier(Textures.EnemySoldier, new Vector(320, 0), 20),
+                new Soldier(Textures.EnemySoldier, new Vector(500, 0), 20)
+            };
             Walls = new[] {new Wall(new Vector(0, -32), 1000, 25)};
             StartCharacter = new Soldier(Textures.PlayerSoldier, Vector.Zero, 100);
         }
