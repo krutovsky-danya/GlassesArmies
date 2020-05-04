@@ -9,14 +9,14 @@ namespace GlassesArmies
         protected readonly double _dt = 1d / 60;
 
         public Game Game;
-        //walls to not collide
+        
         //ai
+        
         protected LinkedList<Turn> Turns;
         public Vector Location { get; protected set; }
 
-        protected Vector _step;
-        //public Creature Copy() => new Creature(texture, Location.Copy);
-        public Vector Velocity;
+        protected Vector Step;
+        protected Vector Velocity;
         protected Vector JumpAcceleration;
 
         protected int HealthPoints;
@@ -33,7 +33,7 @@ namespace GlassesArmies
             Texture = texture;
             StartLocation = location.Copy;
             Location = location.Copy;
-            _step = new Vector(5, 0);
+            Step = new Vector(5, 0);
             Turns = new LinkedList<Turn>();
             Velocity = Vector.Zero;
         }
@@ -52,12 +52,12 @@ namespace GlassesArmies
         
         public virtual void MoveLeft()
         {
-            Move(-_step);
+            Move(-Step);
         }
 
         public virtual void MoveRight()
         {
-            Move(_step);
+            Move(Step);
         }
 
         public virtual void Jump()
@@ -70,8 +70,13 @@ namespace GlassesArmies
 
         public abstract void MakeAutoTurn();
 
-        protected void MemorizeTurn(Turn turn)
+        public void MemorizeTurn(Turn turn)
         {
+            if (Turns.Last == null)
+            {
+                Turns.AddLast(turn.Copy());
+                return;
+            }
             var currentTurn = Turns.Last.Value;
             if (turn.Type != Turn.Types.None && turn.Type != Turn.Types.MoveLeft && turn.Type != Turn.Types.MoveRight
                 || currentTurn.Type != turn.Type)
@@ -93,7 +98,7 @@ namespace GlassesArmies
 
         public override int GetHashCode()
         {
-            return Tuple.Create(Location, _step).GetHashCode();
+            return Tuple.Create(Location, Step).GetHashCode();
         }
         
         public Rectangle ToRectangle()

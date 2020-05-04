@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlTypes;
-using System.Diagnostics;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Numerics;
 
 namespace GlassesArmies
 {
@@ -81,6 +77,7 @@ namespace GlassesArmies
             _projectiles.RemoveWhere(p => p.Live <= 0);
             _aliveCretures.RemoveWhere(c => !c.IsAlive);
             PlayersTurn.Action(Player);
+            Player.MemorizeTurn(PlayersTurn);
             PlayersTurn = Turn.None;
             //Console.WriteLine("Wow");
         }
@@ -127,10 +124,7 @@ namespace GlassesArmies
             Player.Game = this;
             _aliveCretures.Add(Player);
         }
-        // public void MakePlayersCreatureTurn(action)
-        // {
-        //     
-        // }
+        
         public enum CreatureSide
         {
             Enemy,

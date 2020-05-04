@@ -26,21 +26,33 @@ namespace GlassesArmies
 
         public override void MakeAutoTurn()
         {
-            if (ReloadTime <= 0)
+            if (CurrentTurn != null)
             {
-                Shoot(Game.Player.Location + new Vector(16, -16));
-                ReloadTime = 10;
-                BulletsInClip--;
+                CurrentTurn.Value.Action(this);
+                CurrentRepetition++;
+                if (CurrentTurn.Value.Repetitions <= CurrentRepetition)
+                {
+                    CurrentTurn = CurrentTurn.Next;
+                }
             }
             else
             {
-                ReloadTime--;
-            }
+                if (ReloadTime <= 0)
+                {
+                    Shoot(Game.Player.Location + new Vector(16, -16));
+                    ReloadTime = 10;
+                    BulletsInClip--;
+                }
+                else
+                {
+                    ReloadTime--;
+                }
 
-            if (BulletsInClip <= 0)
-            {
-                BulletsInClip = ClipSize;
-                ReloadTime = 120;
+                if (BulletsInClip <= 0)
+                {
+                    BulletsInClip = ClipSize;
+                    ReloadTime = 120;
+                }
             }
         }
 
