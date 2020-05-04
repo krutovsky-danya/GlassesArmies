@@ -22,6 +22,8 @@ namespace GlassesArmies
         public Creature Player;
         public Turn PlayersTurn { get; set; }
 
+        private Level _level;
+
         //camera location
         //score
 
@@ -31,22 +33,23 @@ namespace GlassesArmies
 
         public Game(Level level)
         {
+            _level = level;
             _enemies = new List<Creature>(level.Enemies.Length);
             _players = new HashSet<Creature>();
             _aliveCretures = new HashSet<Creature>();
             _projectiles = new HashSet<Projectile>();
-            foreach (var enemy in level.Enemies)
+            foreach (var levelEnemy in level.Enemies)
             {
-                //copy enemy
+                var enemy = levelEnemy.Copy();
                 enemy.Game = this;
                 _enemies.Add(enemy);
                 _aliveCretures.Add(enemy);
             }
+            
             _walls = new List<Wall>(level.Walls);
             
-            //player = level.StartCharacter.Copy();
             PlayersTurn = Turn.None;
-            Player = level.StartCharacter;
+            Player = level.StartCharacter.Copy();
             Player.Game = this;
         }
 
@@ -84,6 +87,24 @@ namespace GlassesArmies
         public void AddProjectile(Projectile projectile)
         {
             _projectiles.Add(projectile);
+        }
+
+        public void IAmDead(Creature deadOne)
+        {
+            if (deadOne == Player)
+            {
+                PlayerDead();
+            }
+            else
+            {
+                _aliveCretures.Remove(deadOne);
+            }
+        }
+
+        private void PlayerDead()
+        {
+            _players.Add(Player);
+            Player = _level.StartCharacter.Copy();
         }
         // public void MakePlayersCreatureTurn(action)
         // {
