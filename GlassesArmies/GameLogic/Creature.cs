@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace GlassesArmies
@@ -6,16 +7,15 @@ namespace GlassesArmies
     public abstract class Creature
     {
         protected readonly double _dt = 1d / 60;
+        
+        //private int _healthPoints;
 
         public Game Game;
+        //projectiles set to place bullets
+        //walls to not collide
         //ai
-        protected LinkedList<Turn> Turns;
-        protected LinkedListNode<Turn> CurrentTurn;
-        protected int CurrentRepetition;
+        private LinkedList<Turn> _turns;
         public Vector Location { get; protected set; }
-
-        protected Vector StartLocation;
-        protected Bitmap StartTexture;
 
         protected Vector _step;
         //public Creature Copy() => new Creature(texture, Location.Copy);
@@ -25,7 +25,7 @@ namespace GlassesArmies
         protected int HealthPoints;
 
 
-        public Bitmap Texture { get; protected set; }
+        public Bitmap texture { get; protected set; }
 
         public Creature(Bitmap texture, Vector location)
         {
@@ -34,7 +34,7 @@ namespace GlassesArmies
             StartLocation = location.Copy;
             Location = location.Copy;
             _step = new Vector(5, 0);
-            Turns = new LinkedList<Turn>();
+            _turns = new LinkedList<Turn>();
             Velocity = Vector.Zero;
         }
 
@@ -68,11 +68,11 @@ namespace GlassesArmies
 
         protected void MemorizeTurn(Turn turn)
         {
-            var currentTurn = Turns.Last.Value;
+            var currentTurn = _turns.Last.Value;
             if (turn.Type != Turn.Types.None && turn.Type != Turn.Types.MoveLeft && turn.Type != Turn.Types.MoveRight
                 || currentTurn.Type != turn.Type)
             {
-                Turns.AddLast(turn.Copy()); // copy to not increase counter outside
+                _turns.AddLast(turn.Copy()); // copy to not increase counter outside
             }
             else
             {
@@ -87,13 +87,16 @@ namespace GlassesArmies
             Velocity += impulse;
         }
 
+        public override int GetHashCode()
+        {
+            return Tuple.Create(Location, _step).GetHashCode();
+        }
+        
         public Rectangle ToRectangle()
         {
-            return new Rectangle(Location.ToPoint(), new Size(Texture.Width, -Texture.Height));
+            return new Rectangle(Location.ToPoint(), new Size(texture.Width, -texture.Height));
         }
 
         public abstract void TakeDamage(int damage);
-
-        public abstract Creature Copy();
     }
 }

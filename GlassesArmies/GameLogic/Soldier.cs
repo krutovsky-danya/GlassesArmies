@@ -10,9 +10,11 @@ namespace GlassesArmies
         protected readonly int ClipSize = 12;
         protected int BulletsInClip;
         protected bool JumpAbility;
+        public const int MaxHealthPoints = 50;
 
         public Soldier(Bitmap texture, Vector location, int health) : base(texture, location)
         {
+            HealthPoints = MaxHealthPoints;
             JumpAcceleration = new Vector(0, 7);
             BulletsInClip = ClipSize;
             StartHealth = health;

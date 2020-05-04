@@ -23,7 +23,7 @@ namespace GlassesArmies.Tests
             var projectile = new Projectile(location, velocity);
             Assert.AreEqual( location, projectile.Location);
             Assert.AreEqual(velocity, projectile.Velocity);
-            Assert.AreEqual(100, projectile.Live);
+            Assert.AreEqual(Projectile.MaxLive, projectile.Live);
         }
         
         [Test]
@@ -44,7 +44,7 @@ namespace GlassesArmies.Tests
             var projectile = new Projectile(location, velocity);
             projectile.Move();
             Assert.AreEqual(location + velocity, projectile.Location);
-            Assert.AreEqual(99, projectile.Live);
+            Assert.AreEqual(Projectile.MaxLive - 1, projectile.Live);
         }
         
     }
