@@ -12,11 +12,11 @@ namespace GlassesArmies
         private readonly Stack<State> _previousState = new Stack<State>();
         private State _currentState = State.MainMenu;
 
-        private Game _game;
+        public Game Game { get; set; }
 
         public Controller()
         {
-            _game = new Game(new Level(Level.Name.Second));
+            Game = new Game(new Level(Level.Name.Second));
         }
 
         public void ChangeState(State state)
@@ -49,32 +49,32 @@ namespace GlassesArmies
         private static Vector _bias = new Vector(0, 300);
 
         public IEnumerable<Rectangle> GetProjectiles() =>
-            _game.Projectiles
+            Game.Projectiles
                 .Select(projectile => _bias + new Vector(projectile.Location.X - 2, -projectile.Location.Y - 2))
                 .Select(location => new Rectangle((int)location.X, (int)location.Y, 5, 5));
 
-        public IEnumerable<Tuple<Bitmap, Point>> GetAliveCreature() => from creature in _game.Alive
+        public IEnumerable<Tuple<Bitmap, Point>> GetAliveCreature() => from creature in Game.Alive
             let location = _bias + new Vector(creature.Location.X, -creature.Location.Y)
             select Tuple.Create(creature.Texture, location.ToPoint());
 
-        public IEnumerable<Rectangle> GetWalls() => from gameWall in _game.Walls
+        public IEnumerable<Rectangle> GetWalls() => from gameWall in Game.Walls
             let location = _bias + new Vector(gameWall.Location.X, -gameWall.Location.Y) 
             select new Rectangle((int)location.X, (int)location.Y, gameWall.Width, gameWall.Height);
 
         public Tuple<Bitmap, Point> GetPlayerData()
         {
-            var playerLocation = _bias + new Vector(_game.Player.Location.X, -_game.Player.Location.Y);
-            return Tuple.Create(_game.Player.Texture, playerLocation.ToPoint());
+            var playerLocation = _bias + new Vector(Game.Player.Location.X, -Game.Player.Location.Y);
+            return Tuple.Create(Game.Player.Texture, playerLocation.ToPoint());
         }
 
         public void TurnGame()
         {
-            _game.MakeTurn();
+            Game.MakeTurn();
         }
 
         public void SetTurn(Turn turn)
         {
-            _game.PlayersTurn = turn;
+            Game.PlayersTurn = turn;
         }
 
         public void ShootInGame(Point target)

@@ -38,8 +38,8 @@ namespace GlassesArmies
         {
             Enemies = new Creature[]
             {
-                new Soldier(Game.CreatureSide.Enemy, new Vector(420, -70), 100),
-                new Soldier(Game.CreatureSide.Enemy, new Vector(500, 10), 100), 
+                new Soldier(Game.CreatureSide.Enemy, new Vector(420, -40), 100),
+                new Soldier(Game.CreatureSide.Enemy, new Vector(500, 20), 100), 
                 new Soldier(Game.CreatureSide.Enemy, new Vector(422, -155), 100),
                 new Soldier(Game.CreatureSide.Enemy, new Vector(577, -155), 100), 
             };
