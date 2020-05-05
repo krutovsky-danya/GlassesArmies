@@ -8,7 +8,6 @@ namespace GlassesArmies
         private readonly Vector _location;
         public readonly int Width;
         public readonly int Height;
-        //texture
         public Wall(Vector location, int width, int height)
         {
             _location = location.Copy;
