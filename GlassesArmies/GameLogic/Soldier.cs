@@ -1,5 +1,7 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 
 namespace GlassesArmies
 {
@@ -102,36 +104,38 @@ namespace GlassesArmies
         {
             Velocity.Y -= 10 * _dt;
             var destination = movement + Velocity + Location;
+            var prevHitBox = new Rectangle(Location.ToPoint(), new Size(Texture.Width, -Texture.Height));
             var hitBox = new Rectangle(destination.ToPoint(), new Size(Texture.Width, -Texture.Height));
             foreach (var wall in Game.Walls)
             {
                 var wallRect = wall.ToRectangle();
                 if (!Geometry.CheckRectangleIntersection(hitBox, wallRect)) continue;
-                if (Velocity.X < 0 && hitBox.Left < wallRect.Right)
+                if (hitBox.Left < wallRect.Right && prevHitBox.Left >= wallRect.Right)
                 {
                     Velocity.X = 0;
                     destination.X = wallRect.Right;
                 }
-                if (Velocity.X > 0 && wallRect.Left < hitBox.Right)
+
+                if (wallRect.Left < hitBox.Right && wallRect.Left >= prevHitBox.Right)
                 {
                     Velocity.X = 0;
                     destination.X = wallRect.Left - Texture.Width;
                 }
-
-                if (Velocity.Y < 0 && hitBox.Bottom < wallRect.Top)
+                
+                if (hitBox.Bottom < wallRect.Top && prevHitBox.Bottom >= wallRect.Top)
                 {
                     Velocity.Y = 0;
-                    destination.Y = wallRect.Top + Texture.Height;
+                    destination.Y = wallRect.Top + Texture.Height; 
                     JumpAbility = true;
                 }
-                if (Velocity.Y > 0 && wallRect.Bottom < hitBox.Top)
+                
+                if (wallRect.Bottom < hitBox.Top && wallRect.Bottom >= prevHitBox.Top)
                 {
                     Velocity.Y = 0;
                     destination.Y = wallRect.Bottom;
                 }
                 hitBox = new Rectangle(destination.ToPoint(), Texture.Size);
             }
-            
             Location = destination;
         }
 
