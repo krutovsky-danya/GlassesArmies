@@ -33,6 +33,7 @@ namespace GlassesArmies
                 if (CurrentTurn.Value.Repetitions <= CurrentRepetition)
                 {
                     CurrentTurn = CurrentTurn.Next;
+                    CurrentRepetition = 0;
                 }
             }
             else
@@ -46,6 +47,7 @@ namespace GlassesArmies
                 else
                 {
                     ReloadTime--;
+                    Move(Vector.Zero);
                 }
 
                 if (BulletsInClip <= 0)
@@ -60,7 +62,6 @@ namespace GlassesArmies
         {
             turn.Action(this);
             MemorizeTurn(turn);
-            //Move(Vector.Zero);
         }
 
         public override void TakeDamage(int damage)
@@ -93,6 +94,7 @@ namespace GlassesArmies
             
             //_turns.AddLast(new Turn(Turn.TurnType.Shoot, creature => creature.Shoot(x, y)));
             //accelerate back
+            Move(Vector.Zero);
         }
 
         public override void Move(Vector movement)
@@ -137,6 +139,7 @@ namespace GlassesArmies
             if (!JumpAbility) return;
             Velocity += JumpAcceleration;
             JumpAbility = false;
+            Move(Vector.Zero);
         }
 
         public override void Reborn()
