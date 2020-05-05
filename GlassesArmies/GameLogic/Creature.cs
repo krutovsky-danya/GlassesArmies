@@ -1,76 +1,48 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
 
 namespace GlassesArmies
 {
     public abstract class Creature
     {
-        protected readonly double _dt = 1d / 60;
-
         public Game Game;
+        public Game.CreatureSide Side { get; protected set; }
+
+        protected Vector StartLocation { get; }
+        protected Bitmap StartTexture { get; }
+        
+        public Vector Location { get; protected set; }
+        public Bitmap Texture { get; protected set; }
         
         //ai
-        
-        protected LinkedList<Turn> Turns;
-        public Vector Location { get; protected set; }
+
+        protected readonly LinkedList<Turn> Turns;
+        protected LinkedListNode<Turn> CurrentTurn { get; set; }
+        protected int CurrentRepetition { get; set; }
 
         protected Vector Step;
         protected Vector Velocity;
         protected Vector JumpAcceleration;
 
-        protected int HealthPoints;
+        protected int HealthPoints { get; set; }
         public bool IsAlive { get; protected set; } = true;
-        
-        public Game.CreatureSide Side { get; protected set; }
 
+        protected readonly double _dt = 1d / 60;
 
-        public Bitmap Texture { get; protected set; }
-
-        public Creature(Bitmap texture, Vector location)
+        protected Creature(Bitmap texture, Vector location)
         {
             StartTexture = texture;
             Texture = texture;
+            
             StartLocation = location.Copy;
             Location = location.Copy;
+            
             Step = new Vector(5, 0);
             Turns = new LinkedList<Turn>();
             Velocity = Vector.Zero;
         }
 
-        protected Vector StartLocation { get; }
-
-        protected Bitmap StartTexture { get; }
-
-        public virtual void Move(Vector movement)
-        {
-            //check for collisions
-            //maybe some acceleration
-            Location += movement;
-            //_turns.AddLast(Turn.Move(movement));
-        }
-        
-        public virtual void MoveLeft()
-        {
-            Move(-Step);
-        }
-
-        public virtual void MoveRight()
-        {
-            Move(Step);
-        }
-
-        public virtual void Jump()
-        {
-            //if not in flight
-            Velocity += JumpAcceleration;
-        }
-
-        public abstract void Shoot(Vector target);
-
-        public abstract void MakeAutoTurn();
-
-        public void MemorizeTurn(Turn turn)
+        protected void MemorizeTurn(Turn turn)
         {
             if (Turns.Last == null)
             {
@@ -88,31 +60,38 @@ namespace GlassesArmies
                 currentTurn.Repetitions++;
             }
         }
-
-        public abstract void MakeTurn(Turn turn);
-
-        public void Accelerate(Vector impulse)
-        {
-            Velocity += impulse;
-        }
-
-        public override int GetHashCode()
-        {
-            return Tuple.Create(Location, Step).GetHashCode();
-        }
         
         public Rectangle ToRectangle()
         {
             return new Rectangle(Location.ToPoint(), new Size(Texture.Width, -Texture.Height));
         }
-
-        public abstract void TakeDamage(int damage);
-
-        public abstract Creature Copy();
         
         public virtual void Reborn()
         {
             IsAlive = true;
         }
+        
+        public virtual void Accelerate(Vector impulse)
+        {
+            Velocity += impulse;
+        }
+
+        public abstract void Move(Vector movement);
+
+        public abstract void MoveLeft();
+
+        public abstract void MoveRight();
+
+        public abstract void Jump();
+
+        public abstract void Shoot(Vector target);
+
+        public abstract void MakeAutoTurn();
+
+        public abstract void MakeTurn(Turn turn);
+
+        public abstract void TakeDamage(int damage);
+
+        public abstract Creature Copy();
     }
 }

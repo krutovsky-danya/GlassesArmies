@@ -6,8 +6,8 @@ namespace GlassesArmies
 {
     public class Soldier : Creature
     {
-        protected readonly int StartHealth;
         protected int ReloadTime = 10;
+        protected readonly int StartHealth;
         protected readonly int ClipSize = 12;
         protected int BulletsInClip;
         protected bool JumpAbility;
@@ -73,10 +73,6 @@ namespace GlassesArmies
             Game.AcceptDeath(this);
         }
 
-        protected int CurrentRepetition { get; set; }
-
-        private LinkedListNode<Turn> CurrentTurn { get; set; }
-
         public override Creature Copy()
         {
             return new Soldier(Side, StartLocation, StartHealth);
@@ -92,8 +88,7 @@ namespace GlassesArmies
             bulletVelocity *= 1 / bulletVelocity.Length;
             Game.AddProjectile(new Projectile(location, 7 * bulletVelocity, Side));
             
-            //_turns.AddLast(new Turn(Turn.TurnType.Shoot, creature => creature.Shoot(x, y)));
-            //accelerate back
+            //accelerate back?
             Move(Vector.Zero);
         }
 
@@ -132,6 +127,16 @@ namespace GlassesArmies
             }
             
             Location = destination;
+        }
+
+        public override void MoveRight()
+        {
+            Move(Step);
+        }
+        
+        public override void MoveLeft()
+        {
+            Move(-Step);
         }
 
         public override void Jump()

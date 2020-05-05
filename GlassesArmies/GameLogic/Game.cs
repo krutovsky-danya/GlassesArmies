@@ -76,8 +76,7 @@ namespace GlassesArmies
 
             _projectiles.RemoveWhere(p => p.Live <= 0);
             _aliveCretures.RemoveWhere(c => !c.IsAlive);
-            PlayersTurn.Action(Player);
-            Player.MemorizeTurn(PlayersTurn);
+            Player.MakeTurn(PlayersTurn);
             PlayersTurn = Turn.None;
             //Console.WriteLine("Wow");
         }
