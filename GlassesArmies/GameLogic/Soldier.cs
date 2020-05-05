@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 
 namespace GlassesArmies
 {
@@ -40,7 +41,15 @@ namespace GlassesArmies
             {
                 if (ReloadTime <= 0)
                 {
-                    Shoot(Game.Player.Location + new Vector(16, -16));
+                    switch (Side)
+                    {
+                        case Game.CreatureSide.Enemy:
+                            Shoot(Game.Player.Location + new Vector(16, -16));
+                            break;
+                        case Game.CreatureSide.Player:
+                            Shoot(Game.Alive.First().Location + new Vector(16, -16));
+                            break;
+                    }
                     ReloadTime = 10;
                     BulletsInClip--;
                 }
@@ -67,7 +76,7 @@ namespace GlassesArmies
         public override void TakeDamage(int damage)
         {
             HealthPoints -= damage;
-            Console.WriteLine(HealthPoints);
+            // Console.WriteLine(HealthPoints);
             if (HealthPoints > 0) return;
             IsAlive = false;
             Game.AcceptDeath(this);
@@ -141,9 +150,11 @@ namespace GlassesArmies
 
         public override void Jump()
         {
-            if (!JumpAbility) return;
-            Velocity += JumpAcceleration;
-            JumpAbility = false;
+            if (JumpAbility)
+            {
+                Velocity += JumpAcceleration;
+                JumpAbility = false;
+            }
             Move(Vector.Zero);
         }
 
