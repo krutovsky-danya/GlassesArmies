@@ -7,8 +7,8 @@ namespace GlassesArmies
     {
         public readonly Types Type;
         public readonly Action<Creature> Action;
+        
         private int _repetition = 1;
-
         public int Repetitions {
             get => _repetition;
             set
@@ -30,21 +30,14 @@ namespace GlassesArmies
             MoveLeft,
             MoveRight,
             Jump,
-            Shoot,
-            Move
-            //special
+            Shoot
         }
         
         public static Turn None => new Turn(Types.None, creature => creature.Move(Vector.Zero));
         public static Turn MoveLeft => new Turn(Types.MoveLeft, creature => creature.MoveLeft());
         public static Turn MoveRight => new Turn(Types.MoveRight, creature => creature.MoveRight());
         public static Turn Jump => new Turn(Types.Jump, creature => creature.Jump());
-
-        public static Turn Shoot(Vector target)
-        {
-            return new Turn(Types.Shoot, creature => creature.Shoot(target));
-        }
-
+        public static Turn Shoot(Vector target) => new Turn(Types.Shoot, creature => creature.Shoot(target));
         public Turn Copy() => new Turn(Type, Action);
     }
 }
