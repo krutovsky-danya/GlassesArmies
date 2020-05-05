@@ -1,23 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Linq;
 
 namespace GlassesArmies
 {
     public class Soldier : Creature
     {
-        protected int ReloadTime = 10;
         protected readonly int StartHealth;
+        protected int ReloadTime = 10;
         protected readonly int ClipSize = 12;
         protected int BulletsInClip;
         protected bool JumpAbility;
-        public const int MaxHealthPoints = 50;
 
         public Soldier(Game.CreatureSide soldierSide, Vector location, int health) : 
             base(soldierSide == Game.CreatureSide.Enemy ? Textures.EnemySoldier : Textures.PlayerSoldier, location)
         {
-            HealthPoints = MaxHealthPoints;
+            HealthPoints = health;
             JumpAcceleration = new Vector(0, 7);
             BulletsInClip = ClipSize;
             StartHealth = health;
