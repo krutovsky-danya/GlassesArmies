@@ -16,7 +16,7 @@ namespace GlassesArmies
 
         public Controller()
         {
-            _game = new Game(new Level(Level.Name.Empty));
+            _game = new Game(new Level(Level.Name.First));
         }
 
         public void ChangeState(State state)

@@ -33,18 +33,38 @@ namespace GlassesArmies
 
         private void SetFirstLevel()
         {
-            throw new NotImplementedException();
+            Enemies = new Creature[]
+            {
+                new Soldier(Game.CreatureSide.Enemy, new Vector(490, -130), 100), 
+                new Soldier(Game.CreatureSide.Enemy, new Vector(550, -130), 100), 
+                new Soldier(Game.CreatureSide.Enemy, new Vector(470, 20), 100),
+                new Soldier(Game.CreatureSide.Enemy, new Vector(570, 20), 100), 
+            };
+            StartCharacter = new Soldier(Game.CreatureSide.Player, new Vector(0, -220), 100);
+            Walls = new[]
+            {
+                new Wall(new Vector(0, -32 - 220), 1000, 25),
+                new Wall(new Vector(500, -25), 10, 100),
+                new Wall(new Vector(470, -5), 30, 40),
+                new Wall(new Vector(550, -25), 10, 100),
+                new Wall(new Vector(560, -5), 30, 40),
+                new Wall(new Vector(500, -25), 50, 70),
+                new Wall(new Vector(500, -155), 10, 60),
+                new Wall(new Vector(490, -155), 25, 10), 
+                new Wall(new Vector(550, -155), 10, 60),
+                new Wall(new Vector(545, -155), 25, 10), 
+            };
         }
 
         private void SetEmptyLevel()
         {
             Enemies = new Creature[]
             {
-                new Soldier(Game.CreatureSide.Enemy, new Vector(320, 0), 100),
-                new Soldier(Game.CreatureSide.Enemy, new Vector(500, 0), 100)
+                new Soldier(Game.CreatureSide.Enemy, new Vector(320, -220), 100),
+                new Soldier(Game.CreatureSide.Enemy, new Vector(500, -220), 100)
             };
-            Walls = new[] {new Wall(new Vector(0, -32), 1000, 25)};
-            StartCharacter = new Soldier(Game.CreatureSide.Player, Vector.Zero, 100);
+            Walls = new[] {new Wall(new Vector(0, -32 - 220), 1000, 25)};
+            StartCharacter = new Soldier(Game.CreatureSide.Player, new Vector(0, -220), 100);
         }
 
         public enum Name
