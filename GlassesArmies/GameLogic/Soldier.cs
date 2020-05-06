@@ -11,6 +11,7 @@ namespace GlassesArmies
         protected int ReloadTime = 10;
         protected readonly int ClipSize = 12;
         protected int BulletsInClip;
+        protected const int BulletSpeed = 7;
         protected bool JumpAbility;
 
         public Soldier(Game.CreatureSide soldierSide, Vector location, int health) : 
@@ -93,8 +94,8 @@ namespace GlassesArmies
                 location.X += Texture.Width;
             location.Y -= Texture.Height / 2d;
             var bulletVelocity = target - location;
-            bulletVelocity *= 1 / bulletVelocity.Length;
-            Game.AddProjectile(new Projectile(location, 7 * bulletVelocity, Side));
+            bulletVelocity /= bulletVelocity.Length;
+            Game.AddProjectile(new Projectile(location, BulletSpeed * bulletVelocity, Side));
             
             //accelerate back?
             Move(Vector.Zero);

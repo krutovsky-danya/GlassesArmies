@@ -25,16 +25,6 @@ namespace GlassesArmies.Tests
             Assert.AreEqual(velocity, projectile.Velocity);
             Assert.AreEqual(Projectile.MaxLive, projectile.Live);
         }
-        
-        [Test]
-        public void ProjectileEqualityTest()
-        {
-            var location = GenerateVector();
-            var velocity = GenerateVector();
-            var a = new Projectile(location, velocity, Game.CreatureSide.Player);
-            var b = new Projectile(location, velocity, Game.CreatureSide.Player);
-            Assert.AreEqual(a, b);
-        }
 
         [Test]
         public void ProjectileMoveTest()

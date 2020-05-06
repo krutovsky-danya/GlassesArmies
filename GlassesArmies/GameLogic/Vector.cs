@@ -37,6 +37,16 @@ namespace GlassesArmies
             return c * a;
         }
 
+        public static Vector operator /(double c, Vector a)
+        {
+            return new Vector(a.X / c, a.Y / c);
+        }
+        
+        public static Vector operator /(Vector a, double c)
+        {
+            return new Vector(a.X / c, a.Y / c);
+        }
+
         public static Vector operator -(Vector a)
         {
             return -1 * a;
