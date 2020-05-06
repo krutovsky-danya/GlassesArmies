@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Windows.Forms;
+using GlassesArmies.View;
 
 namespace GlassesArmies
 {
@@ -12,11 +12,16 @@ namespace GlassesArmies
         private readonly Stack<State> _previousState = new Stack<State>();
         private State _currentState = State.MainMenu;
 
-        public Game Game { get; set; }
+        public Game Game { get; private set; }
 
         public Controller()
         {
-            Game = new Game(new Level(Level.Name.Second));
+            Game = new Game(new Level(Level.Name.Second), this);
+        }
+
+        public void SetGame(Level.Name level)
+        {
+            Game = new Game(new Level(level), this);
         }
 
         public void ChangeState(State state)
@@ -31,6 +36,9 @@ namespace GlassesArmies
                     break;
                 case State.GamePlay:
                     MainForm.ShowGamePlay();
+                    break;
+                case State.LevelSelect:
+                    MainForm.ShowLevelSelect();
                     break;
                 case State.Settings:
                     MainForm.ShowSettings();
@@ -88,6 +96,7 @@ namespace GlassesArmies
         {
             MainMenu,
             GamePlay,
+            LevelSelect,
             Settings,
             Back,
             Exit

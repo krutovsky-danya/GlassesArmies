@@ -1,18 +1,9 @@
-﻿using System;
-using System.ComponentModel;
-using System.Drawing;
-using System.Windows;
-using System.Windows.Forms;
+﻿using System.ComponentModel;
 
-namespace GlassesArmies
+namespace GlassesArmies.View
 {
     partial class MainForm
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
-        private IContainer _components = null;
-
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
@@ -36,7 +27,8 @@ namespace GlassesArmies
         private void InitializeComponent()
         {
             this._mainMenuControl = new GlassesArmies.MainMenuControl(this._controller);
-            this._gamePlayControl = new GlassesArmies.GamePlayControl(this._controller);
+            this._gamePlayControl = new GlassesArmies.View.GamePlayControl(this._controller);
+            this._levelSelectControl = new LevelSelectControl(this._controller);
             this._settingsControl = new GlassesArmies.SettingsControl(this._controller);
             this.SuspendLayout();
             this._mainMenuControl.AutoSize = true;
@@ -54,6 +46,7 @@ namespace GlassesArmies
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this._mainMenuControl);
             this.Controls.Add(this._gamePlayControl);
+            this.Controls.Add(this._levelSelectControl);
             this.Controls.Add(this._settingsControl);
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "MainForm";
@@ -66,6 +59,8 @@ namespace GlassesArmies
 
         private GlassesArmies.MainMenuControl _mainMenuControl;
         private GlassesArmies.SettingsControl _settingsControl;
-        private GlassesArmies.GamePlayControl _gamePlayControl;
+        private System.ComponentModel.IContainer _components;
+        private GlassesArmies.View.GamePlayControl _gamePlayControl;
+        private LevelSelectControl _levelSelectControl;
     }
 }

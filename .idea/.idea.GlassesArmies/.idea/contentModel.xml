@@ -44,6 +44,8 @@
           <e p="GamePlayControl.cs" t="Include" />
           <e p="GamePlayControl.Designer.cs" t="Include" />
           <e p="GamePlayControl.resx" t="Include" />
+          <e p="LevelSelectControl.cs" t="Include" />
+          <e p="LevelSelectControl.Designer.cs" t="Include" />
           <e p="MainForm.cs" t="Include" />
           <e p="MainForm.Designer.cs" t="Include" />
           <e p="MainForm.resx" t="Include" />

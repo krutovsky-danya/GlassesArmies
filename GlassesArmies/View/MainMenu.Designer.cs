@@ -1,10 +1,8 @@
-﻿using System.ComponentModel;
-using System.Drawing;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Windows.Forms;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 
-namespace GlassesArmies
+namespace GlassesArmies.View
 {
     partial class MainMenu
     {
@@ -36,7 +34,14 @@ namespace GlassesArmies
         private void InitializeComponent()
         {
             this.startButton = new MainMenuButton("Start");
-            this.startButton.Click += (sender, args) => _controller.ChangeState(Controller.State.GamePlay);
+            this.startButton.Click += (sender, args) =>
+            {
+                _controller.SetGame(Level.Name.First);
+                _controller.ChangeState(Controller.State.GamePlay);
+            };
+
+            this.levelSelectButton = new MainMenuButton("Select Level");
+            this.levelSelectButton.Click += (sender, args) => _controller.ChangeState(Controller.State.LevelSelect);
             
             this.settingsButton = new MainMenuButton("Settings");
             this.settingsButton.Click += (sender, args) => _controller.ChangeState(Controller.State.Settings);
@@ -48,7 +53,7 @@ namespace GlassesArmies
             var buttons = new List<MainMenuButton>
             {
                 this.startButton,
-                new MainMenuButton("Select Level"),
+                this.levelSelectButton,
                 this.settingsButton,
                 this.exitButton
             };
@@ -93,7 +98,7 @@ namespace GlassesArmies
         private System.Windows.Forms.TableLayoutPanel layout;
         
         private GlassesArmies.MainMenuButton startButton;
-        
+        private MainMenuButton levelSelectButton;
         private GlassesArmies.MainMenuButton settingsButton;
         private GlassesArmies.MainMenuButton exitButton;
     }

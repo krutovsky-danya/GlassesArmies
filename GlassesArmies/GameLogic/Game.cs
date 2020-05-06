@@ -9,6 +9,8 @@ namespace GlassesArmies
         public Turn PlayersTurn { get; set; }
         
         private readonly Level _level;
+
+        private int _enemyCount;
         
         private HashSet<Creature> _players;
         public IEnumerable<Creature> Players => _players;
@@ -24,6 +26,8 @@ namespace GlassesArmies
         private HashSet<Projectile> _projectiles;
         public IEnumerable<Projectile> Projectiles => _projectiles;
 
+        private Controller _controller;
+
         //camera location
         //score
 
@@ -31,9 +35,10 @@ namespace GlassesArmies
         // enemies -> ai
         // past_me -> list of actions
 
-        public Game(Level level)
+        public Game(Level level, Controller controller)
         {
             _level = level;
+            _controller = controller;
             _players = new HashSet<Creature>();
             _walls = new List<Wall>(level.Walls);
             PlayersTurn = Turn.None;
@@ -82,14 +87,17 @@ namespace GlassesArmies
             {
                 RestartLevel();
             }
-            else
+            else if (deadOne.Side == CreatureSide.Enemy)
             {
-                //_aliveCreatures.Remove(deadOne);
+                _enemyCount--;
+                if (_enemyCount == 0)
+                    GameWon();
             }
         }
 
         private void RestartLevel()
         {
+            _enemyCount = _level.Enemies.Length;
             _projectiles = new HashSet<Projectile>();
             _aliveCreatures = _level.Enemies
                 .Select(e =>
@@ -108,6 +116,11 @@ namespace GlassesArmies
             Player.Game = this;
             _players.Add(Player);
             _aliveCreatures.Add(Player);
+        }
+
+        private void GameWon()
+        {
+            RestartLevel();
         }
         
         public enum CreatureSide

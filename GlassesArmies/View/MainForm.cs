@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace GlassesArmies
+namespace GlassesArmies.View
 {
     public partial class MainForm : Form
     {
@@ -48,6 +48,13 @@ namespace GlassesArmies
             _gamePlayControl.Show();
             _gamePlayControl.Focus();
             _gamePlayControl.ResumeGame();
+        }
+
+        public void ShowLevelSelect()
+        {
+            HideAll();
+            _levelSelectControl.Enabled = true;
+            _levelSelectControl.Show();
         }
 
         public void ShowSettings()

@@ -74,6 +74,12 @@
         <Compile Include="View\GamePlayControl.Designer.cs">
           <DependentUpon>GamePlayControl.cs</DependentUpon>
         </Compile>
+        <Compile Include="View\LevelSelectControl.cs">
+          <SubType>UserControl</SubType>
+        </Compile>
+        <Compile Include="View\LevelSelectControl.Designer.cs">
+          <DependentUpon>LevelSelectControl.cs</DependentUpon>
+        </Compile>
         <Compile Include="View\MainForm.cs">
           <SubType>Form</SubType>
         </Compile>

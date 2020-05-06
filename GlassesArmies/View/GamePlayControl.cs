@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace GlassesArmies
+namespace GlassesArmies.View
 {
     public partial class GamePlayControl : UserControl
     {

@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
+using MainMenu = GlassesArmies.View.MainMenu;
 
 namespace GlassesArmies
 {
@@ -38,7 +39,7 @@ namespace GlassesArmies
             this.gameLabel = new System.Windows.Forms.Label();
             
             this.gamePicture = new PictureBox();
-            this.mainMenu = new GlassesArmies.MainMenu(this._controller);
+            this.mainMenu = new MainMenu(this._controller);
             this.layout.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -117,6 +118,6 @@ namespace GlassesArmies
         private System.Windows.Forms.TableLayoutPanel layout;
         private System.Windows.Forms.Label gameLabel;
         private PictureBox gamePicture;
-        private GlassesArmies.MainMenu mainMenu;
+        private MainMenu mainMenu;
     }
 }

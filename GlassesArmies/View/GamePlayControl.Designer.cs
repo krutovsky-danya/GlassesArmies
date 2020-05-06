@@ -2,13 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Runtime.CompilerServices;
-using System.Runtime.ExceptionServices;
-using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-namespace GlassesArmies
+namespace GlassesArmies.View
 {
     partial class GamePlayControl
     {
@@ -55,13 +51,6 @@ namespace GlassesArmies
             // pauseMenu
             //
             
-            //this.greyFilter = new PictureBox();
-            //this.greyFilter.Image = coolDog;
-            // this.greyFilter.SizeMode = PictureBoxSizeMode.Zoom;
-            // this.greyFilter.Dock = DockStyle.Fill;
-            //this.greyFilter.BackColor = Color.Transparent;
-            
-            
             this._pauseMenu = new TableLayoutPanel();
             this._pauseMenu.Dock = DockStyle.Fill;
             this._pauseMenu.BackColor = Color.Transparent;
@@ -70,25 +59,26 @@ namespace GlassesArmies
             //this.pauseMenu.BackgroundImage = coolDog;
             this._pauseMenu.BackColor = Color.FromArgb(50, Color.Gray);
 
-            this._pauseMenu.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            
+            this._pauseMenu.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
+            this._pauseMenu.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 90F));
+
             //resume
             //restart -> confirm
             //settings
             //exit
             
-            var resume = new PauseMenuButton("Resume");
+            var resume = new MainMenuButton("Resume");
             resume.Click += (sender, args) => ManagePauseMenu();
             
-            var restart = new PauseMenuButton("Restart");
+            var restart = new MainMenuButton("Restart");
             
-            var settings = new PauseMenuButton("Settings");
+            var settings = new MainMenuButton("Settings");
             settings.Click += (sender, args) => this._controller.ChangeState(Controller.State.Settings);
             
-            var exit = new PauseMenuButton("Exit");
+            var exit = new MainMenuButton("Exit");
             exit.Click += (sender, args) => this._controller.ChangeState(Controller.State.MainMenu);
             
-            var pauseMenuButtons = new List<PauseMenuButton>
+            var pauseMenuButtons = new List<MainMenuButton>
             {
                 resume,
                 restart,
@@ -98,14 +88,14 @@ namespace GlassesArmies
             
             pauseMenuButtons.For((button, index) =>
             {
-                button.Anchor = AnchorStyles.None;
+                button.Anchor = AnchorStyles.Left;
                 button.AutoSize = true;
                 button.BackColor = Color.Transparent;
                 
                 //button.BackColor = Color.Aqua;
                 //button.BackgroundImage = coolDog;
                 
-                this._pauseMenu.Controls.Add(button, 0, index);
+                this._pauseMenu.Controls.Add(button, 1, index);
                 this._pauseMenu.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
             });
 
@@ -149,7 +139,7 @@ namespace GlassesArmies
         {
             foreach (var projectile in _controller.GetProjectiles())
             {
-                eventArgs.Graphics.FillEllipse(Brushes.Crimson, projectile);
+                eventArgs.Graphics.FillRectangle(Brushes.Crimson, projectile);
             }
             foreach (var textureLocation in _controller.GetAliveCreature())
             {
@@ -163,6 +153,13 @@ namespace GlassesArmies
 
             var playerData = _controller.GetPlayerData();
             eventArgs.Graphics.DrawImage(playerData.Item1, playerData.Item2);
+            var trinagleCenter = new Point(playerData.Item2.X + playerData.Item1.Height / 2, playerData.Item2.Y - 15);
+            eventArgs.Graphics.FillPolygon(Brushes.Red, new []
+            {
+                new Point(trinagleCenter.X, trinagleCenter.Y + 2),
+                new Point(trinagleCenter.X - 3, trinagleCenter.Y - 3), 
+                new Point(trinagleCenter.X + 3, trinagleCenter.Y - 3), 
+            });
         }
         
         private Random _rng = new Random(1729);
@@ -225,15 +222,5 @@ namespace GlassesArmies
             this._pauseMenu.Enabled = false;
             this._pauseMenu.Hide();
         }
-    }
-
-    public class PauseMenuButton : MainMenuButton
-    {
-        public PauseMenuButton(string text) : base(text)
-        {
-            MouseInText = $"> {text} <";
-            this.TextAlign = ContentAlignment.MiddleCenter;
-        }
-        
     }
 }
