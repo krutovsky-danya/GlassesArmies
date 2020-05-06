@@ -27,51 +27,23 @@ namespace GlassesArmies.View
 
         #region Component Designer generated code
 
-        /// <summary> 
-        /// Required method for Designer support - do not modify 
+        /// <summary>
+        /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // LevelSelectControl
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            
-            this.levels = new TableLayoutPanel();
-            this.levels.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 10F));
-            this.levels.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 90F));
-
-            var firstLevel = new MainMenuButton("First");
-            firstLevel.Click += (sender, args) =>
-            {
-                _controller.SetGame(Level.Name.First);
-                _controller.ChangeState(Controller.State.GamePlay);
-            };
-            
-            var secondLevel = new MainMenuButton("Second");
-            secondLevel.Click += (sender, args) =>
-            {
-                _controller.SetGame(Level.Name.First);
-                _controller.ChangeState(Controller.State.GamePlay);
-            };
-            
-            var levelButtons = new List<MainMenuButton>
-            {
-                firstLevel,
-                secondLevel
-            };
-
-            levelButtons.For((levelButton, i) =>
-            {
-                levelButton.Anchor = AnchorStyles.Left;
-
-                this.levels.Controls.Add(levelButton, 1, i);
-                this.levels.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
-            });
-            
-            this.Controls.Add(this.levels);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.Name = "LevelSelectControl";
+            this.Size = new System.Drawing.Size(150, 188);
+            this.ResumeLayout(false);
         }
-
-        private TableLayoutPanel levels;
 
         #endregion
     }

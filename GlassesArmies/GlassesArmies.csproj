@@ -112,6 +112,9 @@
       <EmbeddedResource Include="View\GamePlayControl.resx">
         <DependentUpon>GamePlayControl.cs</DependentUpon>
       </EmbeddedResource>
+      <EmbeddedResource Include="View\LevelSelectControl.resx">
+        <DependentUpon>LevelSelectControl.cs</DependentUpon>
+      </EmbeddedResource>
       <EmbeddedResource Include="View\MainForm.resx">
         <DependentUpon>MainForm.cs</DependentUpon>
       </EmbeddedResource>

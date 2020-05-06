@@ -41,7 +41,7 @@ namespace GlassesArmies.View
             this._gamePlayControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this._settingsControl.AutoSize = true;
             this._settingsControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MinimumSize = new System.Drawing.Size(1080, 920);
+            this.MinimumSize = new System.Drawing.Size(1920, 1080);
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this._mainMenuControl);

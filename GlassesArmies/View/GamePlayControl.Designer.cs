@@ -153,7 +153,9 @@ namespace GlassesArmies.View
 
             var playerData = _controller.GetPlayerData();
             eventArgs.Graphics.DrawImage(playerData.Item1, playerData.Item2);
-            var trinagleCenter = new Point(playerData.Item2.X + playerData.Item1.Height / 2, playerData.Item2.Y - 15);
+            var trinagleCenter = new Point(
+                playerData.Item2.X + playerData.Item1.Height / 2 - 2, 
+                playerData.Item2.Y - 15);
             eventArgs.Graphics.FillPolygon(Brushes.Red, new []
             {
                 new Point(trinagleCenter.X, trinagleCenter.Y + 2),

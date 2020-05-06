@@ -54,7 +54,7 @@ namespace GlassesArmies
             }
         }
         
-        private static Vector _bias = new Vector(0, 300);
+        private static Vector _bias = new Vector(0, 180);
 
         public IEnumerable<Rectangle> GetProjectiles() =>
             Game.Projectiles

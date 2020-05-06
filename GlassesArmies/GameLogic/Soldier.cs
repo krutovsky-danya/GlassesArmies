@@ -138,6 +138,11 @@ namespace GlassesArmies
                 hitBox = new Rectangle(destination.ToPoint(), Texture.Size);
             }
             Location = destination;
+
+            if (Location.Length > 10000)
+            {
+                TakeDamage(int.MaxValue);
+            }
         }
 
         public override void MoveRight()
