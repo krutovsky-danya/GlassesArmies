@@ -13,6 +13,8 @@ namespace GlassesArmies
         protected int BulletsInClip;
         protected const int BulletSpeed = 7;
         protected bool JumpAbility;
+        protected Bitmap MoveLeftTexture;
+        protected Bitmap MoveRightTexture;
 
         public Soldier(Game.CreatureSide soldierSide, Vector location, int health) : 
             base(soldierSide == Game.CreatureSide.Enemy ? Textures.EnemySoldier : Textures.PlayerSoldier, location)
@@ -23,6 +25,9 @@ namespace GlassesArmies
             StartHealth = health;
             HealthPoints = health;
             Side = soldierSide;
+            MoveLeftTexture = (Bitmap)Texture.Clone();
+            MoveLeftTexture.RotateFlip(RotateFlipType.RotateNoneFlipX);
+            MoveRightTexture = Texture;
         }
 
         public override void MakeAutoTurn()
@@ -44,7 +49,10 @@ namespace GlassesArmies
                     switch (Side)
                     {
                         case Game.CreatureSide.Enemy:
-                            Shoot(Game.Player.Location + new Vector(16, -16));
+                            if ((Game.Player.Location - Location).Length < BulletSpeed * 50)
+                            {
+                                Shoot(Game.Player.Location + new Vector(16, -16));
+                            }
                             break;
                         case Game.CreatureSide.Player:
                             Shoot(Game.Alive.First().Location + new Vector(16, -16));
@@ -90,7 +98,7 @@ namespace GlassesArmies
         public override void Shoot(Vector target)
         {
             var location = Location.Copy;
-            if (target.X > Location.X)
+            if (target.X > Location.X + Texture.Width / 2d)
                 location.X += Texture.Width;
             location.Y -= Texture.Height / 2d;
             var bulletVelocity = target - location;
@@ -98,7 +106,7 @@ namespace GlassesArmies
             Game.AddProjectile(new Projectile(location, BulletSpeed * bulletVelocity, Side));
             
             //accelerate back?
-            Move(Vector.Zero);
+            Texture = target.X > Location.X + Texture.Width / 2d ? MoveRightTexture : MoveLeftTexture;
         }
 
         public override void Move(Vector movement)
@@ -147,11 +155,13 @@ namespace GlassesArmies
 
         public override void MoveRight()
         {
+            Texture = MoveRightTexture;
             Move(Step);
         }
         
         public override void MoveLeft()
         {
+            Texture = MoveLeftTexture;
             Move(-Step);
         }
 
