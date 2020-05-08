@@ -23,7 +23,7 @@ namespace GlassesArmies.Tests
         }
 
         [Test]
-        public void TIntersectionTest()
+        public void InnerIntersectionTest()
         {
             var r1 = new Rectangle(5, 0, 2, -12);
             var r2 = new Rectangle(0, 0, 12, -2);
