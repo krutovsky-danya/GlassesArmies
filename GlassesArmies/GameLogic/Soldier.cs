@@ -179,6 +179,7 @@ namespace GlassesArmies
             Location = StartLocation.Copy;
             Texture = StartTexture;
             HealthPoints = MaxHealth;
+            Velocity = Vector.Zero;
         }
     }
 }
