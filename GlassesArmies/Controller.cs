@@ -24,6 +24,11 @@ namespace GlassesArmies
             Game = new Game(new Level(level), this);
         }
 
+        public void GameWon()
+        {
+            
+        }
+
         public void ChangeState(State state)
         {
             if (state == State.Settings)

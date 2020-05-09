@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace GlassesArmies.View
@@ -50,14 +51,16 @@ namespace GlassesArmies.View
                 _levelList.Controls.Add(button);
             }
 
-            _levelList.Dock = DockStyle.Fill;
+            _levelList.Size = this.Size;
+            _levelList.AutoSize = true;
+            _levelList.Dock = DockStyle.Left;
+            _levelList.BackColor = Color.Orchid;
             // 
             // LevelSelectControl
             // 
             this.Controls.Add(_levelList);
             
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "LevelSelectControl";
             this.Size = new System.Drawing.Size(150, 188);
