@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using GlassesArmies.View;
+using NUnit.Framework.Internal;
 
 namespace GlassesArmies
 {
@@ -61,18 +62,15 @@ namespace GlassesArmies
                 .Select(projectile => _bias + new Vector(projectile.Location.X - 2, -projectile.Location.Y - 2))
                 .Select(location => new Rectangle((int)location.X, (int)location.Y, 5, 5));
 
-        public IEnumerable<Tuple<Bitmap, Point>> GetAliveCreature() => from creature in Game.Alive
-            let location = _bias + new Vector(creature.Location.X, -creature.Location.Y)
-            select Tuple.Create(creature.Texture, location.ToPoint());
+        public IEnumerable<CreatureData> GetAliveCreature() => Game.Alive.Select(c => c.GetData(_bias));
 
         public IEnumerable<Rectangle> GetWalls() => from gameWall in Game.Walls
             let location = _bias + new Vector(gameWall.Location.X, -gameWall.Location.Y) 
             select new Rectangle((int)location.X, (int)location.Y, gameWall.Width, gameWall.Height);
 
-        public Tuple<Bitmap, Point> GetPlayerData()
+        public CreatureData GetPlayerData()
         {
-            var playerLocation = _bias + new Vector(Game.Player.Location.X, -Game.Player.Location.Y);
-            return Tuple.Create(Game.Player.Texture, playerLocation.ToPoint());
+            return Game.Player.GetData(_bias);
         }
 
         public void TurnGame()

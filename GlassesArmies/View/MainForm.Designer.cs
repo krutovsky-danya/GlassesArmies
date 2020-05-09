@@ -28,7 +28,7 @@ namespace GlassesArmies.View
         {
             this._mainMenuControl = new GlassesArmies.MainMenuControl(this._controller);
             this._gamePlayControl = new GlassesArmies.View.GamePlayControl(this._controller);
-            this._levelSelectControl = new LevelSelectControl(this._controller);
+            this._levelSelectControl = new GlassesArmies.View.LevelSelectControl(this._controller);
             this._settingsControl = new GlassesArmies.SettingsControl(this._controller);
             this.SuspendLayout();
             this._mainMenuControl.AutoSize = true;
@@ -59,8 +59,8 @@ namespace GlassesArmies.View
 
         private GlassesArmies.MainMenuControl _mainMenuControl;
         private GlassesArmies.SettingsControl _settingsControl;
-        private System.ComponentModel.IContainer _components = null;
         private GlassesArmies.View.GamePlayControl _gamePlayControl;
-        private LevelSelectControl _levelSelectControl;
+        private GlassesArmies.View.LevelSelectControl _levelSelectControl;
+        private System.ComponentModel.IContainer _components;
     }
 }

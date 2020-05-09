@@ -1,13 +1,10 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Linq;
-using System.Security.Cryptography;
 
 namespace GlassesArmies
 {
     public class Soldier : Creature
     {
-        protected readonly int StartHealth;
         protected int ReloadTime = 10;
         protected readonly int ClipSize = 12;
         protected int BulletsInClip;
@@ -19,10 +16,9 @@ namespace GlassesArmies
         public Soldier(Game.CreatureSide soldierSide, Vector location, int health) : 
             base(soldierSide == Game.CreatureSide.Enemy ? Textures.EnemySoldier : Textures.PlayerSoldier, location)
         {
-            HealthPoints = health;
             JumpAcceleration = new Vector(0, 7);
             BulletsInClip = ClipSize;
-            StartHealth = health;
+            MaxHealth = health;
             HealthPoints = health;
             Side = soldierSide;
             MoveLeftTexture = (Bitmap)Texture.Clone();
@@ -49,7 +45,7 @@ namespace GlassesArmies
                     switch (Side)
                     {
                         case Game.CreatureSide.Enemy:
-                            if ((Game.Player.Location - Location).Length < BulletSpeed * 50)
+                            if ((Game.Player.Location - Location).Length < BulletSpeed * 70)
                             {
                                 Shoot(Game.Player.Location + new Vector(16, -16));
                             }
@@ -92,7 +88,7 @@ namespace GlassesArmies
 
         public override Creature Copy()
         {
-            return new Soldier(Side, StartLocation, StartHealth);
+            return new Soldier(Side, StartLocation, MaxHealth);
         }
 
         public override void Shoot(Vector target)
@@ -182,7 +178,7 @@ namespace GlassesArmies
             CurrentRepetition = 0;
             Location = StartLocation.Copy;
             Texture = StartTexture;
-            HealthPoints = StartHealth;
+            HealthPoints = MaxHealth;
         }
     }
 }

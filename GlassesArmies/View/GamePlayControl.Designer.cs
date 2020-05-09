@@ -141,9 +141,9 @@ namespace GlassesArmies.View
             {
                 eventArgs.Graphics.FillRectangle(Brushes.Crimson, projectile);
             }
-            foreach (var textureLocation in _controller.GetAliveCreature())
+            foreach (var data in _controller.GetAliveCreature())
             {
-                eventArgs.Graphics.DrawImage(textureLocation.Item1, textureLocation.Item2);
+                DrawCreature(eventArgs.Graphics, data);
             }
 
             foreach (var gameWall in _controller.GetWalls())
@@ -152,16 +152,24 @@ namespace GlassesArmies.View
             }
 
             var playerData = _controller.GetPlayerData();
-            eventArgs.Graphics.DrawImage(playerData.Item1, playerData.Item2);
+            DrawCreature(eventArgs.Graphics, playerData);
             var trinagleCenter = new Point(
-                playerData.Item2.X + playerData.Item1.Height / 2 - 2, 
-                playerData.Item2.Y - 15);
+                playerData.Location.X + playerData.Texture.Height / 2 - 2, 
+                playerData.Location.Y - 15);
             eventArgs.Graphics.FillPolygon(Brushes.Red, new []
             {
                 new Point(trinagleCenter.X, trinagleCenter.Y + 2),
                 new Point(trinagleCenter.X - 3, trinagleCenter.Y - 3), 
                 new Point(trinagleCenter.X + 3, trinagleCenter.Y - 3), 
             });
+        }
+
+        private void DrawCreature(Graphics graphics, CreatureData data)
+        {
+            graphics.FillRectangle(Brushes.Red, new Rectangle(
+                data.Location.X + (data.Texture.Width - data.HealthBarWidth) / 2, data.Location.Y - 10,
+                (int)((1d * data.Health / data.MaxHeath) * data.HealthBarWidth), 5));
+            graphics.DrawImage(data.Texture, data.Location);
         }
         
         private Random _rng = new Random(1729);

@@ -24,7 +24,10 @@ namespace GlassesArmies
         protected Vector Velocity;
         protected Vector JumpAcceleration;
 
+        public int MaxHealth { get; protected set; }
         protected int HealthPoints { get; set; }
+        public int HealthBarWidth { get; protected set; }
+        
         public bool IsAlive { get; protected set; } = true;
 
         protected readonly double _dt = 1d / 60;
@@ -82,6 +85,16 @@ namespace GlassesArmies
 
         public abstract void MoveRight();
 
+        public virtual void MoveUp()
+        {
+            
+        }
+
+        public virtual void MoveDown()
+        {
+            
+        }
+
         public abstract void Jump();
 
         public abstract void Shoot(Vector target);
@@ -93,5 +106,30 @@ namespace GlassesArmies
         public abstract void TakeDamage(int damage);
 
         public abstract Creature Copy();
+
+        public virtual CreatureData GetData(Vector bias)
+        {
+            var dataLocation = Location - bias;
+            dataLocation.Y *= -1;
+            return new CreatureData(Texture, dataLocation.ToPoint(), HealthPoints, MaxHealth, Texture.Width);
+        }
+    }
+    
+    public class CreatureData
+    {
+        public Bitmap Texture;
+        public Point Location;
+        public int Health;
+        public int MaxHeath;
+        public int HealthBarWidth;
+
+        public CreatureData(Bitmap texture, Point location, int health, int maxHeath, int healthBarWidth)
+        {
+            Texture = texture;
+            Location = location;
+            Health = health;
+            MaxHeath = maxHeath;
+            HealthBarWidth = healthBarWidth;
+        }
     }
 }
