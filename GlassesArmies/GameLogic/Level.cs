@@ -13,14 +13,14 @@ namespace GlassesArmies
         {
             switch (name)
             {
-                case Name.Third:
-                    SetThirdLevel();
-                    break;
                 case Name.Second:
                     SetSecondLevel();
                     break;
                 case Name.First:
                     SetFirstLevel();
+                    break;
+                case Name.Third:
+                    SetThirdLevel();
                     break;
                 case Name.Empty:
                     SetEmptyLevel();
@@ -100,6 +100,11 @@ namespace GlassesArmies
             };
             StartCharacter = new Soldier(Game.CreatureSide.Player, new Vector(0, -447), 100);
         }
+
+        private void SetUpgradedSecondLevel()
+        {
+            
+        }
         
         private void SetFirstLevel()
         {
@@ -139,10 +144,10 @@ namespace GlassesArmies
 
         public enum Name
         {
-            Second,
             First,
-            Empty,
-            Third
+            Second,
+            Third,
+            Empty
         }
     }
 }

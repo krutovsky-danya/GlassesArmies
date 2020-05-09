@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using GlassesArmies.View;
-using NUnit.Framework.Internal;
 
 namespace GlassesArmies
 {

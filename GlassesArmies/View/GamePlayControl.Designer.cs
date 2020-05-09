@@ -137,6 +137,10 @@ namespace GlassesArmies.View
 
         protected override void OnPaint(PaintEventArgs eventArgs)
         {
+            var playerData = _controller.GetPlayerData();
+            
+            eventArgs.Graphics.TranslateTransform(-playerData.Location.X + Width / 2, -playerData.Location.Y + Height / 2);
+            
             foreach (var projectile in _controller.GetProjectiles())
             {
                 eventArgs.Graphics.FillRectangle(Brushes.Crimson, projectile);
@@ -151,7 +155,7 @@ namespace GlassesArmies.View
                 eventArgs.Graphics.FillRectangle(Brushes.Silver, gameWall);
             }
 
-            var playerData = _controller.GetPlayerData();
+            
             DrawCreature(eventArgs.Graphics, playerData);
             var trinagleCenter = new Point(
                 playerData.Location.X + playerData.Texture.Height / 2 - 2, 
@@ -199,8 +203,12 @@ namespace GlassesArmies.View
         private void OnClick(object sender, EventArgs eventArgs)
         {
             var mouseEventArgs = (MouseEventArgs) eventArgs;
+            var playerData = _controller.GetPlayerData();
+            var target = new Point(
+                mouseEventArgs.Location.X + playerData.Location.X - Width / 2,
+                mouseEventArgs.Location.Y + playerData.Location.Y - Height / 2);
             //Console.WriteLine(mouseEventArgs.Location);
-            _controller.ShootInGame(mouseEventArgs.Location);
+            _controller.ShootInGame(target);
         }
 
         private bool _isPaused;
