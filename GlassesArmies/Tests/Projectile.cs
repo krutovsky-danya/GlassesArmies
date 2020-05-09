@@ -36,6 +36,5 @@ namespace GlassesArmies.Tests
             Assert.AreEqual(location + velocity, projectile.Location);
             Assert.AreEqual(Projectile.MaxLive - 1, projectile.Live);
         }
-        
     }
 }
