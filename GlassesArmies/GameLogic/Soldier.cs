@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Linq;
 
 namespace GlassesArmies
@@ -49,10 +50,18 @@ namespace GlassesArmies
                             {
                                 Shoot(Game.Player.Location + new Vector(16, -16));
                             }
+                            Move(Vector.Zero);
                             break;
                         case Game.CreatureSide.Player:
-                            Shoot(Game.Alive.First().Location + new Vector(16, -16));
+                            var target = Game.Alive.First().Location + new Vector(16, -16);
+                            if ((target - Location).Length < 80)
+                            {
+                                Shoot(target);
+                            }
+                            Move(Vector.Zero);
                             break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
                     }
                     ReloadTime = 10;
                     BulletsInClip--;

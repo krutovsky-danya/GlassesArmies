@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace GlassesArmies
@@ -91,7 +92,10 @@ namespace GlassesArmies
             {
                 _enemyCount--;
                 if (_enemyCount == 0)
+                {
+                    //_controller.GameWon();
                     GameWon();
+                }
             }
         }
 
@@ -116,6 +120,7 @@ namespace GlassesArmies
             Player.Game = this;
             _players.Add(Player);
             _aliveCreatures.Add(Player);
+            Console.WriteLine(_players.Count);
         }
 
         private void GameWon()

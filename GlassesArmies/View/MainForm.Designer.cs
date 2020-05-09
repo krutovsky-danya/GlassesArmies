@@ -10,10 +10,10 @@ namespace GlassesArmies.View
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (_components != null))
-            {
-                _components.Dispose();
-            }
+            // if (disposing && (_components != null))
+            // {
+            //     _components.Dispose();
+            // }
 
             base.Dispose(disposing);
         }
@@ -61,6 +61,5 @@ namespace GlassesArmies.View
         private GlassesArmies.SettingsControl _settingsControl;
         private GlassesArmies.View.GamePlayControl _gamePlayControl;
         private GlassesArmies.View.LevelSelectControl _levelSelectControl;
-        private System.ComponentModel.IContainer _components;
     }
 }

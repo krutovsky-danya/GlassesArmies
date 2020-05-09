@@ -8,7 +8,7 @@ namespace GlassesArmies
         public Vector Velocity  { get; }
         public Vector Location { get; protected set; }
         
-        public const int MaxLive = 50;
+        public const int MaxLive = 150;
         public int Live { get; protected set; } = MaxLive;
 
         public int Damage { get; set; } = 10;
