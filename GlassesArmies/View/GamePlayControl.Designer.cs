@@ -86,16 +86,21 @@ namespace GlassesArmies.View
                 exit
             };
             
+            this._pauseMenu.RowStyles.Add(new RowStyle(SizeType.Percent, 23));
+            this._pauseMenu.Controls.Add(new Label
+            {
+                Text = "Pause",
+                Font = new Font(FontFamily.GenericSerif, 24),
+                Anchor = AnchorStyles.Left,
+                AutoSize = true,
+            }, 1, 0);
             pauseMenuButtons.For((button, index) =>
             {
                 button.Anchor = AnchorStyles.Left;
                 button.AutoSize = true;
                 button.BackColor = Color.Transparent;
                 
-                //button.BackColor = Color.Aqua;
-                //button.BackgroundImage = coolDog;
-                
-                this._pauseMenu.Controls.Add(button, 1, index);
+                this._pauseMenu.Controls.Add(button, 1, index + 1);
                 this._pauseMenu.RowStyles.Add(new RowStyle(SizeType.Percent, 10F));
             });
 

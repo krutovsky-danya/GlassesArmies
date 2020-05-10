@@ -37,14 +37,37 @@ namespace GlassesArmies.View
         {
             this._levelList = new System.Windows.Forms.TableLayoutPanel();
             this.SuspendLayout();
+            
+            _levelList = new TableLayoutPanel();
+            _levelList.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
+
+            var i = 0;
+            foreach (var name in Enum.GetNames(typeof(Level.Name)))
+            {
+                var button = new MainMenuButton(name);
+                button.AutoSize = true;
+                button.Anchor = AnchorStyles.Left;
+                button.Click += (sender, args) =>
+                {
+                    Enum.TryParse<Level.Name>(name, out var level);
+                    _controller.SetGame(level);
+                    _controller.ChangeState(Controller.State.GamePlay);
+                };
+                button.BackColor = Color.FromArgb(red:20, green:161, blue:204);
+                _levelList.RowStyles.Add(new RowStyle(SizeType.Percent, 50));
+                _levelList.Controls.Add(button, 0, i);
+                i++;
+            }
+
+            _levelList.Size = this.Size;
+            _levelList.Dock = DockStyle.Fill;
+            //_levelList.BackColor = Color.Orchid;
             // 
             // _levelList
             // 
             this._levelList.AutoSize = true;
-            this._levelList.BackColor = System.Drawing.Color.Orchid;
             this._levelList.ColumnStyles.Add(
                 new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this._levelList.Dock = System.Windows.Forms.DockStyle.Left;
             this._levelList.Location = new System.Drawing.Point(0, 0);
             this._levelList.Name = "_levelList";
             this._levelList.Size = new System.Drawing.Size(20, 188);

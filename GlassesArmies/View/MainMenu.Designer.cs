@@ -37,7 +37,6 @@ namespace GlassesArmies.View
             this.startButton = new MainMenuButton("Start");
             this.startButton.Click += (sender, args) =>
             {
-                _controller.SetGame(Level.Name.Third);
                 _controller.ChangeState(Controller.State.GamePlay);
             };
 
