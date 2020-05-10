@@ -35,47 +35,33 @@ namespace GlassesArmies.View
         /// </summary>
         private void InitializeComponent()
         {
+            this._levelList = new System.Windows.Forms.TableLayoutPanel();
             this.SuspendLayout();
-            
-            _levelList = new TableLayoutPanel();
-            _levelList.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
-
-            var i = 0;
-            foreach (var name in Enum.GetNames(typeof(Level.Name)))
-            {
-                var button = new MainMenuButton(name);
-                button.AutoSize = true;
-                button.Margin = new Padding(5);
-                button.Click += (sender, args) =>
-                {
-                    Enum.TryParse<Level.Name>(name, out var level);
-                    _controller.SetGame(level);
-                    _controller.ChangeState(Controller.State.GamePlay);
-                };
-                _levelList.RowStyles.Add(new RowStyle(SizeType.Percent, 50));
-                _levelList.Controls.Add(button, 0, i);
-                i++;
-            }
-
-            _levelList.Size = this.Size;
-            _levelList.AutoSize = true;
-            _levelList.Dock = DockStyle.Fill;
-            //_levelList.BackColor = Color.Orchid;
+            // 
+            // _levelList
+            // 
+            this._levelList.AutoSize = true;
+            this._levelList.BackColor = System.Drawing.Color.Orchid;
+            this._levelList.ColumnStyles.Add(
+                new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this._levelList.Dock = System.Windows.Forms.DockStyle.Left;
+            this._levelList.Location = new System.Drawing.Point(0, 0);
+            this._levelList.Name = "_levelList";
+            this._levelList.Size = new System.Drawing.Size(20, 188);
+            this._levelList.TabIndex = 0;
             // 
             // LevelSelectControl
             // 
-            this.Controls.Add(_levelList);
-            
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.Controls.Add(this._levelList);
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "LevelSelectControl";
             this.Size = new System.Drawing.Size(150, 188);
-            this.AutoSize = true;
             this.ResumeLayout(false);
+            this.PerformLayout();
         }
 
         #endregion
 
-        private TableLayoutPanel _levelList;
+        private System.Windows.Forms.TableLayoutPanel _levelList;
     }
 }
