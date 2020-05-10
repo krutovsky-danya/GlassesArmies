@@ -240,5 +240,13 @@ namespace GlassesArmies.View
             this._pauseMenu.Enabled = false;
             this._pauseMenu.Hide();
         }
+
+        public void SetPause()
+        {
+            if (!_isPaused)
+            {
+                ManagePauseMenu();
+            }
+        }
     }
 }

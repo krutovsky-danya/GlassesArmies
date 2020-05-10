@@ -11,22 +11,34 @@ namespace GlassesArmies
         public MainForm MainForm { get; set; }
         private readonly Stack<State> _previousState = new Stack<State>();
         private State _currentState = State.MainMenu;
+        private Level.Name _currentLevelName;
+        private Dictionary<Level.Name, Level.Name> _nextLevel;
 
         public Game Game { get; private set; }
 
         public Controller()
         {
-            Game = new Game(new Level(Level.Name.Second), this);
+            SetGame(Level.Name.First);
+            _nextLevel = new Dictionary<Level.Name, Level.Name>
+            {
+                {Level.Name.First, Level.Name.Second},
+                {Level.Name.Second, Level.Name.Third},
+                {Level.Name.Third, Level.Name.UpgradedSecond},
+                {Level.Name.UpgradedSecond, Level.Name.Empty},
+                {Level.Name.Empty, Level.Name.Empty}
+            };
         }
 
         public void SetGame(Level.Name level)
         {
+            _currentLevelName = level;
             Game = new Game(new Level(level), this);
         }
 
         public void GameWon()
         {
-            
+            MainForm.SetGamePlayPause();
+            SetGame(_nextLevel[_currentLevelName]);
         }
 
         public void ChangeState(State state)

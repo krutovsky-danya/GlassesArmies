@@ -63,6 +63,7 @@ namespace GlassesArmies
                 {
                     creature.TakeDamage(projectile.Damage);
                     projectile.Collide();
+                    break;
                 }
 
                 foreach (var dummy in Walls.Where(wall => Geometry.CheckRectangleIntersection(wall.ToRectangle(), projectileRect)))
@@ -93,8 +94,7 @@ namespace GlassesArmies
                 _enemyCount--;
                 if (_enemyCount == 0)
                 {
-                    //_controller.GameWon();
-                    GameWon();
+                    _controller.GameWon();
                 }
             }
         }
@@ -123,11 +123,6 @@ namespace GlassesArmies
             Console.WriteLine(_players.Count);
         }
 
-        private void GameWon()
-        {
-            RestartLevel();
-        }
-        
         public enum CreatureSide
         {
             Enemy,

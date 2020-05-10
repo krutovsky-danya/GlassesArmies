@@ -9,7 +9,7 @@ namespace GlassesArmies
         protected int ReloadTime = 10;
         protected readonly int ClipSize = 12;
         protected int BulletsInClip;
-        protected const int BulletSpeed = 7;
+        protected const int BulletSpeed = 10;
         protected bool JumpAbility;
         protected Bitmap MoveLeftTexture;
         protected Bitmap MoveRightTexture;
@@ -54,11 +54,11 @@ namespace GlassesArmies
                             break;
                         case Game.CreatureSide.Player:
                             var target = Game.Alive.First().Location + new Vector(16, -16);
-                            if ((target - Location).Length < 80)
+                            if ((target - Location).Length < BulletSpeed * 80)
                             {
                                 Shoot(target);
                             }
-                            Move(Vector.Zero);
+                            MoveRight();
                             break;
                         default:
                             throw new ArgumentOutOfRangeException();

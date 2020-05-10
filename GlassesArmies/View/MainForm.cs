@@ -73,5 +73,7 @@ namespace GlassesArmies.View
                 control.Hide();
             }
         }
+
+        public void SetGamePlayPause() => _gamePlayControl.SetPause();
     }
 }

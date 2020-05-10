@@ -4,7 +4,7 @@ namespace GlassesArmies.View
 {
     public partial class LevelSelectControl : UserControl
     {
-        private Controller _controller;
+        private readonly Controller _controller;
         
         public LevelSelectControl(Controller controller)
         {
