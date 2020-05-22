@@ -210,10 +210,24 @@ namespace GlassesArmies
         {
             Enemies = new Creature[]
             {
-                new Soldier(Game.CreatureSide.Enemy, new Vector(320, -220), 100),
-                new Soldier(Game.CreatureSide.Enemy, new Vector(500, -220), 100)
+                // new Soldier(Game.CreatureSide.Enemy, new Vector(320, -220), 100),
+                // new Soldier(Game.CreatureSide.Enemy, new Vector(500, -220), 100)
             };
-            Walls = new[] {new Wall(new Vector(0, -32 - 220), 1000, 25)};
+            Walls = new[]
+            {
+                new Wall(new Vector(0, -32 - 220), 1000, 25),
+                new Wall(new Vector(50, 200), 100, 20),
+                new Wall(new Vector(50, 180), 20, 100),
+                new Wall(new Vector(70, 100), 80, 20),
+                new Wall(new Vector(130, 130), 20, 30),
+                
+                new Wall(new Vector(200, -32 - 220), 1000, 25),
+                new Wall(new Vector(250, 200), 100, 20),
+                new Wall(new Vector(250, 180), 20, 100),
+                new Wall(new Vector(270, 100), 80, 20),
+                new Wall(new Vector(330, 130), 20, 30),
+                
+            };
             StartCharacter = new Soldier(Game.CreatureSide.Player, new Vector(0, -220), 100);
         }
 

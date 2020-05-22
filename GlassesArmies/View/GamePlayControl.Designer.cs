@@ -70,8 +70,9 @@ namespace GlassesArmies.View
             var resume = new MainMenuButton("Resume");
             resume.Click += (sender, args) => ManagePauseMenu();
             
-            var restart = new MainMenuButton("Restart");
-            
+            var selectLevel = new MainMenuButton("SelectLevel");
+            selectLevel.Click += (sender, args) => this._controller.ChangeState(Controller.State.LevelSelect);
+
             var settings = new MainMenuButton("Settings");
             settings.Click += (sender, args) => this._controller.ChangeState(Controller.State.Settings);
             
@@ -81,7 +82,7 @@ namespace GlassesArmies.View
             var pauseMenuButtons = new List<MainMenuButton>
             {
                 resume,
-                restart,
+                selectLevel,
                 settings,
                 exit
             };

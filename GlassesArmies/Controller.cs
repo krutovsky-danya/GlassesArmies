@@ -37,7 +37,6 @@ namespace GlassesArmies
 
         public void GameWon()
         {
-            MainForm.SetGamePlayPause();
             SetGame(_nextLevel[_currentLevelName]);
         }
 
