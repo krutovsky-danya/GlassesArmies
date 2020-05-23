@@ -13,7 +13,7 @@ namespace GlassesArmies
         private readonly Stack<State> _previousState = new Stack<State>();
         private State _currentState = State.MainMenu;
         private Level.Name _currentLevelName;
-        private Dictionary<Level.Name, Level.Name> _nextLevel;
+        private readonly Dictionary<Level.Name, Level.Name> _nextLevel;
 
         public Game Game { get; private set; }
 
@@ -76,6 +76,7 @@ namespace GlassesArmies
                     MainForm.ShowMainMenu();
                     break;
                 case State.GamePlay:
+                    Game = new Game(new Level(_currentLevelName), this);
                     MainForm.ShowGamePlay();
                     break;
                 case State.LevelSelect:

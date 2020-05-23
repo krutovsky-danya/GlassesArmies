@@ -53,6 +53,7 @@ namespace GlassesArmies.View
             this.Name = "GlassesArmies";
             this.Text = "Glasses Armies";
             this.Icon = new Icon(@"..\..\Resources\Icon\playerSoldier.ico");
+            this._controller.SetFullScreen();
             this.ResumeLayout(false);
             this.PerformLayout();
         }

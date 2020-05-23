@@ -130,6 +130,7 @@ namespace GlassesArmies
                 this._controller.BackBorders,
                 this._controller.SetBorderLess
             });
+            this.fullScreenSwitcher.SwitchLeft(null, null);
 
             var rowContent = new List<Tuple<SettingsLabel, Control>>
             {

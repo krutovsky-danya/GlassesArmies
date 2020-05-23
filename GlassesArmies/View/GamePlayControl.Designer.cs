@@ -132,6 +132,10 @@ namespace GlassesArmies.View
         {
             if (!this._isPaused)
                 this._timer.Start();
+            else
+            {
+                ManagePauseMenu();
+            }
         }
 
         private void OnTimerTick(object sender, EventArgs eventArgs)

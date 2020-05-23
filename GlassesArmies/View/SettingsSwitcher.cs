@@ -60,14 +60,14 @@ namespace GlassesArmies.View
             //this.BackColor = Color.Olive;
         }
 
-        private void SwitchLeft(object sender, EventArgs eventArgs)
+        public void SwitchLeft(object sender, EventArgs eventArgs)
         {
             _index = (_options.Count + _index - 1) % _options.Count;
             _text.Text = _options[_index].ToString();
             _actions[_index]();
         }
 
-        private void SwitchRight(object sender, EventArgs eventArgs)
+        public void SwitchRight(object sender, EventArgs eventArgs)
         {
             _index = (_index + 1) % _options.Count;
             _text.Text = _options[_index].ToString();
