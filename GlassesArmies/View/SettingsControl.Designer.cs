@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
+using GlassesArmies.View;
 using Control = System.Windows.Forms.Control;
 using Orientation = System.Windows.Forms.Orientation;
 
@@ -112,19 +113,31 @@ namespace GlassesArmies
             this.soundsVolumeTrackBar = new SettingsSlider();
             
             this.resolutionLabel = new SettingsLabel("Resolution");
-            this.resolutionSwitcher = new SettingsSwitcher<Resolution>(new Resolution(3, 4),
-                new Resolution(720, 480),
-                new Resolution(1080, 920));
+            // this.resolutionSwitcher = new SettingsSwitcher<Resolution>(new Resolution(3, 4),
+            //    new Resolution(720, 480),
+            //    new Resolution(1080, 920));
             
             this.fullScreenLabel = new SettingsLabel("Full Screen");
-            this.fullScreenSwitcher = new SettingsSwitcher<string>("OFF", "ON");
+            this.fullScreenSwitcher = new SettingsSwitcher<string>(new[] {"OFF", "ON"}, new Action[]
+            {
+                this._controller.OffFullScreen,
+                this._controller.SetFullScreen
+            });
             
+            var BorderLessLabel = new SettingsLabel("Borderless");
+            var BorderlessSwitcher = new SettingsSwitcher<string>(new[] {"OFF", "ON"}, new Action[]
+            {
+                this._controller.BackBorders,
+                this._controller.SetBorderLess
+            });
+
             var rowContent = new List<Tuple<SettingsLabel, Control>>
             {
                 Tuple.Create<SettingsLabel, Control>(this.musicVolumeLabel, this.musicVolumeTrackBar),
                 Tuple.Create<SettingsLabel, Control>(this.soundsVolumeLabel, this.soundsVolumeTrackBar),
-                Tuple.Create<SettingsLabel, Control>(this.resolutionLabel, this.resolutionSwitcher),
+                // Tuple.Create<SettingsLabel, Control>(this.resolutionLabel, this.resolutionSwitcher),
                 Tuple.Create<SettingsLabel, Control>(this.fullScreenLabel, this.fullScreenSwitcher),
+                Tuple.Create<SettingsLabel, Control>(BorderLessLabel, BorderlessSwitcher)
             };
 
             for (int i = 0; i < rowContent.Count; i++)
@@ -140,7 +153,7 @@ namespace GlassesArmies
             this.ChangeControls.Dock = DockStyle.Fill;
             this.ChangeControls.TextAlign = ContentAlignment.MiddleCenter;
             //this.ChangeControls.BackColor = Color.Gray;
-            this.settings.Controls.Add(this.ChangeControls, 0, 4);
+            //this.settings.Controls.Add(this.ChangeControls, 0, 4);
             this.settings.SetColumnSpan(this.ChangeControls, 2);
             
             //this.soundsVolumeLabel.BackColor = Color.Navy;
@@ -152,9 +165,9 @@ namespace GlassesArmies
         private GlassesArmies.SettingsLabel soundsVolumeLabel;
         private GlassesArmies.SettingsSlider soundsVolumeTrackBar;
         private GlassesArmies.SettingsLabel resolutionLabel;
-        private GlassesArmies.SettingsSwitcher<Resolution> resolutionSwitcher;
+        //private SettingsSwitcher<Resolution> resolutionSwitcher;
         private GlassesArmies.SettingsLabel fullScreenLabel;
-        private GlassesArmies.SettingsSwitcher<string> fullScreenSwitcher;
+        private SettingsSwitcher<string> fullScreenSwitcher;
         private System.Windows.Forms.Label ChangeControls;
     }
     

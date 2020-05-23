@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Windows.Forms;
 using GlassesArmies.View;
 
 namespace GlassesArmies
@@ -38,6 +39,30 @@ namespace GlassesArmies
         public void GameWon()
         {
             SetGame(_nextLevel[_currentLevelName]);
+        }
+
+        public void SetFullScreen()
+        {
+            SetBorderLess();
+            MainForm.WindowState = FormWindowState.Maximized;
+            MainForm.TopMost = true;
+        }
+
+        public void OffFullScreen()
+        {
+            BackBorders();
+            MainForm.WindowState = FormWindowState.Normal;
+            MainForm.TopMost = false;
+        }
+
+        public void SetBorderLess()
+        {
+            MainForm.FormBorderStyle = FormBorderStyle.None;
+        }
+
+        public void BackBorders()
+        {
+            MainForm.FormBorderStyle = FormBorderStyle.Sizable;
         }
 
         public void ChangeState(State state)

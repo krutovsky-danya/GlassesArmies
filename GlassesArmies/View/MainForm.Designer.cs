@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Drawing;
 
 namespace GlassesArmies.View
 {
@@ -49,8 +50,9 @@ namespace GlassesArmies.View
             this.Controls.Add(this._levelSelectControl);
             this.Controls.Add(this._settingsControl);
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.Name = "MainForm";
-            this.Text = "MainForm";
+            this.Name = "GlassesArmies";
+            this.Text = "Glasses Armies";
+            this.Icon = new Icon(@"..\..\Resources\Icon\playerSoldier.ico");
             this.ResumeLayout(false);
             this.PerformLayout();
         }

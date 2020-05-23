@@ -120,7 +120,6 @@ namespace GlassesArmies
             Player.Game = this;
             _players.Add(Player);
             _aliveCreatures.Add(Player);
-            Console.WriteLine(_players.Count);
         }
 
         public enum CreatureSide

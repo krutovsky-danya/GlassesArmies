@@ -4,11 +4,12 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace GlassesArmies
+namespace GlassesArmies.View
 {
     public class SettingsSwitcher<T> : UserControl
     {
         private readonly List<T> _options;
+        private readonly List<Action> _actions;
         private int _index;
         private Label _left;
         private Label _text;
@@ -16,15 +17,16 @@ namespace GlassesArmies
 
         public T Value => _options[_index];
         
-        public SettingsSwitcher(params T[] list)
+        public SettingsSwitcher(IEnumerable<T> list, IEnumerable<Action> actions)
         {
             _options = new List<T>(list);
+            _actions = new List<Action>(actions);
             if (_options.Count == 0)
                 throw new InvalidEnumArgumentException();
             InitializeComponent();
         }
 
-        public void InitializeComponent()
+        private void InitializeComponent()
         {
             _left = new Label {Text = "< "};
             _text = new Label {Text = _options[_index].ToString()};
@@ -62,12 +64,14 @@ namespace GlassesArmies
         {
             _index = (_options.Count + _index - 1) % _options.Count;
             _text.Text = _options[_index].ToString();
+            _actions[_index]();
         }
 
         private void SwitchRight(object sender, EventArgs eventArgs)
         {
             _index = (_index + 1) % _options.Count;
             _text.Text = _options[_index].ToString();
+            _actions[_index]();
         }
     }
 }
