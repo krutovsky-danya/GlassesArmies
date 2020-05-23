@@ -52,8 +52,7 @@ namespace GlassesArmies.View
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "GlassesArmies";
             this.Text = "Glasses Armies";
-            this.Icon = new Icon(@"..\..\Resources\Icon\playerSoldier.ico");
-            this._controller.SetFullScreen();
+            this.Icon = new System.Drawing.Icon("..\\..\\Resources\\Icon\\playerSoldier.ico");
             this.ResumeLayout(false);
             this.PerformLayout();
         }
