@@ -9,7 +9,7 @@ namespace GlassesArmies
         protected int ReloadTime = 10;
         protected readonly int ClipSize = 12;
         protected int BulletsInClip;
-        protected const int BulletSpeed = 10;
+        protected int BulletSpeed = 10;
         protected bool JumpAbility;
         protected Bitmap MoveLeftTexture;
         protected Bitmap MoveRightTexture;
@@ -78,12 +78,6 @@ namespace GlassesArmies
                     ReloadTime = 120;
                 }
             }
-        }
-
-        public override void MakeTurn(Turn turn)
-        {
-            turn.Action(this);
-            MemorizeTurn(turn);
         }
 
         public override void TakeDamage(int damage)
@@ -156,6 +150,8 @@ namespace GlassesArmies
             {
                 TakeDamage(int.MaxValue);
             }
+
+            ReloadTime--;
         }
 
         public override void MoveRight()

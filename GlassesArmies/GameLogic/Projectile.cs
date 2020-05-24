@@ -5,7 +5,7 @@ namespace GlassesArmies
 {
     public class Projectile //red circle
     {
-        public Vector Velocity  { get; }
+        public Vector Velocity  { get; protected set; }
         public Vector Location { get; protected set; }
         
         public const int MaxLive = 150;
@@ -22,7 +22,7 @@ namespace GlassesArmies
             Side = side;
         }
         
-        public void Move()
+        public virtual void Move()
         {
             Location += Velocity;
             Live--;
@@ -54,7 +54,7 @@ namespace GlassesArmies
             return $"Velocity: {Velocity}, Location: {Location}, Live = {Live}";
         }
         
-        public Rectangle ToRectangle()
+        public virtual Rectangle ToRectangle()
         {
             return new Rectangle(Location.ToPoint(), new Size(5, -5));
         }

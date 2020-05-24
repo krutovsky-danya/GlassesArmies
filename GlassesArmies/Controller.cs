@@ -96,22 +96,22 @@ namespace GlassesArmies
             }
         }
         
-        private static Vector _bias = new Vector(0, 180);
+        private static readonly Vector Bias = new Vector(0, 180);
 
         public IEnumerable<Rectangle> GetProjectiles() =>
             Game.Projectiles
-                .Select(projectile => _bias + new Vector(projectile.Location.X - 2, -projectile.Location.Y - 2))
+                .Select(projectile => Bias + new Vector(projectile.Location.X - 2, -projectile.Location.Y - 2))
                 .Select(location => new Rectangle((int)location.X, (int)location.Y, 5, 5));
 
-        public IEnumerable<CreatureData> GetAliveCreature() => Game.Alive.Select(c => c.GetData(_bias));
+        public IEnumerable<CreatureData> GetAliveCreature() => Game.Alive.Select(c => c.GetData(Bias));
 
         public IEnumerable<Rectangle> GetWalls() => from gameWall in Game.Walls
-            let location = _bias + new Vector(gameWall.Location.X, -gameWall.Location.Y) 
+            let location = Bias + new Vector(gameWall.Location.X, -gameWall.Location.Y) 
             select new Rectangle((int)location.X, (int)location.Y, gameWall.Width, gameWall.Height);
 
         public CreatureData GetPlayerData()
         {
-            return Game.Player.GetData(_bias);
+            return Game.Player.GetData(Bias);
         }
 
         public void TurnGame()
@@ -126,7 +126,7 @@ namespace GlassesArmies
 
         public void ShootInGame(Point target)
         {
-            var inGameTarget = target.ToVector() - _bias;
+            var inGameTarget = target.ToVector() - Bias;
             inGameTarget.Y *= -1;
             SetTurn(Turn.Shoot(inGameTarget));
         }

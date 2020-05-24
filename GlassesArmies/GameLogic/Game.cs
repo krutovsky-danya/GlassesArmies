@@ -19,6 +19,8 @@ namespace GlassesArmies
         private HashSet<Creature> _aliveCreatures; // probably not set
         public IEnumerable<Creature> Alive => _aliveCreatures;
         // TODO: fix THETA(N) deletion
+        
+        public int Score { get; private set; }
 
         private List<Wall> _walls;
         public IEnumerable<Wall> Walls => _walls;
@@ -92,6 +94,7 @@ namespace GlassesArmies
             else if (deadOne.Side == CreatureSide.Enemy)
             {
                 _enemyCount--;
+                Score++;
                 if (_enemyCount == 0)
                 {
                     _controller.GameWon();

@@ -101,7 +101,11 @@ namespace GlassesArmies
 
         public abstract void MakeAutoTurn();
 
-        public abstract void MakeTurn(Turn turn);
+        public virtual void MakeTurn(Turn turn)
+        {
+            turn.Action(this);
+            MemorizeTurn(turn);
+        }
 
         public abstract void TakeDamage(int damage);
 
