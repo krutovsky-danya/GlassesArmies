@@ -7,5 +7,6 @@ namespace GlassesArmies
         public static readonly Bitmap CoolDog = new Bitmap(@"Resources\Textures\coolDog.jpg");
         public static readonly Bitmap EnemySoldier = new Bitmap(@"Resources\Textures\enemySoldier.png");
         public static readonly Bitmap PlayerSoldier = new Bitmap(@"Resources\Textures\playerSoldier.png");
+        public static readonly Bitmap Grave = new Bitmap(@"Resources\Textures\Grave.png");
     }
 }

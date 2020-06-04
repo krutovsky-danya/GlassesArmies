@@ -178,6 +178,14 @@ namespace GlassesArmies.View
                 new Point(trinagleCenter.X - 3, trinagleCenter.Y - 3), 
                 new Point(trinagleCenter.X + 3, trinagleCenter.Y - 3), 
             });
+            eventArgs.Graphics.TranslateTransform(playerData.Location.X - Width / 2, playerData.Location.Y - Height / 2);
+            if (_controller.Game.DeathCount > 0)
+            {
+                //paint grave in (0,0)
+                eventArgs.Graphics.DrawImage(Textures.Grave, new Point(0, 0));
+                //write count in (32, 0)
+                eventArgs.Graphics.DrawString(_controller.Game.DeathCount.ToString(), new Font(FontFamily.GenericMonospace, 24), Brushes.Black, 32, 0);
+            }
         }
 
         private void DrawCreature(Graphics graphics, CreatureData data)
