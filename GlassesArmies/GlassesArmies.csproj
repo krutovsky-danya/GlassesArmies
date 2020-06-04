@@ -100,6 +100,12 @@
         <Compile Include="View\MainMenuControl.Designer.cs">
           <DependentUpon>MainMenuControl.cs</DependentUpon>
         </Compile>
+        <Compile Include="View\ScoreControl.cs">
+          <SubType>UserControl</SubType>
+        </Compile>
+        <Compile Include="View\Score.Designer.cs">
+          <DependentUpon>ScoreControl.cs</DependentUpon>
+        </Compile>
         <Compile Include="View\SettingsControl.cs">
           <SubType>UserControl</SubType>
         </Compile>

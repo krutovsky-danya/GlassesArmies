@@ -38,6 +38,12 @@ namespace GlassesArmies
 
         public void GameWon()
         {
+            ChangeState(State.Score);
+        }
+
+        public void ShowNextLevel()
+        {
+            ChangeState(State.GamePlay);
             SetGame(_nextLevel[_currentLevelName]);
         }
 
@@ -79,6 +85,9 @@ namespace GlassesArmies
                     if (_currentState == State.MainMenu)
                         Game = new Game(new Level(_currentLevelName), this);
                     MainForm.ShowGamePlay();
+                    break;
+                case State.Score:
+                    MainForm.ShowScore(Game.Score);
                     break;
                 case State.LevelSelect:
                     MainForm.ShowLevelSelect();
@@ -136,6 +145,7 @@ namespace GlassesArmies
         {
             MainMenu,
             GamePlay,
+            Score,
             LevelSelect,
             Settings,
             Back,

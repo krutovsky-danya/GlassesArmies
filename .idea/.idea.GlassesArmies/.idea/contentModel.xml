@@ -58,6 +58,8 @@
           <e p="MainMenuControl.cs" t="Include" />
           <e p="MainMenuControl.Designer.cs" t="Include" />
           <e p="MainMenuControl.resx" t="Include" />
+          <e p="Score.Designer.cs" t="Include" />
+          <e p="ScoreControl.cs" t="Include" />
           <e p="SettingsControl.cs" t="Include" />
           <e p="SettingsControl.Designer.cs" t="Include" />
           <e p="SettingsControl.resx" t="Include" />

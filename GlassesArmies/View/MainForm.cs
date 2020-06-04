@@ -50,6 +50,14 @@ namespace GlassesArmies.View
             _gamePlayControl.ResumeGame();
         }
 
+        public void ShowScore(int score)
+        {
+            HideAll();
+            _scoreControl.Enabled = true;
+            _scoreControl.Score = score;
+            _scoreControl.Show();
+        }
+
         public void ShowLevelSelect()
         {
             HideAll();
@@ -73,7 +81,5 @@ namespace GlassesArmies.View
                 control.Hide();
             }
         }
-
-        public void SetGamePlayPause() => _gamePlayControl.SetPause();
     }
 }
