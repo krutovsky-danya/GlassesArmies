@@ -49,10 +49,11 @@ namespace GlassesArmies.View
             this.Controls.Add(this._gamePlayControl);
             this.Controls.Add(this._levelSelectControl);
             this.Controls.Add(this._settingsControl);
+            this.Size = new System.Drawing.Size(1920, 1080);
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "GlassesArmies";
             this.Text = "Glasses Armies";
-            this.Icon = new System.Drawing.Icon("..\\..\\Resources\\Icon\\playerSoldier.ico");
+            this.Icon = new System.Drawing.Icon("Resources\\Icon\\playerSoldier.ico");
             this.ResumeLayout(false);
             this.PerformLayout();
         }

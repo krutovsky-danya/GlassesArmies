@@ -7,6 +7,7 @@ namespace GlassesArmies
     public class Game
     {
         public Creature Player;
+        public int DeathCount { get; private set; }
         public Turn PlayersTurn { get; set; }
         
         private readonly Level _level;
@@ -90,6 +91,7 @@ namespace GlassesArmies
             if (deadOne == Player)
             {
                 RestartLevel();
+                DeathCount++;
             }
             else if (deadOne.Side == CreatureSide.Enemy)
             {

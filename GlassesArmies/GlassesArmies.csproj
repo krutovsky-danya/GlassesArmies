@@ -7,7 +7,7 @@
         <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
         <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
         <ProjectGuid>{C8663311-82DB-4139-95E4-AE50517A6F6E}</ProjectGuid>
-        <OutputType>Exe</OutputType>
+        <OutputType>WinExe</OutputType>
         <AppDesignerFolder>Properties</AppDesignerFolder>
         <RootNamespace>GlassesArmies</RootNamespace>
         <AssemblyName>GlassesArmies</AssemblyName>

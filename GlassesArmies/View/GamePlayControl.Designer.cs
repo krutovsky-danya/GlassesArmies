@@ -110,8 +110,10 @@ namespace GlassesArmies.View
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "GamePlayControl";
+            this.DoubleBuffered = true;
 
             this.KeyDown += OnKeyDown;
+            
             this.Click += OnClick;
             this._timer.Tick += OnTimerTick;
             

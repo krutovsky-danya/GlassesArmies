@@ -76,7 +76,8 @@ namespace GlassesArmies
                     MainForm.ShowMainMenu();
                     break;
                 case State.GamePlay:
-                    Game = new Game(new Level(_currentLevelName), this);
+                    if (_currentState == State.MainMenu)
+                        Game = new Game(new Level(_currentLevelName), this);
                     MainForm.ShowGamePlay();
                     break;
                 case State.LevelSelect:
