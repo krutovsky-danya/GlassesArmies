@@ -8,11 +8,12 @@ namespace GlassesArmies
     {
         public Creature Player;
         public int DeathCount { get; private set; }
+        public int StartEnemiCount { get; private set; }
         public Turn PlayersTurn { get; set; }
         
         private readonly Level _level;
 
-        private int _enemyCount;
+        public int EnemyCount{ get; private set; }
         
         private HashSet<Creature> _players;
         public IEnumerable<Creature> Players => _players;
@@ -20,8 +21,6 @@ namespace GlassesArmies
         private HashSet<Creature> _aliveCreatures; // probably not set
         public IEnumerable<Creature> Alive => _aliveCreatures;
         // TODO: fix THETA(N) deletion
-        
-        public int Score { get; private set; }
 
         private List<Wall> _walls;
         public IEnumerable<Wall> Walls => _walls;
@@ -46,6 +45,7 @@ namespace GlassesArmies
             _players = new HashSet<Creature>();
             _walls = new List<Wall>(level.Walls);
             PlayersTurn = Turn.None;
+            StartEnemiCount = _level.Enemies.Length;
             
             RestartLevel();
         }
@@ -95,9 +95,8 @@ namespace GlassesArmies
             }
             else if (deadOne.Side == CreatureSide.Enemy)
             {
-                _enemyCount--;
-                Score++;
-                if (_enemyCount == 0)
+                EnemyCount--;
+                if (EnemyCount == 0)
                 {
                     _controller.GameWon();
                 }
@@ -106,7 +105,6 @@ namespace GlassesArmies
 
         private void RestartLevel()
         {
-            _enemyCount = _level.Enemies.Length;
             _projectiles = new HashSet<Projectile>();
             _aliveCreatures = _level.Enemies
                 .Select(e =>
@@ -116,6 +114,7 @@ namespace GlassesArmies
                     return enemy;
                 })
                 .ToHashSet();
+            EnemyCount = StartEnemiCount;
             foreach (var creature in _players)
             {
                 creature.Reborn();

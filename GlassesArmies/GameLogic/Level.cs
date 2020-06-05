@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -22,6 +23,9 @@ namespace GlassesArmies
                     break;
                 case Name.Third:
                     SetThirdLevel();
+                    break;
+                case Name.LevelForTeamOfFay:
+                    SetLevelForTeamOfFay();
                     break;
                 case Name.UpgradedSecond:
                     SetUpgradedSecondLevel();
@@ -180,6 +184,22 @@ namespace GlassesArmies
             };
             StartCharacter = new Soldier(Game.CreatureSide.Player, new Vector(0, -447), 100);
         }
+
+        private void SetLevelForTeamOfFay()
+        {
+            var enemies = new List<Creature>();
+            for (int i = 0; i < 90; i++)
+            {
+                enemies.Add(new Soldier(Game.CreatureSide.Enemy, new Vector(300 + 50 * i, -400), 100));
+            }
+
+            Enemies = enemies.ToArray();
+            Walls = new[]
+            {
+                new Wall(new Vector(0, -472), 7000, 25)
+            };
+            StartCharacter = new Soldier(Game.CreatureSide.Player, new Vector(0, -447), 100);
+        }
         
         private void SetFirstLevel()
         {
@@ -236,6 +256,7 @@ namespace GlassesArmies
             First,
             Second,
             Third,
+            LevelForTeamOfFay,
             UpgradedSecond,
             Empty
         }

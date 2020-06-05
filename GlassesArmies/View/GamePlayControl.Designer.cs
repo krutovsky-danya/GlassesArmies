@@ -179,12 +179,15 @@ namespace GlassesArmies.View
                 new Point(trinagleCenter.X + 3, trinagleCenter.Y - 3), 
             });
             eventArgs.Graphics.TranslateTransform(playerData.Location.X - Width / 2, playerData.Location.Y - Height / 2);
+            
+            
+            eventArgs.Graphics.DrawImage(Textures.EnemyGrave, new Point(0, 0));
+            eventArgs.Graphics.DrawString($"{_controller.Game.StartEnemiCount - _controller.Game.EnemyCount}/{_controller.Game.StartEnemiCount}",
+                new Font(FontFamily.GenericMonospace, 24), Brushes.Black, 32, 0);
             if (_controller.Game.DeathCount > 0)
             {
-                //paint grave in (0,0)
-                eventArgs.Graphics.DrawImage(Textures.Grave, new Point(0, 0));
-                //write count in (32, 0)
-                eventArgs.Graphics.DrawString(_controller.Game.DeathCount.ToString(), new Font(FontFamily.GenericMonospace, 24), Brushes.Black, 32, 0);
+                eventArgs.Graphics.DrawImage(Textures.Grave, new Point(0, 32));
+                eventArgs.Graphics.DrawString(_controller.Game.DeathCount.ToString(), new Font(FontFamily.GenericMonospace, 24), Brushes.Black, 32, 32);
             }
         }
 

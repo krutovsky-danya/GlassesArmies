@@ -24,7 +24,8 @@ namespace GlassesArmies
             {
                 {Level.Name.First, Level.Name.Second},
                 {Level.Name.Second, Level.Name.Third},
-                {Level.Name.Third, Level.Name.UpgradedSecond},
+                {Level.Name.Third, Level.Name.LevelForTeamOfFay},
+                {Level.Name.LevelForTeamOfFay, Level.Name.UpgradedSecond},
                 {Level.Name.UpgradedSecond, Level.Name.Empty},
                 {Level.Name.Empty, Level.Name.Empty}
             };
@@ -87,7 +88,7 @@ namespace GlassesArmies
                     MainForm.ShowGamePlay();
                     break;
                 case State.Score:
-                    MainForm.ShowScore(Game.Score);
+                    MainForm.ShowScore(Game.DeathCount);
                     break;
                 case State.LevelSelect:
                     MainForm.ShowLevelSelect();
