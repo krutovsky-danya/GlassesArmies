@@ -113,6 +113,7 @@ namespace GlassesArmies.View
             this.DoubleBuffered = true;
 
             this.KeyDown += OnKeyDown;
+            this.KeyUp += OnKeyUp;
             
             this.Click += OnClick;
             this._timer.Tick += OnTimerTick;
@@ -139,10 +140,31 @@ namespace GlassesArmies.View
                 ManagePauseMenu();
             }
         }
+        
+        private List<Keys> actionKeys = new List<Keys>{Keys.A, Keys.D, Keys.Space};
+        private Dictionary<Keys, Turn> KeyToTurn = new Dictionary<Keys, Turn>
+        {
+            {Keys.A, Turn.MoveLeft},
+            {Keys.D, Turn.MoveRight},
+            {Keys.Space, Turn.Jump}
+        };
+        
 
         private void OnTimerTick(object sender, EventArgs eventArgs)
         {
-            //Console.WriteLine("Tick");
+            if (!_shooted)
+            {
+                var turn = Turn.None;
+                foreach (var key in actionKeys)
+                {
+                    if (PressedKeys.Contains(key))
+                    {
+                        turn = KeyToTurn[key].Copy();
+                    }
+                }
+                _controller.SetTurn(turn);
+            }
+            _shooted = false;
             _controller.TurnGame();
             Invalidate();
         }
@@ -200,31 +222,29 @@ namespace GlassesArmies.View
         }
         
         private Random _rng = new Random(1729);
+        
+        public HashSet<Keys> PressedKeys = new HashSet<Keys>();
 
         private void OnKeyDown(object sender, KeyEventArgs e)
         {
-            // Console.WriteLine(e.KeyChar);
-            // Console.WriteLine((int)e.KeyChar);
             //Enter is 13
-            switch (e.KeyCode)
-            {
-                case Keys.Escape:
-                    ManagePauseMenu();
-                    break;
-                case Keys.D:
-                    _controller.SetTurn(Turn.MoveRight);
-                    break;
-                case Keys.A:
-                    _controller.SetTurn(Turn.MoveLeft);
-                    break;
-                case Keys.Space:
-                    _controller.SetTurn(Turn.Jump);
-                    break;
+            if (e.KeyCode == Keys.Escape)
+            { 
+                ManagePauseMenu();
             }
+            PressedKeys.Add(e.KeyCode);
         }
+        
+        private void OnKeyUp(object sender, KeyEventArgs e)
+        {
+            PressedKeys.Remove(e.KeyCode);
+        }
+
+        private bool _shooted;
 
         private void OnClick(object sender, EventArgs eventArgs)
         {
+            _shooted = true;
             var mouseEventArgs = (MouseEventArgs) eventArgs;
             var playerData = _controller.GetPlayerData();
             var target = new Point(

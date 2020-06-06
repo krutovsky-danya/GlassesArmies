@@ -30,7 +30,7 @@ namespace GlassesArmies.View
         {
             this._mainMenuControl = new GlassesArmies.MainMenuControl(this._controller);
             this._gamePlayControl = new GlassesArmies.View.GamePlayControl(this._controller);
-            this._scoreControl = new ScoreControl(this._controller);
+            this._scoreControl = new GlassesArmies.View.ScoreControl(this._controller);
             this._levelSelectControl = new GlassesArmies.View.LevelSelectControl(this._controller);
             this._settingsControl = new GlassesArmies.SettingsControl(this._controller);
             this.SuspendLayout();
@@ -40,13 +40,10 @@ namespace GlassesArmies.View
             this._mainMenuControl.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this._mainMenuControl.Name = "_mainMenuControl";
             this._mainMenuControl.TabIndex = 0;
-            
             this._gamePlayControl.AutoSize = true;
             this._gamePlayControl.Dock = System.Windows.Forms.DockStyle.Fill;
-
             this._scoreControl.AutoSize = true;
-            this._scoreControl.Dock = DockStyle.Fill;
-            
+            this._scoreControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this._settingsControl.AutoSize = true;
             this._settingsControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.MinimumSize = new System.Drawing.Size(1920, 1080);
