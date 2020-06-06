@@ -58,7 +58,14 @@ namespace GlassesArmies
                             {
                                 Shoot(target);
                             }
-                            MoveRight();
+                            if ((target - Location).X > 0)
+                            {
+                                MoveRight();
+                            }
+                            if ((target - Location).X < 0)
+                            {
+                                MoveLeft();
+                            }
                             break;
                         default:
                             throw new ArgumentOutOfRangeException();
@@ -82,6 +89,8 @@ namespace GlassesArmies
 
         public override void TakeDamage(int damage)
         {
+            if (!IsAlive)
+                return;
             HealthPoints -= damage;
             // Console.WriteLine(HealthPoints);
             if (HealthPoints > 0) return;

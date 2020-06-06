@@ -44,6 +44,11 @@ namespace GlassesArmies
 
         public void ShowNextLevel()
         {
+            if (_currentLevelName == Level.Name.UpgradedSecond)
+            {
+                ChangeState(State.MainMenu);
+                return;
+            }
             ChangeState(State.GamePlay);
             SetGame(_nextLevel[_currentLevelName]);
         }
