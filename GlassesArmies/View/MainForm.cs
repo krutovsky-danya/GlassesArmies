@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace GlassesArmies.View
@@ -80,6 +81,7 @@ namespace GlassesArmies.View
                 control.Enabled = false;
                 control.Hide();
             }
+            _gamePlayControl.PressedKeys = new HashSet<Keys>();
         }
     }
 }
