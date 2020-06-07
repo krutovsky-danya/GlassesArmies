@@ -26,8 +26,6 @@ namespace GlassesArmies
                 {Level.Name.Second, Level.Name.Third},
                 {Level.Name.Third, Level.Name.LevelForTeamOfFay},
                 {Level.Name.LevelForTeamOfFay, Level.Name.UpgradedSecond},
-                {Level.Name.UpgradedSecond, Level.Name.Empty},
-                {Level.Name.Empty, Level.Name.Empty}
             };
         }
 
@@ -44,7 +42,7 @@ namespace GlassesArmies
 
         public void ShowNextLevel()
         {
-            if (_currentLevelName == Level.Name.UpgradedSecond)
+            if (!_nextLevel.ContainsKey(_currentLevelName))
             {
                 ChangeState(State.MainMenu);
                 return;

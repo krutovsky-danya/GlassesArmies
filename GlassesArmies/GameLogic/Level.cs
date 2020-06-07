@@ -30,6 +30,9 @@ namespace GlassesArmies
                 case Name.UpgradedSecond:
                     SetUpgradedSecondLevel();
                     break;
+                case Name.LevelForTeamOfFayViewMode:
+                    SetLevelForTeamOfFayViewMode();
+                    break;
                 case Name.Empty:
                     SetEmptyLevel();
                     break;
@@ -188,7 +191,7 @@ namespace GlassesArmies
         private void SetLevelForTeamOfFay()
         {
             var enemies = new List<Creature>();
-            for (int i = 0; i < 90; i++)
+            for (int i = 0; i < 110; i++)
             {
                 enemies.Add(new Soldier(Game.CreatureSide.Enemy, new Vector(300 + 50 * i, -400), 100));
             }
@@ -196,7 +199,26 @@ namespace GlassesArmies
             Enemies = enemies.ToArray();
             Walls = new[]
             {
-                new Wall(new Vector(0, -472), 7000, 25)
+                new Wall(new Vector(-1200, -472), 7000, 25)
+            };
+            StartCharacter = new Soldier(Game.CreatureSide.Player, new Vector(0, -447), 100);
+        }
+        
+        private void SetLevelForTeamOfFayViewMode()
+        {
+            var enemies = new List<Creature>();
+            for (int i = 0; i < 110; i++)
+            {
+                enemies.Add(new Soldier(Game.CreatureSide.Enemy, new Vector(300 + 50 * i, -400), 100));
+            }
+
+            Enemies = enemies.ToArray();
+            Walls = new[]
+            {
+                new Wall(new Vector(-1200, -472), 7000, 25),
+                new Wall(new Vector(5750, -572), 200, 25),
+                new Wall(new Vector(5700, -672), 200, 25),
+                new Wall(new Vector(-1200, -752), 7000, 25)
             };
             StartCharacter = new Soldier(Game.CreatureSide.Player, new Vector(0, -447), 100);
         }
@@ -258,6 +280,7 @@ namespace GlassesArmies
             Third,
             LevelForTeamOfFay,
             UpgradedSecond,
+            LevelForTeamOfFayViewMode,
             Empty
         }
     }

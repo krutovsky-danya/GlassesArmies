@@ -13,6 +13,7 @@ namespace GlassesArmies
         protected bool JumpAbility;
         protected Bitmap MoveLeftTexture;
         protected Bitmap MoveRightTexture;
+        protected Random Chance = new Random();
 
         public Soldier(Game.CreatureSide soldierSide, Vector location, int health) : 
             base(soldierSide == Game.CreatureSide.Enemy ? Textures.EnemySoldier : Textures.PlayerSoldier, location)
@@ -58,14 +59,6 @@ namespace GlassesArmies
                             {
                                 Shoot(target);
                             }
-                            if ((target - Location).X > 0)
-                            {
-                                MoveRight();
-                            }
-                            if ((target - Location).X < 0)
-                            {
-                                MoveLeft();
-                            }
                             break;
                         default:
                             throw new ArgumentOutOfRangeException();
@@ -77,6 +70,26 @@ namespace GlassesArmies
                 {
                     ReloadTime--;
                     Move(Vector.Zero);
+                }
+                
+                if (Side == Game.CreatureSide.Player)
+                {
+                    var direction = Game.Alive.First().Location + new Vector(16, -16) - Location;
+                    if (direction.Y > 10 && Chance.Next(100) < 10 && JumpAbility)
+                    {
+                        Jump();
+                    }
+                    else
+                    {
+                        if (direction.X > 25 && (Chance.Next(2) == 1 || !JumpAbility))
+                        {
+                            MoveRight();
+                        }
+                        if (direction.X < -25 && (Chance.Next(2) == 1 || !JumpAbility))
+                        {
+                            MoveLeft();
+                        }
+                    }
                 }
 
                 if (BulletsInClip <= 0)
