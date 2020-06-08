@@ -37,6 +37,7 @@ namespace GlassesArmies
         //Turn
         // enemies -> ai
         // past_me -> list of actions
+        public bool IsWon { get; private set; } = false;
 
         public Game(Level level, Controller controller)
         {
@@ -98,6 +99,7 @@ namespace GlassesArmies
                 EnemyCount--;
                 if (EnemyCount == 0)
                 {
+                    IsWon = true;
                     _controller.GameWon();
                 }
             }

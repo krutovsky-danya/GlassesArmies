@@ -76,15 +76,15 @@ namespace GlassesArmies.View
             var settings = new MainMenuButton("Settings");
             settings.Click += (sender, args) => this._controller.ChangeState(Controller.State.Settings);
             
-            var exit = new MainMenuButton("Exit");
-            exit.Click += (sender, args) => this._controller.ChangeState(Controller.State.MainMenu);
+            var mainMenuButton = new MainMenuButton("Main Menu");
+            mainMenuButton.Click += (sender, args) => this._controller.ChangeState(Controller.State.MainMenu);
             
             var pauseMenuButtons = new List<MainMenuButton>
             {
                 resume,
                 selectLevel,
                 settings,
-                exit
+                mainMenuButton
             };
             
             this._pauseMenu.RowStyles.Add(new RowStyle(SizeType.Percent, 23));
