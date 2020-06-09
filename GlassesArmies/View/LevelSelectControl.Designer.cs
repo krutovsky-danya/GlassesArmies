@@ -45,8 +45,10 @@ namespace GlassesArmies.View
             foreach (var name in Enum.GetNames(typeof(Level.Name)))
             {
                 var button = new MainMenuButton(name);
-                button.AutoSize = true;
+                button.Size = new Size(1000, 150);
+                button.Dock = DockStyle.Fill;
                 button.Anchor = AnchorStyles.Left;
+                button.Margin = new Padding(150, 20, 0, 0);
                 button.Click += (sender, args) =>
                 {
                     Enum.TryParse<Level.Name>(name, out var level);
@@ -58,20 +60,22 @@ namespace GlassesArmies.View
                 _levelList.Controls.Add(button, 0, i);
                 i++;
             }
+            var exitButton = new MainMenuButton("Back");
+            exitButton.Dock = DockStyle.Fill;
+            exitButton.Anchor = AnchorStyles.Right;
+            exitButton.Click += (sender, args) => _controller.ChangeState(Controller.State.MainMenu);
+            _levelList.RowStyles.Add(new RowStyle(SizeType.Percent, 50));
+            _levelList.Controls.Add(exitButton, 0, i);
 
             _levelList.Size = this.Size;
-            _levelList.Dock = DockStyle.Fill;
-            //_levelList.BackColor = Color.Orchid;
             // 
             // _levelList
             // 
-            this._levelList.AutoSize = true;
+            this._levelList.Dock = DockStyle.Fill;
             this._levelList.ColumnStyles.Add(
                 new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this._levelList.Location = new System.Drawing.Point(0, 0);
             this._levelList.Name = "_levelList";
-            this._levelList.Size = new System.Drawing.Size(20, 188);
-            this._levelList.TabIndex = 0;
             // 
             // LevelSelectControl
             // 
@@ -79,6 +83,8 @@ namespace GlassesArmies.View
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "LevelSelectControl";
             this.Size = new System.Drawing.Size(150, 188);
+            this.AutoSize = true;
+            this.Dock = DockStyle.Fill;
             this.ResumeLayout(false);
             this.PerformLayout();
         }

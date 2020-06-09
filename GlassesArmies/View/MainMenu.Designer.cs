@@ -66,7 +66,6 @@ namespace GlassesArmies.View
             this.layout.AutoSize = true;
             this.layout.Dock = DockStyle.Fill;
             this.layout.Location = new System.Drawing.Point(0, 0);
-            this.layout.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.layout.Name = "layout";
             this.layout.TabIndex = 0;
             this.layout.ColumnCount = 1;

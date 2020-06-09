@@ -106,7 +106,6 @@ namespace GlassesArmies
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.Controls.Add(this.layout);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "MainMenuControl";
             this.layout.ResumeLayout(false);
             this.layout.PerformLayout();
