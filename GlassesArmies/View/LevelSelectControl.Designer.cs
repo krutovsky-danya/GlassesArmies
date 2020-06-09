@@ -79,6 +79,7 @@ namespace GlassesArmies.View
             this.Name = "LevelSelectControl";
             this.Size = new System.Drawing.Size(150, 188);
             this.AutoSize = true;
+            this.Dock = DockStyle.Fill;
             this.ResumeLayout(false);
             this.PerformLayout();
         }
