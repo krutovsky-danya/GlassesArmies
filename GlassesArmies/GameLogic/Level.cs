@@ -50,6 +50,7 @@ namespace GlassesArmies
         
         private void SetThirdLevel()
         {
+            #region
             Enemies = new Creature[]
             {
                 new Soldier(Game.CreatureSide.Enemy, new Vector(430, -275), 100),
@@ -84,10 +85,12 @@ namespace GlassesArmies
                 new Wall(new Vector(550, -385), 50, 17000),
             };
             StartCharacter = new Soldier(Game.CreatureSide.Player, new Vector(960, -300), 100);
+            #endregion
         }
 
         private void SetSecondLevel()
         {
+            #region
             Enemies = new Creature[]
             {
                 new Soldier(Game.CreatureSide.Enemy, new Vector(420, -275), 100),
@@ -110,10 +113,12 @@ namespace GlassesArmies
                 new Wall(new Vector(500, -230), 20, 10),
             };
             StartCharacter = new Soldier(Game.CreatureSide.Player, new Vector(0, -447), 100);
+            #endregion
         }
 
         private void SetUpgradedSecondLevel()
         {
+            #region
             Enemies = new Creature[]
             {
                 new Soldier(Game.CreatureSide.Enemy, new Vector(420, -275), 100),
@@ -186,6 +191,61 @@ namespace GlassesArmies
                 new Wall(new Vector(-200, -900), 850, 20)
             };
             StartCharacter = new Soldier(Game.CreatureSide.Player, new Vector(0, -447), 100);
+            #endregion
+        }
+        
+        private void SetFirstLevel()
+        {
+            #region
+            Enemies = new Creature[]
+            {
+                new Soldier(Game.CreatureSide.Enemy, new Vector(490, -350), 100),
+                new Soldier(Game.CreatureSide.Enemy, new Vector(550, -350), 100),
+                new Soldier(Game.CreatureSide.Enemy, new Vector(470, -200), 100),
+                new Soldier(Game.CreatureSide.Enemy, new Vector(570, -200), 100),
+            };
+            Walls = new[]
+            {
+                new Wall(new Vector(0, -472), 1500, 25),
+                new Wall(new Vector(500, -245), 10, 100),
+                new Wall(new Vector(470, -225), 30, 40),
+                new Wall(new Vector(550, -245), 10, 100),
+                new Wall(new Vector(560, -225), 30, 40),
+                new Wall(new Vector(500, -245), 50, 70),
+                new Wall(new Vector(500, -375), 10, 60),
+                new Wall(new Vector(490, -375), 25, 10), 
+                new Wall(new Vector(550, -375), 10, 60),
+                new Wall(new Vector(545, -375), 25, 10), 
+            };
+            StartCharacter = new Soldier(Game.CreatureSide.Player, new Vector(0, -447), 100);
+            #endregion
+        }
+
+        private void SetEmptyLevel()
+        {
+            #region
+            Enemies = new Creature[]
+            {
+                // new Soldier(Game.CreatureSide.Enemy, new Vector(320, -220), 100),
+                // new Soldier(Game.CreatureSide.Enemy, new Vector(500, -220), 100)
+            };
+            Walls = new[]
+            {
+                new Wall(new Vector(0, -32 - 220), 1000, 25),
+                new Wall(new Vector(50, 200), 100, 20),
+                new Wall(new Vector(50, 180), 20, 100),
+                new Wall(new Vector(70, 100), 80, 20),
+                new Wall(new Vector(130, 130), 20, 30),
+                
+                new Wall(new Vector(200, -32 - 220), 1000, 25),
+                new Wall(new Vector(250, 200), 100, 20),
+                new Wall(new Vector(250, 180), 20, 100),
+                new Wall(new Vector(270, 100), 80, 20),
+                new Wall(new Vector(330, 130), 20, 30),
+                
+            };
+            StartCharacter = new Soldier(Game.CreatureSide.Player, new Vector(0, -220), 100);
+            #endregion
         }
 
         private void SetLevelForTeamOfFay()
@@ -221,56 +281,6 @@ namespace GlassesArmies
                 new Wall(new Vector(-1200, -752), 7000, 25)
             };
             StartCharacter = new Soldier(Game.CreatureSide.Player, new Vector(0, -447), 100);
-        }
-        
-        private void SetFirstLevel()
-        {
-            Enemies = new Creature[]
-            {
-                new Soldier(Game.CreatureSide.Enemy, new Vector(490, -350), 100),
-                new Soldier(Game.CreatureSide.Enemy, new Vector(550, -350), 100),
-                new Soldier(Game.CreatureSide.Enemy, new Vector(470, -200), 100),
-                new Soldier(Game.CreatureSide.Enemy, new Vector(570, -200), 100),
-            };
-            Walls = new[]
-            {
-                new Wall(new Vector(0, -472), 1500, 25),
-                new Wall(new Vector(500, -245), 10, 100),
-                new Wall(new Vector(470, -225), 30, 40),
-                new Wall(new Vector(550, -245), 10, 100),
-                new Wall(new Vector(560, -225), 30, 40),
-                new Wall(new Vector(500, -245), 50, 70),
-                new Wall(new Vector(500, -375), 10, 60),
-                new Wall(new Vector(490, -375), 25, 10), 
-                new Wall(new Vector(550, -375), 10, 60),
-                new Wall(new Vector(545, -375), 25, 10), 
-            };
-            StartCharacter = new Soldier(Game.CreatureSide.Player, new Vector(0, -447), 100);
-        }
-
-        private void SetEmptyLevel()
-        {
-            Enemies = new Creature[]
-            {
-                // new Soldier(Game.CreatureSide.Enemy, new Vector(320, -220), 100),
-                // new Soldier(Game.CreatureSide.Enemy, new Vector(500, -220), 100)
-            };
-            Walls = new[]
-            {
-                new Wall(new Vector(0, -32 - 220), 1000, 25),
-                new Wall(new Vector(50, 200), 100, 20),
-                new Wall(new Vector(50, 180), 20, 100),
-                new Wall(new Vector(70, 100), 80, 20),
-                new Wall(new Vector(130, 130), 20, 30),
-                
-                new Wall(new Vector(200, -32 - 220), 1000, 25),
-                new Wall(new Vector(250, 200), 100, 20),
-                new Wall(new Vector(250, 180), 20, 100),
-                new Wall(new Vector(270, 100), 80, 20),
-                new Wall(new Vector(330, 130), 20, 30),
-                
-            };
-            StartCharacter = new Soldier(Game.CreatureSide.Player, new Vector(0, -220), 100);
         }
 
         public enum Name
