@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
+using System.Windows;
 using System.Windows.Forms;
 
 namespace GlassesArmies.View
@@ -37,6 +39,8 @@ namespace GlassesArmies.View
         {
             this._timer = new Timer();
             this._timer.Interval = 20;
+            this._shotCounter = 0;
+            this._shotInterval = 6;
             // this._timer.Interval = 1000;
 
             this._isPaused = false;
@@ -112,10 +116,12 @@ namespace GlassesArmies.View
             this.Name = "GamePlayControl";
             this.DoubleBuffered = true;
 
+            this.MouseDown += OnMouseDown;
+            this.MouseUp += OnMouseUp;
             this.KeyDown += OnKeyDown;
             this.KeyUp += OnKeyUp;
             
-            this.Click += OnClick;
+            // this.Click += OnClick;
             this._timer.Tick += OnTimerTick;
             
             HidePauseMenu();
@@ -126,6 +132,8 @@ namespace GlassesArmies.View
         #endregion
 
         private Timer _timer;
+        private int _shotCounter;
+        private int _shotInterval;
 
         private TableLayoutPanel _pauseMenu;
 
@@ -148,10 +156,24 @@ namespace GlassesArmies.View
             {Keys.D, Turn.MoveRight},
             {Keys.Space, Turn.Jump}
         };
-        
 
+        private bool _isLeftButtonPressed = false;
+        
         private void OnTimerTick(object sender, EventArgs eventArgs)
         {
+            this._shotCounter = (this._shotCounter + 1) % _shotInterval;
+            if (_isLeftButtonPressed && this._shotCounter == 0)
+            {
+                _shooted = true;
+                var playerData = _controller.GetPlayerData();
+                var mousePosition = PointToClient(Cursor.Position);
+                var target = new Point(
+                    mousePosition.X + playerData.Location.X - Width / 2,
+                    mousePosition.Y + playerData.Location.Y - Height / 2);
+                //Console.WriteLine(mouseEventArgs.Location);
+                _controller.ShootInGame(target);
+            }
+
             if (!_shooted)
             {
                 var turn = Turn.None;
@@ -224,6 +246,26 @@ namespace GlassesArmies.View
         private Random _rng = new Random(1729);
         
         public HashSet<Keys> PressedKeys = new HashSet<Keys>();
+
+        private void OnMouseDown(object sender, MouseEventArgs e)
+        {
+            switch (e.Button)
+            {
+                case MouseButtons.Left:
+                    _isLeftButtonPressed = true;
+                    break;
+            }
+        }
+
+        private void OnMouseUp(object sender, MouseEventArgs e)
+        {
+            switch (e.Button)
+            {
+                case MouseButtons.Left:
+                    _isLeftButtonPressed = false;
+                    break;
+            }
+        }
 
         private void OnKeyDown(object sender, KeyEventArgs e)
         {
