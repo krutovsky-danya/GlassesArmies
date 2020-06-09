@@ -45,9 +45,10 @@ namespace GlassesArmies.View
             foreach (var name in Enum.GetNames(typeof(Level.Name)))
             {
                 var button = new MainMenuButton(name);
-                //button.AutoSize = true;
+                button.Size = new Size(1000, 150);
                 button.Dock = DockStyle.Fill;
                 button.Anchor = AnchorStyles.Left;
+                button.Margin = new Padding(150, 20, 0, 0);
                 button.Click += (sender, args) =>
                 {
                     Enum.TryParse<Level.Name>(name, out var level);
@@ -67,11 +68,10 @@ namespace GlassesArmies.View
             _levelList.Controls.Add(exitButton, 0, i);
 
             _levelList.Size = this.Size;
-            _levelList.BackColor = Color.Orchid;
             // 
             // _levelList
             // 
-            this._levelList.AutoSize = true;
+            this._levelList.Dock = DockStyle.Fill;
             this._levelList.ColumnStyles.Add(
                 new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this._levelList.Location = new System.Drawing.Point(0, 0);
