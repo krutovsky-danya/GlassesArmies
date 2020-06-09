@@ -46,6 +46,7 @@ namespace GlassesArmies.View
             {
                 var button = new MainMenuButton(name);
                 button.AutoSize = true;
+                button.Dock = DockStyle.Fill;
                 button.Anchor = AnchorStyles.Left;
                 button.Click += (sender, args) =>
                 {
@@ -60,18 +61,16 @@ namespace GlassesArmies.View
             }
 
             _levelList.Size = this.Size;
-            _levelList.Dock = DockStyle.Fill;
             //_levelList.BackColor = Color.Orchid;
             // 
             // _levelList
             // 
             this._levelList.AutoSize = true;
+            this._levelList.BackColor = Color.Black;
             this._levelList.ColumnStyles.Add(
                 new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this._levelList.Location = new System.Drawing.Point(0, 0);
             this._levelList.Name = "_levelList";
-            this._levelList.Size = new System.Drawing.Size(20, 188);
-            this._levelList.TabIndex = 0;
             // 
             // LevelSelectControl
             // 
@@ -79,6 +78,7 @@ namespace GlassesArmies.View
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "LevelSelectControl";
             this.Size = new System.Drawing.Size(150, 188);
+            this.AutoSize = true;
             this.ResumeLayout(false);
             this.PerformLayout();
         }
