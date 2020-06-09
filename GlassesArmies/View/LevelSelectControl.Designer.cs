@@ -45,7 +45,7 @@ namespace GlassesArmies.View
             foreach (var name in Enum.GetNames(typeof(Level.Name)))
             {
                 var button = new MainMenuButton(name);
-                button.AutoSize = true;
+                //button.AutoSize = true;
                 button.Dock = DockStyle.Fill;
                 button.Anchor = AnchorStyles.Left;
                 button.Click += (sender, args) =>
@@ -59,14 +59,19 @@ namespace GlassesArmies.View
                 _levelList.Controls.Add(button, 0, i);
                 i++;
             }
+            var exitButton = new MainMenuButton("Back");
+            exitButton.Dock = DockStyle.Fill;
+            exitButton.Anchor = AnchorStyles.Right;
+            exitButton.Click += (sender, args) => _controller.ChangeState(Controller.State.MainMenu);
+            _levelList.RowStyles.Add(new RowStyle(SizeType.Percent, 50));
+            _levelList.Controls.Add(exitButton, 0, i);
 
             _levelList.Size = this.Size;
-            //_levelList.BackColor = Color.Orchid;
+            _levelList.BackColor = Color.Orchid;
             // 
             // _levelList
             // 
             this._levelList.AutoSize = true;
-            this._levelList.BackColor = Color.Black;
             this._levelList.ColumnStyles.Add(
                 new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this._levelList.Location = new System.Drawing.Point(0, 0);
