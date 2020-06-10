@@ -257,7 +257,7 @@ namespace GlassesArmies.View
             }
         }
 
-        private void OnMouseUp(object sender, MouseEventArgs e)
+        public void OnMouseUp(object sender, MouseEventArgs e)
         {
             switch (e.Button)
             {

@@ -82,6 +82,7 @@ namespace GlassesArmies.View
                 control.Hide();
             }
             _gamePlayControl.PressedKeys = new HashSet<Keys>();
+            _gamePlayControl.OnMouseUp(null, new MouseEventArgs(MouseButtons.Left, 1, 0, 0, 0));
         }
     }
 }
